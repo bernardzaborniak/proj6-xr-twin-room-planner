@@ -11,15 +11,5 @@ public class FurnitureManager : MonoBehaviour
     // non-monobehaviour for saving
     // monobehaviour for displaying
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }
