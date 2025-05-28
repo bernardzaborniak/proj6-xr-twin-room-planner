@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 26a51d653bd7111429b1afe89194a707
+timeCreated: 1470100331
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38028
+  packageName: Simple Office Interiors - Cartoon assets
+  packageVersion: 1.2
+  assetPath: Assets/SimpleOfficeInteriors/Prefabs/SO_CeilingLight.prefab
+  uploadId: 616469

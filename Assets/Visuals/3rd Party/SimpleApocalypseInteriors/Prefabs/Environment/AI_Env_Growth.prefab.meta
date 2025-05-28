@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d242b5b06890dbf4892e9c89a9e0ca23
+timeCreated: 1465356958
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Growth.prefab
+  uploadId: 615744

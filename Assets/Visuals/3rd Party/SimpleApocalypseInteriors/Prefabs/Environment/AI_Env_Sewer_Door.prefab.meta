@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 448b80c2e85a1c941a1fedc37d917a6f
+timeCreated: 1466030904
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Sewer_Door.prefab
+  uploadId: 615744

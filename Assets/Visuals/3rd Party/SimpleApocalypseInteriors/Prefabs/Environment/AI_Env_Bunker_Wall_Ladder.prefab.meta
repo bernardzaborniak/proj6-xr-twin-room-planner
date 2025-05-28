@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c745c87d9a1e102469a16bc5c37408ae
+timeCreated: 1466485441
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Bunker_Wall_Ladder.prefab
+  uploadId: 615744

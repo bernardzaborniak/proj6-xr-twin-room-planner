@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d1c4c94387f491643a652a4a75109d83
+timeCreated: 1466030906
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Sewer_Wall_End.prefab
+  uploadId: 615744

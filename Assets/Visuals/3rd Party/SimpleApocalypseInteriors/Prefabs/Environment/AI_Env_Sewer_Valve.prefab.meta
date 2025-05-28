@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 25af7a0dc94b49040af8e2c9b579187c
+timeCreated: 1466030905
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Sewer_Valve.prefab
+  uploadId: 615744

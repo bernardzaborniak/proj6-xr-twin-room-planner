@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5cf9cf48a9a255b4d8f1210ffe6e5752
+timeCreated: 1465356953
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Roof_01_Blank.prefab
+  uploadId: 615744

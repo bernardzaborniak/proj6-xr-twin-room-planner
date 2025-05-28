@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 71c0b361fb4b95a4da0414e066a13ab4
+timeCreated: 1465439490
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Wall_Grey_Closet.prefab
+  uploadId: 615744

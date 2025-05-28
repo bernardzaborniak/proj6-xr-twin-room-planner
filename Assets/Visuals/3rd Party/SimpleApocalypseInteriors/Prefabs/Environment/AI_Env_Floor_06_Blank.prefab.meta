@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 346b7928d2fa8d54e93f341c47d8b216
+timeCreated: 1465511718
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Floor_06_Blank.prefab
+  uploadId: 615744

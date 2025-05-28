@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72f4bc2d4433f734db0fad9f671f72e5
+timeCreated: 1466473962
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38419
+  packageName: Simple Apocalypse Interiors - Cartoon Assets
+  packageVersion: 1.01
+  assetPath: Assets/SimpleApocalypseInteriors/Prefabs/Environment/AI_Env_Sewer_Floor_Edge.prefab
+  uploadId: 615744

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: be85b129bf2763c4995e050d6187b221
+timeCreated: 1459821864
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38028
+  packageName: Simple Office Interiors - Cartoon assets
+  packageVersion: 1.2
+  assetPath: Assets/SimpleOfficeInteriors/Prefabs/SO_CeilingFan.prefab
+  uploadId: 616469
