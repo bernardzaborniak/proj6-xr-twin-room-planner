@@ -1,0 +1,19 @@
+public enum FurnitureLabel
+{
+    FLOOR,
+    CEILING,
+    WALL_FACE,
+    TABLE,
+    COUCH,
+    DOOR_FRAME,
+    WINDOW_FRAME,
+    OTHER,
+    STORAGE,
+    BED,
+    SCREEN,
+    LAMP,
+    PLANT,
+    WALL_ART,
+    GLOBAL_MESH,
+    INVISIBLE_WALL_FACE,
+}
