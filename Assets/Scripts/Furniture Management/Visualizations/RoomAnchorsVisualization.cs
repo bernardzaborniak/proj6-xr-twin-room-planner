@@ -1,28 +1,39 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoomAnchorsVisualization : RoomVisualization
 {
-    // This is the scanned room from meta, use this object to allow the player to manually edit it
-
-    // spawn all the bounding boxes with allowing to move them and edit etc...
-
-    //RoomData scannedRoomData;
-    AnchorVisualization allFurniture;
-
     [SerializeField] GameObject furnitureScanVisualizationPrefab;
+
+    List<AnchorVisualization> anchorVisualizations = new List<AnchorVisualization>();
+    string currentRoomName;
 
     public override void PopulateFromSaveData(RoomData roomData)
     {
-        // spawn object based on save data
+        currentRoomName = roomData.roomName;
 
-        Instantiate(furnitureScanVisualizationPrefab,transform.position, Quaternion.identity, this.transform);
+        for (int i = 0; i < roomData.furniture.Count; i++)
+        {
+            // spawn object based on save data
+            AnchorVisualization newFurniture = Instantiate(furnitureScanVisualizationPrefab, this.transform).GetComponent<AnchorVisualization>();
+            newFurniture.VisualizeFromData(roomData.furniture[i]);
+            anchorVisualizations.Add(newFurniture);
+        }
     }
 
     public override RoomData SaveChangesToNewRoomData()
     {
-        return null;
+        RoomData newData = new RoomData();
+        newData.roomName = currentRoomName;
+
+        foreach (AnchorVisualization furniture in anchorVisualizations)
+        {
+            newData.furniture.Add(furniture.ConvertToFurnitureDataObject());
+        }
+
+        return newData;
     }
 
 }

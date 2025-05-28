@@ -9,7 +9,7 @@ public class FurnitureVisualization : MonoBehaviour
 
 
     // also have some sort of classifier here, that maps the labels to a mesh
-
+    
     FurnitureData localDataCopy;
 
     public void VisualizeFromData(FurnitureData data)
