@@ -12,11 +12,39 @@ public class FurnitureVisualization : MonoBehaviour
     
     FurnitureData localDataCopy;
 
-    public void VisualizeFromData(FurnitureData data)
+    GameObject visualizedFurniturePiece;
+
+    LabelToModelConversionTable labelToMeshConversionTableRef;
+
+    public void VisualizeFromData(FurnitureData data, LabelToModelConversionTable labelToMeshConversionTable)
     {
         localDataCopy = data.DeepCopy();
         transform.localPosition = data.posInRoom;
         transform.localRotation = data.rotInRoom;
+
+        this.labelToMeshConversionTableRef = labelToMeshConversionTable;
+
+        SelectAndDisplayMesh();
+    }
+
+    void SelectAndDisplayMesh()
+    {
+        GameObject furnitureToSpawn = null;
+
+        Debug.Log($"localDataCopy.label {localDataCopy.label}");
+        Debug.Log($"labelToMeshConversionTableRef {labelToMeshConversionTableRef}");
+        Debug.Log($"labelToMeshConversionTableRef.labelToPrefabDict {labelToMeshConversionTableRef.labelToPrefabDict}");
+
+        if (labelToMeshConversionTableRef.labelToPrefabDict.ContainsKey(localDataCopy.label))
+        {
+            furnitureToSpawn = labelToMeshConversionTableRef.labelToPrefabDict[localDataCopy.label];
+        }
+        else
+        {
+            furnitureToSpawn = labelToMeshConversionTableRef.defaultPrefab;
+        }
+
+        visualizedFurniturePiece = Instantiate(furnitureToSpawn, transform);
     }
 
 

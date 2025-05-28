@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f81b418ebd956441b032814d0418144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  labelToMeshConversionTable: {fileID: 11400000, guid: 9b1b59bb95e386040b2e72e17f16572c, type: 2}
   roomScanData:
     roomName: 
     furniture: []

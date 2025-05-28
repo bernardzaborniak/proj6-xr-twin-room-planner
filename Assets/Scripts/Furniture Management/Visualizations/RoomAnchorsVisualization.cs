@@ -10,7 +10,7 @@ public class RoomAnchorsVisualization : RoomVisualization
     List<AnchorVisualization> anchorVisualizations = new List<AnchorVisualization>();
     string currentRoomName;
 
-    public override void PopulateFromSaveData(RoomData roomData)
+    public override void SetUpFromSaveData(RoomData roomData, LabelToModelConversionTable labelToMeshConversionTable)
     {
         currentRoomName = roomData.roomName;
 

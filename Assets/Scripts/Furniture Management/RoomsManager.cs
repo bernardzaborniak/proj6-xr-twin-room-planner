@@ -9,6 +9,10 @@ public class RoomsManager : MonoBehaviour
 {
     // Manages the scanned room data and the various furniture rom variations.
 
+    [SerializeField]
+    LabelToModelConversionTable labelToMeshConversionTable;
+    [Space]
+
 
     /// <summary>
     /// This is the scanned and potentially adjusted room to use as a base for the others
@@ -109,6 +113,8 @@ public class RoomsManager : MonoBehaviour
             TryConvertEnumByName<MRUKAnchor.SceneLabels, FurnitureLabel>(anchor.Label, out translatedLabel);
             furniture.label = translatedLabel;
             furniture.tempLabelString = anchor.Label.ToString();
+
+            // TODO Watch out, meta is not using the unity default z axis as forward
             furniture.posInRoom = anchor.transform.localPosition;
             furniture.rotInRoom = anchor.transform.localRotation;
 
@@ -142,7 +148,7 @@ public class RoomsManager : MonoBehaviour
         }
 
         currentVisualization = Instantiate(roomAnchorsVisualizationPrefab).GetComponent<RoomVisualization>();
-        currentVisualization.PopulateFromSaveData(roomScanData);
+        currentVisualization.SetUpFromSaveData(roomScanData, labelToMeshConversionTable);
 
         //auto hide variations
 
@@ -183,7 +189,7 @@ public class RoomsManager : MonoBehaviour
         currentVisualization = Instantiate(roomVariationVisualizationPrefab).GetComponent<RoomVisualization>();
         Debug.Log("currentVisualization.PopulateFromSaveData(roomVariationsData);");
         Debug.Log($"roomVariationsData.furniture count: {roomVariationsData[varId].furniture.Count}");
-        currentVisualization.PopulateFromSaveData(roomVariationsData[varId]);
+        currentVisualization.SetUpFromSaveData(roomVariationsData[varId], labelToMeshConversionTable);
 
         // check if any other variation is shown right now
 

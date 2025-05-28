@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f01b2de0c9b41fa4daaad28381a6f2c7, type: 3}
+  m_Name: Label To Model Conversion Table
+  m_EditorClassIdentifier: 
+  labelToPrefabDict:
+    _serializedList:
+    - Key: 9
+      Value: {fileID: 136718, guid: 8b376f6eb972e5f4b965e8863c3f41bd, type: 3}
+    - Key: 3
+      Value: {fileID: 165648, guid: a07d922277bd56040afe5a1accccb0f7, type: 3}
+    - Key: 4
+      Value: {fileID: 4793113249633943343, guid: 9be56135c8d94cb49a9ba592caf4a3b1, type: 3}
+    - Key: 8
+      Value: {fileID: 161416, guid: daaa1b0931867f84b9b88cf98a4b0266, type: 3}
+  defaultPrefab: {fileID: 190214, guid: 19750885284d69344a35d6aac8aa99d1, type: 3}

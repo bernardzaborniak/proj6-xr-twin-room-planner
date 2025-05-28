@@ -5,14 +5,11 @@ public class RoomVariationVisualization : RoomVisualization
 {
     [SerializeField] GameObject furnitureVisualizationPrefab;
 
-    // the int key is the index of the furniture in the original data object
     List<FurnitureVisualization> furnitureVisualizations = new List<FurnitureVisualization> ();
     string currentRoomName;
 
-    // todo maybe later actually save a backup of roomData here and keep some kind of dictionary to see which
-    // objects were there before and had updatd positions or labels and which were added extra.
 
-    public override void PopulateFromSaveData(RoomData roomData)
+    public override void SetUpFromSaveData(RoomData roomData, LabelToModelConversionTable labelToMeshConversionTable)
     {
         currentRoomName = roomData.roomName;
 
@@ -20,7 +17,7 @@ public class RoomVariationVisualization : RoomVisualization
         {
             // spawn object based on save data
             FurnitureVisualization newFurniture = Instantiate(furnitureVisualizationPrefab, this.transform).GetComponent<FurnitureVisualization>();
-            newFurniture.VisualizeFromData(roomData.furniture[i]);
+            newFurniture.VisualizeFromData(roomData.furniture[i], labelToMeshConversionTable);
             furnitureVisualizations.Add(newFurniture);
         }
     }
