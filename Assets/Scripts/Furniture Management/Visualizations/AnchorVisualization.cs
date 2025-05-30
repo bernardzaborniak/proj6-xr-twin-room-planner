@@ -14,6 +14,14 @@ public class AnchorVisualization:MonoBehaviour
         localDataCopy = data.DeepCopy();
         transform.localPosition = data.posInRoom;
         transform.localRotation = data.rotInRoom;
+
+        if (data.type == FurnitureType.FloorAndWalls)
+        {
+
+        }else if (data.type == FurnitureType.Furniture)
+        {
+            transform.localScale = data.volumeBounds.size;
+        }
     }
 
 

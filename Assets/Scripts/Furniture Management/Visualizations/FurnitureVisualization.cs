@@ -8,8 +8,6 @@ public class FurnitureVisualization : MonoBehaviour
     // for the visualization of furniture, only allow it to change position and rotation with ray interactor
 
 
-    // also have some sort of classifier here, that maps the labels to a mesh
-    
     FurnitureData localDataCopy;
 
     GameObject visualizedFurniturePiece;
@@ -25,15 +23,24 @@ public class FurnitureVisualization : MonoBehaviour
         this.labelToMeshConversionTableRef = labelToMeshConversionTable;
 
         SelectAndDisplayMesh();
+
+        // Resize to unit size 1x1x1
+        MeshRenderer meshRenderer = visualizedFurniturePiece.GetComponent<MeshRenderer>();
+
+        Bounds meshBounds = meshRenderer.bounds;
+        Vector3 normalizedScale = new Vector3(
+            meshRenderer.bounds.size.x != 0 ? 1f / meshRenderer.bounds.size.x : 0f,
+            meshRenderer.bounds.size.y != 0 ? 1f / meshRenderer.bounds.size.y : 0f,
+            meshRenderer.bounds.size.z != 0 ? 1f / meshRenderer.bounds.size.z : 0f
+        );
+
+        // Now combine normalized 1x1x1 size with the size we extracted from the scan
+        visualizedFurniturePiece.transform.localScale = Vector3.Scale(normalizedScale, data.volumeBounds.size);
     }
 
     void SelectAndDisplayMesh()
     {
         GameObject furnitureToSpawn = null;
-
-        Debug.Log($"localDataCopy.label {localDataCopy.label}");
-        Debug.Log($"labelToMeshConversionTableRef {labelToMeshConversionTableRef}");
-        Debug.Log($"labelToMeshConversionTableRef.labelToPrefabDict {labelToMeshConversionTableRef.labelToPrefabDict}");
 
         if (labelToMeshConversionTableRef.labelToPrefabDict.ContainsKey(localDataCopy.label))
         {

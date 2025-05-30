@@ -114,26 +114,40 @@ public class RoomsManager : MonoBehaviour
             furniture.label = translatedLabel;
             furniture.tempLabelString = anchor.Label.ToString();
 
-            // TODO Watch out, meta is not using the unity default z axis as forward
             furniture.posInRoom = anchor.transform.localPosition;
             furniture.rotInRoom = anchor.transform.localRotation;
 
-            //TODO how to find out if plane or rect?
-            if (anchor.PlaneRect != null)
+            // TODO Visualize the Walls aswell
+
+            if (anchor.VolumeBounds != null)
+            {
+                furniture.type = FurnitureType.Furniture;
+                furniture.volumeBounds = (Bounds)anchor.VolumeBounds;
+
+                // For volumes we need to adjust the rotation as meta uses different axies
+                // Flip y and z bounds
+                Vector3 newSize = new Vector3(furniture.volumeBounds.size.x, furniture.volumeBounds.size.z, furniture.volumeBounds.size.y);
+                furniture.volumeBounds.size = newSize;
+                 // Rotate it wierdly
+                furniture.rotInRoom *= Quaternion.Euler(-90f, 0f, 0f) *Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
+
+                // All meta bounds somehow have their center right at the top .. meta be crazy lizard followers im telling you
+                furniture.posInRoom.y -= furniture.volumeBounds.size.y;
+
+                if(anchor.PlaneRect != null)
+                {
+                    // sme volumes like tables or beds also have planes
+                    furniture.planeRect = (Rect)anchor.PlaneRect;
+                }
+                
+            }
+            else if (anchor.PlaneRect != null)
             {
                 furniture.type = FurnitureType.FloorAndWalls;
                 furniture.planeRect = (Rect)anchor.PlaneRect;
             }
-            else if (anchor.VolumeBounds != null)
-            {
-
-                furniture.type = FurnitureType.Furniture;
-                furniture.volumeBounds = (Bounds)anchor.VolumeBounds;
-            }
-
-
+            
             room.furniture.Add(furniture);
-
         }
 
         return room;
