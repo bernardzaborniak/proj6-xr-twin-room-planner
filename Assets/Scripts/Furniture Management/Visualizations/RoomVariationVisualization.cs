@@ -34,4 +34,10 @@ public class RoomVariationVisualization : RoomVisualization
 
         return newData;
     }
+
+    public void AddFurnitureFromCatalogue(FurnitureData data)
+    {
+        //TODO
+        //furnitureVisualizations.Add(spanwed object);
+    }
 }
