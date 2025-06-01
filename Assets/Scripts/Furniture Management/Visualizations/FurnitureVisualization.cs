@@ -9,10 +9,11 @@ public class FurnitureVisualization : MonoBehaviour
 
 
     FurnitureData localDataCopy;
-
     GameObject visualizedFurniturePiece;
-
     LabelToModelConversionTable labelToMeshConversionTableRef;
+
+    [SerializeField] BoxCollider boxCollider;
+
 
     public void VisualizeFromData(FurnitureData data, LabelToModelConversionTable labelToMeshConversionTable)
     {
@@ -27,6 +28,8 @@ public class FurnitureVisualization : MonoBehaviour
         // Resize to unit size 1x1x1
         MeshRenderer meshRenderer = visualizedFurniturePiece.GetComponent<MeshRenderer>();
 
+   
+
         Bounds meshBounds = meshRenderer.bounds;
         Vector3 normalizedScale = new Vector3(
             meshRenderer.bounds.size.x != 0 ? 1f / meshRenderer.bounds.size.x : 0f,
@@ -35,7 +38,13 @@ public class FurnitureVisualization : MonoBehaviour
         );
 
         // Now combine normalized 1x1x1 size with the size we extracted from the scan
-        visualizedFurniturePiece.transform.localScale = Vector3.Scale(normalizedScale, data.volumeBounds.size);
+        // scale is still fuced up a bit at the moment when loading form save data :/
+        Vector3 newSize = Vector3.Scale(normalizedScale, data.volumeBounds.size);
+
+        boxCollider.size = data.volumeBounds.size;
+        boxCollider.center = new Vector3(0f, boxCollider.size.y/2, 0f);
+
+        visualizedFurniturePiece.transform.localScale = newSize;
     }
 
     void SelectAndDisplayMesh()
