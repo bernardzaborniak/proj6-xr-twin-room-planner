@@ -38,6 +38,8 @@ public class TempRoomScanUI : MonoBehaviour
     void OnCaptureCurrentMetaRoom()
     {
         roomManager.CaptureCurrentMetaRoom();
+        OnRevertVar1();
+        OnRevertVar2();
     }
 
 
