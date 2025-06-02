@@ -8,6 +8,7 @@ public class AnchorVisualization:MonoBehaviour
     // have a gizmo here showing forward, thats important for setting up the furniture properly later
 
     FurnitureData localDataCopy;
+    [SerializeField] GameObject visualizationBox;
 
     public void VisualizeFromData(FurnitureData data)
     {
@@ -17,10 +18,12 @@ public class AnchorVisualization:MonoBehaviour
 
         if (data.type == FurnitureType.FloorAndWalls)
         {
-
-        }else if (data.type == FurnitureType.Furniture)
+            //temp for now, use actual scanned mesh later
+            visualizationBox.transform.localScale = Vector3.one * 0.2f;
+        }
+        else if (data.type == FurnitureType.Furniture)
         {
-            transform.localScale = data.volumeBounds.size;
+            visualizationBox.transform.localScale = data.volumeBounds.size;
         }
     }
 
