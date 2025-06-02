@@ -128,25 +128,32 @@ public class RoomsManager : MonoBehaviour
                 // Flip y and z bounds
                 Vector3 newSize = new Vector3(furniture.volumeBounds.size.x, furniture.volumeBounds.size.z, furniture.volumeBounds.size.y);
                 furniture.volumeBounds.size = newSize;
-                 // Rotate it wierdly
-                furniture.rotInRoom *= Quaternion.Euler(-90f, 0f, 0f) *Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
+                // Rotate it wierdly
+                furniture.rotInRoom *= Quaternion.Euler(-90f, 0f, 0f) * Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
 
                 // All meta bounds somehow have their center right at the top .. meta be crazy lizard followers im telling you
+
                 furniture.posInRoom.y -= furniture.volumeBounds.size.y;
 
-                if(anchor.PlaneRect != null)
+                // except for the couch, it has its cetner in the middle, wtf meta
+                if (furniture.label == FurnitureLabel.COUCH)
+                {
+                    furniture.posInRoom.y += furniture.volumeBounds.size.y / 2;
+                }
+
+                if (anchor.PlaneRect != null)
                 {
                     // sme volumes like tables or beds also have planes
                     furniture.planeRect = (Rect)anchor.PlaneRect;
                 }
-                
+
             }
             else if (anchor.PlaneRect != null)
             {
                 furniture.type = FurnitureType.FloorAndWalls;
                 furniture.planeRect = (Rect)anchor.PlaneRect;
             }
-            
+
             room.furniture.Add(furniture);
         }
 
@@ -195,7 +202,7 @@ public class RoomsManager : MonoBehaviour
 
     public void ShowRoomVariation(int varId)
     {
-        if(currentVisualization != null)
+        if (currentVisualization != null)
         {
             Destroy(currentVisualization.gameObject);
         }
@@ -242,7 +249,7 @@ public class RoomsManager : MonoBehaviour
     public void RevertRoomVariation(int varId)
     {
         roomVariationsData[varId] = roomScanData.DeepCopy();
-        SaveRoomVariation(varId );
+        SaveRoomVariation(varId);
     }
 
 
