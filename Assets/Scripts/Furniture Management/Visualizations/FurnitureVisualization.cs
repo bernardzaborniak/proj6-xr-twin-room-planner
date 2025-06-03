@@ -21,6 +21,8 @@ public class FurnitureVisualization : MonoBehaviour
     /// Are used to recreate the scanned bounds for scaling and positoning.
     /// </summary>
     [SerializeField] MeshFilter meshBounds;
+    [SerializeField] MeshRenderer meshBoundsRenderer;
+    [SerializeField] Transform scaleHelper;
 
     // todo add mvoeable readonly bool
     public bool Moveable { get; private set; }
@@ -62,10 +64,6 @@ public class FurnitureVisualization : MonoBehaviour
 
         }
 
-
-        // Floors and walls are not movable.
-        //Moveable = data.type == FurnitureType.Furniture;
-
     }
 
 
@@ -92,16 +90,15 @@ public class FurnitureVisualization : MonoBehaviour
             furnitureToSpawn = labelToMeshConversionTableRef.defaultPrefab;
         }
 
-        return Instantiate(furnitureToSpawn, transform);
+        return Instantiate(furnitureToSpawn, scaleHelper);
     }
 
     GameObject CreateWallMesh(FurnitureData data, Material defaultWallMaterial)
     {
         GameObject furnitureToSpawn = new GameObject("Wall Mesh");
-        furnitureToSpawn.transform.parent = transform;
+        furnitureToSpawn.transform.parent = scaleHelper;
         furnitureToSpawn.transform.localPosition = Vector3.zero;
         furnitureToSpawn.transform.localRotation = Quaternion.identity;
-
 
         MeshRenderer renderer = furnitureToSpawn.AddComponent<MeshRenderer>();
         renderer.material = defaultWallMaterial;
@@ -112,19 +109,12 @@ public class FurnitureVisualization : MonoBehaviour
         filter.sharedMesh.normals = data.meshData.normals;
 
 
-
         return furnitureToSpawn;
     }
 
     void AdjustMeshRotation()
     {
         // Metas scannedm eshes have weird rotations and centers, so we need to adjust them
-
-        // 1. Rotation
-        //visualizedFurniturePiece.transform.localRotation *= Quaternion.Euler(-90f, 0f, 0f) * Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
-
-        //visualizedFurniturePiece.transform.localRotation *= Quaternion.Euler(-90f, 0f, 0f) * Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
-
         visualizedFurniturePiece.transform.rotation = Quaternion.LookRotation(transform.up, Vector3.up);
     }
 
@@ -146,7 +136,7 @@ public class FurnitureVisualization : MonoBehaviour
             posOffset.y = -boundsInWorldSpace.y;
         }
 
-        visualizedFurniturePiece.transform.position += posOffset;
+        scaleHelper.transform.position += posOffset;
     }
 
 
@@ -159,26 +149,15 @@ public class FurnitureVisualization : MonoBehaviour
         Vector3 size = furnitureMeshBounds.size;
         float maxDimension = Mathf.Max(size.x, size.y, size.z);
 
-
-        Debug.Log($"before bounds {furnitureMeshRenderer.bounds}");
-
-        Vector3 scaleFactor = new Vector3(
+        Vector3 normalizedFurnitureScale = new Vector3(
            size.x > 0 ? 1f / size.x : 1f,
            size.y > 0 ? 1f / size.y : 1f,
            size.z > 0 ? 1f / size.z : 1f
        );
 
-
-
-        Vector3 normalizedFurnitureScale = visualizedFurniturePiece.transform.localScale = scaleFactor;
-
-        Debug.Log($"new local scale is: {normalizedFurnitureScale}");
         visualizedFurniturePiece.transform.localScale = normalizedFurnitureScale;
-        Debug.Log($"new bounds {furnitureMeshRenderer.bounds}");
 
-        // now scale according to the bounding box mesh
-        Vector3 boundingMeshBounds = transform.TransformVector(meshBounds.sharedMesh.bounds.size);
-        visualizedFurniturePiece.transform.localScale = Vector3.Scale(normalizedFurnitureScale,boundingMeshBounds);
+        scaleHelper.transform.localScale = meshBoundsRenderer.localBounds.size;
     }
 
 
