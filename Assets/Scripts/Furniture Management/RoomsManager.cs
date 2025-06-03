@@ -127,6 +127,14 @@ public class RoomsManager : MonoBehaviour
 
         foreach (MRUKAnchor anchor in mrukRoom.Anchors)
         {
+            if(anchor.transform.childCount == 0)
+            {
+                Debug.Log($"scipped anchor bounds for: {anchor.Label}");
+
+                continue;
+            }
+
+
             FurnitureData furniture = new FurnitureData();
 
 

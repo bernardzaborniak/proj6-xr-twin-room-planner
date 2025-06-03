@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
         {
             switchScene();
         }
+
+        if (OVRInput.GetDown(OVRInput.Button.One))
+        {
+            roomsManager.CaptureCurrentMetaRoom();
+        }
     }
 
     void switchScene()
