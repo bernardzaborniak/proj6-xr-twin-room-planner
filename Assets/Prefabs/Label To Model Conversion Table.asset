@@ -23,3 +23,4 @@ MonoBehaviour:
     - Key: 8
       Value: {fileID: 161416, guid: daaa1b0931867f84b9b88cf98a4b0266, type: 3}
   defaultPrefab: {fileID: 190214, guid: 19750885284d69344a35d6aac8aa99d1, type: 3}
+  defaultWallMaterial: {fileID: 2100000, guid: 1bf6361aae83a8b4689ff19a568f7ab3, type: 2}

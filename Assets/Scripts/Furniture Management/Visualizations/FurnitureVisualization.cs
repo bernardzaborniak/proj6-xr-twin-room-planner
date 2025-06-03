@@ -37,16 +37,34 @@ public class FurnitureVisualization : MonoBehaviour
 
         this.labelToMeshConversionTableRef = labelToMeshConversionTable;
 
-        meshBounds.sharedMesh = CreateBoundsMesh(data);
-        visualizedFurniturePiece = SelectAndDisplayFurnitureMesh();
-        AdjustMeshRotation();
-        AdjustMeshPositionOffset(data);
-        AdjustMeshScaling(data);
+        bool isWall = FurnitureLabelUtilities.IsLabelFlatWall(data.label);
 
+        
+
+        if (isWall)
+        {
+            Debug.Log($"{data.label} is wall {gameObject.GetHashCode()}");
+            visualizedFurniturePiece = CreateWallMesh(data, labelToMeshConversionTable.defaultWallMaterial);
+            Moveable = false;
+        }
+        else
+        {
+            Debug.Log($"{data.label} is not wall  {gameObject.GetHashCode()}");
+
+
+            meshBounds.sharedMesh = CreateBoundsMesh(data);
+            visualizedFurniturePiece = SelectAndDisplayFurnitureMesh();
+            AdjustMeshRotation();
+            AdjustMeshPositionOffset(data);
+            AdjustMeshScaling(data);
+
+            Moveable = true;
+
+        }
 
 
         // Floors and walls are not movable.
-        Moveable = data.type == FurnitureType.Furniture;
+        //Moveable = data.type == FurnitureType.Furniture;
 
     }
 
@@ -75,6 +93,27 @@ public class FurnitureVisualization : MonoBehaviour
         }
 
         return Instantiate(furnitureToSpawn, transform);
+    }
+
+    GameObject CreateWallMesh(FurnitureData data, Material defaultWallMaterial)
+    {
+        GameObject furnitureToSpawn = new GameObject("Wall Mesh");
+        furnitureToSpawn.transform.parent = transform;
+        furnitureToSpawn.transform.localPosition = Vector3.zero;
+        furnitureToSpawn.transform.localRotation = Quaternion.identity;
+
+
+        MeshRenderer renderer = furnitureToSpawn.AddComponent<MeshRenderer>();
+        renderer.material = defaultWallMaterial;
+        MeshFilter filter = furnitureToSpawn.AddComponent<MeshFilter>();
+        filter.sharedMesh = new Mesh();
+        filter.sharedMesh.vertices = data.meshData.vertices;
+        filter.sharedMesh.triangles = data.meshData.triangles;
+        filter.sharedMesh.normals = data.meshData.normals;
+
+
+
+        return furnitureToSpawn;
     }
 
     void AdjustMeshRotation()
@@ -129,11 +168,7 @@ public class FurnitureVisualization : MonoBehaviour
            size.z > 0 ? 1f / size.z : 1f
        );
 
-        /*Vector3 normalizedFurnitureScale = new Vector3(
-            furnitureMeshRenderer.bounds.size.x != 0 ? 1f / furnitureMeshRenderer.bounds.size.x : 0f,
-            furnitureMeshRenderer.bounds.size.y != 0 ? 1f / furnitureMeshRenderer.bounds.size.y : 0f,
-            furnitureMeshRenderer.bounds.size.z != 0 ? 1f / furnitureMeshRenderer.bounds.size.z : 0f
-        );*/
+
 
         Vector3 normalizedFurnitureScale = visualizedFurniturePiece.transform.localScale = scaleFactor;
 
@@ -141,10 +176,9 @@ public class FurnitureVisualization : MonoBehaviour
         visualizedFurniturePiece.transform.localScale = normalizedFurnitureScale;
         Debug.Log($"new bounds {furnitureMeshRenderer.bounds}");
 
-
-        // Vector3 newPos = visualizedFurniturePiece.transform.localPosition;
-        //newPos.y = newPos.y - furnitureMeshRenderer.bounds.size.y / 2;
-        //visualizedFurniturePiece.transform.localPosition = newPos;
+        // now scale according to the bounding box mesh
+        Vector3 boundingMeshBounds = transform.TransformVector(meshBounds.sharedMesh.bounds.size);
+        visualizedFurniturePiece.transform.localScale = Vector3.Scale(normalizedFurnitureScale,boundingMeshBounds);
     }
 
 

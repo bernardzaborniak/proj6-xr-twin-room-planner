@@ -13,7 +13,8 @@ public static class FurnitureLabelUtilities
             label == FurnitureLabel.WALL_FACE ||
             label == FurnitureLabel.WINDOW_FRAME ||
             label == FurnitureLabel.DOOR_FRAME ||
-            label == FurnitureLabel.GLOBAL_MESH
+            label == FurnitureLabel.GLOBAL_MESH ||
+            label == FurnitureLabel.WALL_ART
             );
     }
 }
