@@ -1,3 +1,4 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class AnchorVisualization:MonoBehaviour
@@ -8,7 +9,7 @@ public class AnchorVisualization:MonoBehaviour
     // have a gizmo here showing forward, thats important for setting up the furniture properly later
 
     FurnitureData localDataCopy;
-    [SerializeField] GameObject visualizationBox;
+    [SerializeField] MeshFilter visualizationMesh;
 
     public void VisualizeFromData(FurnitureData data)
     {
@@ -16,15 +17,26 @@ public class AnchorVisualization:MonoBehaviour
         transform.localPosition = data.posInRoom;
         transform.localRotation = data.rotInRoom;
 
-        if (data.type == FurnitureType.FloorAndWalls)
-        {
-            //temp for now, use actual scanned mesh later
-            visualizationBox.transform.localScale = Vector3.one * 0.2f;
-        }
-        else if (data.type == FurnitureType.Furniture)
-        {
-            visualizationBox.transform.localScale = data.volumeBounds.size;
-        }
+        Debug.Log($"[Bern[ Visualize from Data: {data.label} mesh vertex 0: {data.meshData.vertices[0]}");
+        Mesh newMesh = new Mesh();
+        //mesh.Clear();
+
+        newMesh.vertices = data.meshData.vertices;
+        newMesh.triangles = data.meshData.triangles;
+        newMesh.normals = data.meshData.normals;
+
+        visualizationMesh.sharedMesh = newMesh;
+
+        /*
+                if (data.type == FurnitureType.FloorAndWalls)
+                {
+                    //temp for now, use actual scanned mesh later
+                    visualizationMesh.transform.localScale = Vector3.one * 0.2f;
+                }
+                else if (data.type == FurnitureType.Furniture)
+                {
+                    visualizationMesh.transform.localScale = data.volumeBounds.size;
+                }*/
     }
 
 

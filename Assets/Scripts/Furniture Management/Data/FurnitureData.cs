@@ -19,9 +19,14 @@ public class FurnitureData
     public Quaternion rotInRoom;
 
     // Bounds & visualization
-    public Mesh mesh; // maybe we actually dont need the mesh?  we can just generate it at runtime
+    //public Mesh mesh; // maybe we actually dont need the mesh?  we can just generate it at runtime
+    public MeshSaveData meshData;
+
+
     public Rect planeRect;
     public Bounds volumeBounds;
+
+    public float newTestFloat = 4.33f;
 
     public FurnitureData DeepCopy()
     {
@@ -34,9 +39,10 @@ public class FurnitureData
             posInRoom = this.posInRoom,
             rotInRoom = this.rotInRoom,
 
-            mesh = this.mesh, // Only copies the reference. Consider cloning if needed.
+            meshData = this.meshData, // Only copies the reference. Consider cloning if needed.
             planeRect = this.planeRect,
-            volumeBounds = this.volumeBounds
+            volumeBounds = this.volumeBounds,
+            newTestFloat = this.newTestFloat
         };
     }
 }

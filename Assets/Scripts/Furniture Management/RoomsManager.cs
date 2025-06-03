@@ -83,7 +83,7 @@ public class RoomsManager : MonoBehaviour
         }
 
         // if no room variatin is available yet, create 2 new ones
-        if (allRoomVariations.Length == 0)
+        if (allRoomVariations.Length == 0 && roomScanData != null)
         {
             Create2ExampleRoomVariations();
         }
@@ -105,7 +105,21 @@ public class RoomsManager : MonoBehaviour
     {
         MRUKRoom room = MRUK.Instance.GetCurrentRoom();
         roomScanData = ConvertMetaRoomToAppRoom(room);
+
+        SaveRoomScan();
+
+        // if no room variatin is available yet, create 2 new ones
+        string path = Application.persistentDataPath;
+        string[] allRoomVariations = Directory.GetFiles(path, "roomVariation*.json");
+
+        if (allRoomVariations.Length == 0 && roomScanData != null)
+        {
+            Create2ExampleRoomVariations();
+        }
+
+        
     }
+
 
     public RoomData ConvertMetaRoomToAppRoom(MRUKRoom mrukRoom)
     {
@@ -126,39 +140,47 @@ public class RoomsManager : MonoBehaviour
 
             // TODO Visualize the Walls aswell
 
+            // meta objects mesh value is not set i dont know why, so we do it in this weird way
+            furniture.meshData = new MeshSaveData(anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh);
+
             if (anchor.VolumeBounds != null)
             {
                 furniture.type = FurnitureType.Furniture;
                 furniture.volumeBounds = (Bounds)anchor.VolumeBounds;
+                Debug.Log($"[Bern] Global Mesh before was: {anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh}");
+
+               
 
                 // For volumes we need to adjust the rotation as meta uses different axies
                 // Flip y and z bounds
-                Vector3 newSize = new Vector3(furniture.volumeBounds.size.x, furniture.volumeBounds.size.z, furniture.volumeBounds.size.y);
-                furniture.volumeBounds.size = newSize;
+
+                ///Vector3 newSize = new Vector3(furniture.volumeBounds.size.x, furniture.volumeBounds.size.z, furniture.volumeBounds.size.y);
+                ///furniture.volumeBounds.size = newSize;
                 // Rotate it wierdly
-                furniture.rotInRoom *= Quaternion.Euler(-90f, 0f, 0f) * Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
+                ///furniture.rotInRoom *= Quaternion.Euler(-90f, 0f, 0f) * Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
+
 
                 // All meta bounds somehow have their center right at the top .. meta be crazy lizard followers im telling you
 
-                furniture.posInRoom.y -= furniture.volumeBounds.size.y;
+                ///furniture.posInRoom.y -= furniture.volumeBounds.size.y;
 
                 // except for the couch, it has its cetner in the middle, wtf meta
-                if (furniture.label == FurnitureLabel.COUCH)
-                {
-                    furniture.posInRoom.y += furniture.volumeBounds.size.y / 2;
-                }
+                ///if (furniture.label == FurnitureLabel.COUCH)
+                ///{
+                 ///   furniture.posInRoom.y += furniture.volumeBounds.size.y / 2;
+                ///}
 
-                if (anchor.PlaneRect != null)
-                {
+                ///if (anchor.PlaneRect != null)
+                ///{
                     // sme volumes like tables or beds also have planes
-                    furniture.planeRect = (Rect)anchor.PlaneRect;
-                }
+                 ///   furniture.planeRect = (Rect)anchor.PlaneRect;
+                ///}
 
             }
             else if (anchor.PlaneRect != null)
             {
                 furniture.type = FurnitureType.FloorAndWalls;
-                furniture.planeRect = (Rect)anchor.PlaneRect;
+                ///furniture.planeRect = (Rect)anchor.PlaneRect;
             }
 
             room.furniture.Add(furniture);
