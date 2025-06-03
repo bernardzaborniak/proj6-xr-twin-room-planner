@@ -11,4 +11,6 @@ public class LabelToModelConversionTable: ScriptableObject
     [Tooltip("Use this if no label was registered in the dict above")]
     public GameObject defaultPrefab;
 
+    public Material defaultWallMaterial;
+
 }
