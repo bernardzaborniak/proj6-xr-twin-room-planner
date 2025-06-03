@@ -59,6 +59,7 @@ public class FurnitureVisualization : MonoBehaviour
             AdjustMeshRotation();
             AdjustMeshPositionOffset(data);
             AdjustMeshScaling(data);
+            SetBoxCollider();
 
             Moveable = true;
 
@@ -158,6 +159,12 @@ public class FurnitureVisualization : MonoBehaviour
         visualizedFurniturePiece.transform.localScale = normalizedFurnitureScale;
 
         scaleHelper.transform.localScale = meshBoundsRenderer.localBounds.size;
+    }
+
+    void SetBoxCollider()
+    {
+        boxCollider.center = meshBoundsRenderer.localBounds.center;
+        boxCollider.size = meshBoundsRenderer.localBounds.size;
     }
 
 
