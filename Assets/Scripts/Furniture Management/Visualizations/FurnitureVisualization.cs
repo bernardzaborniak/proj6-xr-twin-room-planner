@@ -14,6 +14,8 @@ public class FurnitureVisualization : MonoBehaviour
 
     [SerializeField] BoxCollider boxCollider;
 
+    // todo add mvoeable readonly bool
+    public bool Moveable { get; private set; }
 
     public void VisualizeFromData(FurnitureData data, LabelToModelConversionTable labelToMeshConversionTable)
     {
@@ -29,7 +31,6 @@ public class FurnitureVisualization : MonoBehaviour
         MeshRenderer meshRenderer = visualizedFurniturePiece.GetComponent<MeshRenderer>();
 
    
-
         Bounds meshBounds = meshRenderer.bounds;
         Vector3 normalizedScale = new Vector3(
             meshRenderer.bounds.size.x != 0 ? 1f / meshRenderer.bounds.size.x : 0f,
@@ -45,6 +46,10 @@ public class FurnitureVisualization : MonoBehaviour
         boxCollider.center = new Vector3(0f, boxCollider.size.y/2, 0f);
 
         visualizedFurniturePiece.transform.localScale = newSize;
+
+        // Floors and walls are not movable.
+        Moveable = data.type == FurnitureType.Furniture;
+       
     }
 
     void SelectAndDisplayMesh()

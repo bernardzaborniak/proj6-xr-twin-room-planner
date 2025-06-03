@@ -42,6 +42,7 @@ public class RoomsManager : MonoBehaviour
         // Record current room
         if (Input.GetKeyDown(KeyCode.C))
         {
+            // TODO run this automatically
             Create2ExampleRoomVariations();
         }
 
@@ -79,6 +80,12 @@ public class RoomsManager : MonoBehaviour
             {
                 roomVariationsData.Add(variation);
             }
+        }
+
+        // if no room variatin is available yet, create 2 new ones
+        if (allRoomVariations.Length == 0)
+        {
+            Create2ExampleRoomVariations();
         }
     }
 
