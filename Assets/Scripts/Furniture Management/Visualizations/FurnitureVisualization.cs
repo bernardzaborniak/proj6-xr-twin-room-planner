@@ -31,6 +31,15 @@ public class FurnitureVisualization : MonoBehaviour
     /// </summary>
     public Vector3 CustomFurnitureDirection { get; private set; }
 
+    // Finn 04.06., used in SpawnMenuLogic for creating new furniture
+    public void Set(BoxCollider boxC, MeshFilter meshF, MeshRenderer meshR, Transform scaleH)
+    {
+        boxCollider = boxC;
+        meshBounds = meshF;
+        meshBoundsRenderer = meshR;
+        scaleHelper = scaleH;
+    }
+
     public void VisualizeFromData(FurnitureData data, LabelToModelConversionTable labelToMeshConversionTable)
     {
         localDataCopy = data.DeepCopy();
