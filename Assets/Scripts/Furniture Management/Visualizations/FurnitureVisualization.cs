@@ -25,7 +25,7 @@ public class FurnitureVisualization : MonoBehaviour
     [SerializeField] Transform scaleHelper;
 
     // todo add mvoeable readonly bool
-    public bool Moveable { get; private set; }
+    public bool Moveable { get; set; }
     /// <summary>
     /// We are using a custom direction decoupled from metas orientations //TODO
     /// </summary>
