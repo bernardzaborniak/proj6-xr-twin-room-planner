@@ -298,4 +298,12 @@ public class RoomsManager : MonoBehaviour
         string name = sourceValue.ToString();
         return Enum.TryParse(name, out targetValue);
     }
+
+    public void AddFurnitureToCurrentVisualization(FurnitureData data)
+    {
+        if(currentVisualization is RoomVariationVisualization)
+        {
+            (currentVisualization as RoomVariationVisualization).AddFurnitureFromCatalogue(data);
+        }
+    }
 }

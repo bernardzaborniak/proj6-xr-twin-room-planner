@@ -15153,23 +15153,60 @@ MonoBehaviour:
   menuImage: {fileID: 882489469}
   count: {fileID: 218086087}
   rayInteraction: {fileID: 950758263}
+  roomManager: {fileID: 676192692}
   furnitureList:
   - fName: Couch 01
-    mesh: {fileID: 4300000, guid: a38c2ee71f6376a45b6b45e66004a109, type: 3}
-    material: {fileID: 2100000, guid: 0fa29dbb24d023c4f815d0a00e41584a, type: 2}
+    data:
+      type: 2
+      label: 4
+      tempLabelString: 
+      posInRoom: {x: 0, y: 0, z: 0}
+      rotInRoom: {x: 0, y: 0, z: 0, w: 0}
+      meshData:
+        triangles: 000000000200000001000000000000000300000002000000030000000700000002000000020000000700000006000000070000000500000006000000070000000400000005000000000000000100000005000000000000000500000004000000000000000400000007000000000000000700000003000000010000000200000006000000010000000600000005000000
+        vertices:
+        - {x: 0, y: 0, z: 0}
+        - {x: 1, y: 0, z: 0}
+        - {x: 0, y: 1, z: 0}
+        - {x: 0, y: 0, z: 1}
+        - {x: 0, y: 1, z: 1}
+        - {x: 1, y: 1, z: 0}
+        - {x: 1, y: 1, z: 1}
+        - {x: 1, y: 0, z: 1}
+        normals: []
+      planeRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      volumeBounds:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+      newTestFloat: 4.33
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
-  - fName: Couch 02
-    mesh: {fileID: 4300000, guid: 927fa657fb9bc0f43a236e48f12c3c36, type: 3}
-    material: {fileID: 2100000, guid: 0fa29dbb24d023c4f815d0a00e41584a, type: 2}
-    image: {fileID: 21300000, guid: 2f8349570a152884fb6cf7ebdc8c18b3, type: 3}
   - fName: Desk 06
-    mesh: {fileID: 4300000, guid: f437f56c4d9ddd94cad9e292b78601d3, type: 3}
-    material: {fileID: 2100000, guid: 0fa29dbb24d023c4f815d0a00e41584a, type: 2}
+    data:
+      type: 2
+      label: 3
+      tempLabelString: 
+      posInRoom: {x: 0, y: 0, z: 0}
+      rotInRoom: {x: 0, y: 0, z: 0, w: 0}
+      meshData:
+        triangles: 
+        vertices: []
+        normals: []
+      planeRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      volumeBounds:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+      newTestFloat: 4.33
     image: {fileID: 21300000, guid: b7bad1260586fa746a0b67e930892936, type: 3}
-  shootLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  maxLineDistance: 0
 --- !u!1 &2058227443
 GameObject:
   m_ObjectHideFlags: 0

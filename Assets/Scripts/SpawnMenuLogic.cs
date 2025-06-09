@@ -14,6 +14,7 @@ public class SpawnObjectMenu : MonoBehaviour
     public TMP_Text count;
 
     public RayInteraction rayInteraction;
+    public RoomsManager roomManager;
 
     [SerializeField]
     private List<FurnitureItem> furnitureList = new List<FurnitureItem>();
@@ -35,7 +36,7 @@ public class SpawnObjectMenu : MonoBehaviour
         }
         if (OVRInput.GetDown(OVRInput.RawButton.Y) && isOpened)
         {
-            OnClick();
+            spawnFurniture();
             updateMenu(currentItem);
         }
         if (OVRInput.GetDown(OVRInput.RawButton.LThumbstickLeft) && isOpened)
@@ -77,40 +78,46 @@ public class SpawnObjectMenu : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Object spawned");
-        furniture = new GameObject("Furniture Visualization (Spawned)");
-        furniture.transform.position += new Vector3(50f, 0f, 0f);
-           
-        // Add script
-        BoxCollider collider = furniture.AddComponent<BoxCollider>();
-        FurnitureVisualization furnitureVis = furniture.AddComponent<FurnitureVisualization>();
+        //Debug.Log("Object spawned");
+        //furniture = new GameObject("Furniture Visualization (Spawned)");
+        //furniture.transform.position += new Vector3(50f, 0f, 0f);
 
-        // Create child "MeshBounds"
-        GameObject childMeshBounds = new GameObject("MeshBounds");
-        childMeshBounds.AddComponent<MeshFilter>();
-        childMeshBounds.AddComponent<MeshRenderer>();
-        childMeshBounds.transform.SetParent(furnitureVis.transform);
+        //// Add script
+        //BoxCollider collider = furniture.AddComponent<BoxCollider>();
+        //FurnitureVisualization furnitureVis = furniture.AddComponent<FurnitureVisualization>();
 
-        // Create child "ScalingHelper"
-        GameObject childScalingHelper = new GameObject("ScalingHelper");
-        childScalingHelper.transform.SetParent(furnitureVis.transform);
+        //// Create child "MeshBounds"
+        //GameObject childMeshBounds = new GameObject("MeshBounds");
+        //childMeshBounds.AddComponent<MeshFilter>();
+        //childMeshBounds.AddComponent<MeshRenderer>();
+        //childMeshBounds.transform.SetParent(furnitureVis.transform);
 
-        // Create child of ScalingHelper "Furniture Piece"
-        GameObject subchildFurniturePiece = new GameObject("Furniture Piece");
-        MeshFilter meshFilter = subchildFurniturePiece.AddComponent<MeshFilter>();
-        meshFilter.mesh = furnitureList[currentItem].mesh;
-        meshFilter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        subchildFurniturePiece.transform.SetParent(childScalingHelper.transform);
-        MeshRenderer renderer = subchildFurniturePiece.AddComponent<MeshRenderer>();
-        renderer.material = furnitureList[currentItem].material;
+        //// Create child "ScalingHelper"
+        //GameObject childScalingHelper = new GameObject("ScalingHelper");
+        //childScalingHelper.transform.SetParent(furnitureVis.transform);
 
-        furnitureVis.Set(collider, childMeshBounds.GetComponent<MeshFilter>(), childMeshBounds.GetComponent<MeshRenderer>(), childScalingHelper.transform);
-        furnitureVis.Moveable = true;
+        //// Create child of ScalingHelper "Furniture Piece"
+        //GameObject subchildFurniturePiece = new GameObject("Furniture Piece");
+        //MeshFilter meshFilter = subchildFurniturePiece.AddComponent<MeshFilter>();
+        //meshFilter.mesh = furnitureList[currentItem].mesh;
+        //meshFilter.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //subchildFurniturePiece.transform.SetParent(childScalingHelper.transform);
+        //MeshRenderer renderer = subchildFurniturePiece.AddComponent<MeshRenderer>();
+        //renderer.material = furnitureList[currentItem].material;
 
-        furniture.transform.position += new Vector3(0f, 0f, 1f);
-        furniture.layer = LayerMask.NameToLayer("Furniture Visualization");
+        //furnitureVis.Set(collider, childMeshBounds.GetComponent<MeshFilter>(), childMeshBounds.GetComponent<MeshRenderer>(), childScalingHelper.transform);
+        //furnitureVis.Moveable = true;
 
-        // TODO: select spawn position, make movable by RayInteraction script
+        //furniture.transform.position += new Vector3(0f, 0f, 1f);
+        //furniture.layer = LayerMask.NameToLayer("Furniture Visualization");
+
+
+    }
+
+    void spawnFurniture()
+    {
+        FurnitureItem furnitureItemToSpawn = furnitureList[currentItem];
+        roomManager.AddFurnitureToCurrentVisualization(furnitureItemToSpawn.data);
     }
 
     private void updateMenu(int item)
