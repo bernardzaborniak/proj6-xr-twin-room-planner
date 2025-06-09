@@ -9977,7 +9977,7 @@ MonoBehaviour:
   menuImage: {fileID: 282810830}
   count: {fileID: 1641073505}
   rayInteraction: {fileID: 0}
-  roomManager: {fileID: 0}
+  roomManager: {fileID: 1017816717}
   furnitureList:
   - fName: Couch 01
     data:
