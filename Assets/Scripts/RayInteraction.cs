@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RayInteraction : MonoBehaviour
@@ -10,9 +11,17 @@ public class RayInteraction : MonoBehaviour
     public LineRenderer lineRenderer;
 
     public LayerMask mask;
+    public float heightChangeSpeed;
+    public float rotationChangeSpeed;
 
     RaycastHit currentHit;
     bool hasHit;
+
+    bool isInteractingWithObject;
+    Plane currentInteractionPlane;
+    Vector3 furnitureToRayOffset;
+    GameObject currentInteractingObject;
+    float heightOffset;
 
     void Start()
     {
@@ -43,23 +52,64 @@ public class RayInteraction : MonoBehaviour
 
         if (OVRInput.GetDown(shootingButton))
         {
-            SelectObject();
+            SelectObject(ray);
+        }
+
+        if (OVRInput.GetUp(shootingButton))
+        {
+            StopSelectObject();
+        }
+
+        if (isInteractingWithObject)
+        {
+            moveSelectedObject(ray);
+            ChangeObjectHeight();
+            ChangeObjectRotation();
         }
     }
+    
 
-    void SelectObject()
+    void SelectObject(Ray ray)
     {
+
         if (!hasHit)
             return;
 
-        // for moving in xz-plane
         FurnitureVisualization visualization = currentHit.transform.GetComponent<FurnitureVisualization>();
 
         if (visualization != null && visualization.Moveable) 
         {
-            // DO the move
-            Vector3 newPos = Vector3.zero;//TODO set the new position somehow
-            visualization.transform.position = newPos;
+            heightOffset = 0;
+            currentInteractingObject = visualization.gameObject;
+            isInteractingWithObject = true;
+            currentInteractionPlane = new Plane (Vector3.up, visualization.transform.position);
+            float t = 0;
+            currentInteractionPlane.Raycast(ray, out t);
+            furnitureToRayOffset = visualization.transform.position - (rayOrigin.position + rayOrigin.forward * t);
         }
+    }
+
+    void moveSelectedObject(Ray ray)
+    {
+        float t = 0;
+        currentInteractionPlane.Raycast(ray, out t);
+        Vector3 newpos = rayOrigin.position + rayOrigin.forward * t;
+        currentInteractingObject.transform.position = newpos + furnitureToRayOffset + Vector3.up * heightOffset;
+    }
+    
+    void StopSelectObject()
+    {
+        isInteractingWithObject = false;
+    }
+
+    void ChangeObjectHeight()
+    {
+        heightOffset += OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y * heightChangeSpeed;
+
+    }
+
+    void ChangeObjectRotation()
+    {
+        currentInteractingObject.transform.Rotate(0, 0, OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).x * rotationChangeSpeed);
     }
 }
