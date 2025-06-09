@@ -2437,7 +2437,7 @@ GameObject:
   - component: {fileID: 317168744}
   - component: {fileID: 317168743}
   m_Layer: 0
-  m_Name: Ray
+  m_Name: Ray Interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
