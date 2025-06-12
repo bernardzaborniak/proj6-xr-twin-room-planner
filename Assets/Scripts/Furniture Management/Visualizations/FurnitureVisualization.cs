@@ -65,8 +65,8 @@ public class FurnitureVisualization : MonoBehaviour
 
             meshBounds.sharedMesh = CreateBoundsMesh(data);
             visualizedFurniturePiece = SelectAndDisplayFurnitureMesh();
-            AdjustMeshRotation();
-            AdjustMeshPositionOffset(data);
+            //AdjustMeshRotation();
+           // AdjustMeshPositionOffset(data);
             AdjustMeshScaling(data);
             SetBoxCollider();
 
@@ -125,6 +125,7 @@ public class FurnitureVisualization : MonoBehaviour
     void AdjustMeshRotation()
     {
         // Metas scannedm eshes have weird rotations and centers, so we need to adjust them
+        
         visualizedFurniturePiece.transform.rotation = Quaternion.LookRotation(transform.up, Vector3.up);
     }
 

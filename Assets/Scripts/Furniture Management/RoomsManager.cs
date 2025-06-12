@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
+using TMPro;
+using static UnityEngine.Mesh;
 
 public class RoomsManager : MonoBehaviour
 {
@@ -11,22 +13,22 @@ public class RoomsManager : MonoBehaviour
 
     [SerializeField]
     LabelToModelConversionTable labelToMeshConversionTable;
+    [SerializeField] GameObject roomAnchorsVisualizationPrefab;
+    [SerializeField] GameObject roomVariationVisualizationPrefab;
     [Space]
 
-
+    [Header("Below are runtime fields, dont set them in the inspector")]
     /// <summary>
     /// This is the scanned and potentially adjusted room to use as a base for the others
     /// </summary>
     [SerializeField] RoomData roomScanData;
 
     [SerializeField] RoomVisualization currentVisualization;
-    [SerializeField] GameObject roomAnchorsVisualizationPrefab;
 
     /// <summary>
     /// Those are the differents layouts of furniture that we tried out.
     /// </summary>
     [SerializeField] List<RoomData> roomVariationsData;
-    [SerializeField] GameObject roomVariationVisualizationPrefab;
 
 
 
@@ -137,59 +139,61 @@ public class RoomsManager : MonoBehaviour
 
             FurnitureData furniture = new FurnitureData();
 
-
+            //   1 ----- Set Labels  ----
             FurnitureLabel translatedLabel;
             TryConvertEnumByName<MRUKAnchor.SceneLabels, FurnitureLabel>(anchor.Label, out translatedLabel);
             furniture.label = translatedLabel;
             furniture.tempLabelString = anchor.Label.ToString();
-
-            furniture.posInRoom = anchor.transform.localPosition;
-            furniture.rotInRoom = anchor.transform.localRotation;
-
-            // TODO Visualize the Walls aswell
-
-            // meta objects mesh value is not set i dont know why, so we do it in this weird way
-            furniture.meshData = new MeshSaveData(anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh);
 
             if (anchor.VolumeBounds != null)
             {
                 furniture.type = FurnitureType.Furniture;
                 furniture.volumeBounds = (Bounds)anchor.VolumeBounds;
                 Debug.Log($"[Bern] Global Mesh before was: {anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh}");
-
-               
-
-                // For volumes we need to adjust the rotation as meta uses different axies
-                // Flip y and z bounds
-
-                ///Vector3 newSize = new Vector3(furniture.volumeBounds.size.x, furniture.volumeBounds.size.z, furniture.volumeBounds.size.y);
-                ///furniture.volumeBounds.size = newSize;
-                // Rotate it wierdly
-                ///furniture.rotInRoom *= Quaternion.Euler(-90f, 0f, 0f) * Quaternion.Euler(0f, -180f, 0f) * Quaternion.Euler(0f, 0f, 180f);
-
-
-                // All meta bounds somehow have their center right at the top .. meta be crazy lizard followers im telling you
-
-                ///furniture.posInRoom.y -= furniture.volumeBounds.size.y;
-
-                // except for the couch, it has its cetner in the middle, wtf meta
-                ///if (furniture.label == FurnitureLabel.COUCH)
-                ///{
-                 ///   furniture.posInRoom.y += furniture.volumeBounds.size.y / 2;
-                ///}
-
-                ///if (anchor.PlaneRect != null)
-                ///{
-                    // sme volumes like tables or beds also have planes
-                 ///   furniture.planeRect = (Rect)anchor.PlaneRect;
-                ///}
-
             }
             else if (anchor.PlaneRect != null)
             {
                 furniture.type = FurnitureType.FloorAndWalls;
-                ///furniture.planeRect = (Rect)anchor.PlaneRect;
             }
+
+
+            //  2 --- Set Pos and fix Orentation ----
+            furniture.posInRoom = anchor.transform.localPosition;
+
+            //furniture.rotInRoom = anchor.transform.localRotation;
+            furniture.rotInRoom = Quaternion.LookRotation(-anchor.transform.right,Vector3.up);
+
+            // Meta objects mesh value is set to null, i dont know why, so we do it in this weird way
+            furniture.meshData = new MeshSaveData(anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh);
+
+            // transform all meshes vertices into the new orientation
+            // get the world position of vertices and transform it into another
+            // save the lowest position in y, that will be our origin, as the origins of meta vary
+            float lowestY = float.MaxValue;
+            Vector3[] verticesInWorldSpace = new Vector3[furniture.meshData.vertices.Length];
+
+            for (int i = 0; i < furniture.meshData.vertices.Length; i++)
+            {
+                Vector3 meshVertex = furniture.meshData.vertices[i];
+                verticesInWorldSpace[i] = anchor.transform.TransformPoint(meshVertex);
+                if (meshVertex.y < lowestY)
+                {
+                    lowestY = meshVertex.y;
+                }
+            }
+
+            furniture.posInRoom.y = lowestY;
+            // used to transform the mesh vertices into the new local space
+            Matrix4x4 targetWorldMatrix = Matrix4x4.TRS(furniture.posInRoom, furniture.rotInRoom, Vector3.one);
+            Matrix4x4 worldToLocal = targetWorldMatrix.inverse;
+
+            for (int i = 0; i < verticesInWorldSpace.Length; i++) 
+            {
+                verticesInWorldSpace[i] = worldToLocal.MultiplyPoint3x4(verticesInWorldSpace[i]);
+            }
+
+            furniture.meshData.vertices = verticesInWorldSpace;
+
 
             room.furniture.Add(furniture);
         }
