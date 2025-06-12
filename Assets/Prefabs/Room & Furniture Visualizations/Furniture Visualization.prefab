@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 8771885151609156410}
-  meshBounds: {fileID: 4827649710289113138}
+  meshBoundsFilter: {fileID: 4827649710289113138}
   meshBoundsRenderer: {fileID: 1937268577476256462}
   scaleHelper: {fileID: 4386260947325157985}
 --- !u!65 &8771885151609156410
