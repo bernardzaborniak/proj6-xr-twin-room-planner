@@ -174,11 +174,11 @@ public class RoomsManager : MonoBehaviour
 
             for (int i = 0; i < furniture.meshData.vertices.Length; i++)
             {
-                Vector3 meshVertex = furniture.meshData.vertices[i];
-                verticesInWorldSpace[i] = anchor.transform.TransformPoint(meshVertex);
-                if (meshVertex.y < lowestY)
+                verticesInWorldSpace[i] = anchor.transform.TransformPoint(furniture.meshData.vertices[i]);
+
+                if (verticesInWorldSpace[i].y < lowestY)
                 {
-                    lowestY = meshVertex.y;
+                    lowestY = verticesInWorldSpace[i].y;
                 }
             }
 

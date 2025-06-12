@@ -17,7 +17,7 @@ public class AnchorVisualization:MonoBehaviour
         transform.localPosition = data.posInRoom;
         transform.localRotation = data.rotInRoom;
 
-        Debug.Log($"[Bern[ Visualize from Data: {data.label} mesh vertex 0: {data.meshData.vertices[0]}");
+        //Debug.Log($"[Bern[ Visualize from Data: {data.label} mesh vertex 0: {data.meshData.vertices[0]}");
         Mesh newMesh = new Mesh();
         //mesh.Clear();
 
