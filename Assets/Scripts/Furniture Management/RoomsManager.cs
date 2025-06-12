@@ -303,11 +303,11 @@ public class RoomsManager : MonoBehaviour
         return Enum.TryParse(name, out targetValue);
     }
 
-    public void AddFurnitureToCurrentVisualization(FurnitureData data)
+    public void AddFurnitureToCurrentVisualization(FurnitureData data, Vector3 worldspacePosition)
     {
         if(currentVisualization is RoomVariationVisualization)
         {
-            (currentVisualization as RoomVariationVisualization).AddFurnitureFromCatalogue(data);
+            (currentVisualization as RoomVariationVisualization).AddFurnitureFromCatalogue(data, worldspacePosition);
         }
     }
 }

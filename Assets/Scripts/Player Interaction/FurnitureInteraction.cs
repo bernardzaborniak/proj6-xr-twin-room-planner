@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class RayInteraction : MonoBehaviour
+public class FurnitureInteraction : MonoBehaviour
 {
     public OVRInput.RawButton shootingButton;
 
@@ -62,7 +62,7 @@ public class RayInteraction : MonoBehaviour
 
         if (isInteractingWithObject)
         {
-            moveSelectedObject(ray);
+            MoveSelectedObject(ray);
             ChangeObjectHeight();
             ChangeObjectRotation();
         }
@@ -89,7 +89,7 @@ public class RayInteraction : MonoBehaviour
         }
     }
 
-    void moveSelectedObject(Ray ray)
+    void MoveSelectedObject(Ray ray)
     {
         float t = 0;
         currentInteractionPlane.Raycast(ray, out t);
@@ -110,6 +110,6 @@ public class RayInteraction : MonoBehaviour
 
     void ChangeObjectRotation()
     {
-        currentInteractingObject.transform.Rotate(0, 0, OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).x * rotationChangeSpeed);
+        currentInteractingObject.transform.Rotate(0f, OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).x * rotationChangeSpeed, 0f);
     }
 }
