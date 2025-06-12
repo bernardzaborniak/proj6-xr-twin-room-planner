@@ -64,6 +64,7 @@ public class RoomsManager : MonoBehaviour
 
     public void LoadSavedRoomData()
     {
+        roomScanData = null;
         string path = Application.persistentDataPath;
 
         string roomScanPath = Path.Combine(path, "roomScan.json");
@@ -84,6 +85,10 @@ public class RoomsManager : MonoBehaviour
             }
         }
 
+        if (roomScanData == null) 
+        {
+            CaptureCurrentMetaRoom();
+        }
         // if no room variatin is available yet, create 2 new ones
         if (allRoomVariations.Length == 0 && roomScanData != null)
         {
@@ -162,6 +167,7 @@ public class RoomsManager : MonoBehaviour
 
             //furniture.rotInRoom = anchor.transform.localRotation;
             furniture.rotInRoom = Quaternion.LookRotation(-anchor.transform.right,Vector3.up);
+            furniture.rotationAdjuster = 0f;
 
             // Meta objects mesh value is set to null, i dont know why, so we do it in this weird way
             furniture.meshData = new MeshSaveData(anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh);
@@ -235,7 +241,13 @@ public class RoomsManager : MonoBehaviour
         // 2 save changes to disk
         string savename = "roomScan.json";
 
+        for (int i = 0; i < roomScanData.furniture.Count; i++) {
+            Debug.Log($"save scan data {roomScanData.furniture[i].label} + {roomScanData.furniture[i].rotationAdjuster}");
+        }
+
         string jsonString = JsonUtility.ToJson(roomScanData);
+        Debug.Log(jsonString);
+        //TODO why is the string not being saved here??
         string fullPath = Path.Combine(Application.persistentDataPath, savename);
 
         File.WriteAllText(fullPath, jsonString);

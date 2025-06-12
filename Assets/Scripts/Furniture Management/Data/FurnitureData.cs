@@ -18,15 +18,16 @@ public class FurnitureData
     public Vector3 posInRoom;
     public Quaternion rotInRoom;
 
+    // used to correct the y rotation of furniture pieces
+    public float rotationAdjuster;
+
     // Bounds & visualization
     //public Mesh mesh; // maybe we actually dont need the mesh?  we can just generate it at runtime
     public MeshSaveData meshData;
 
-
     public Rect planeRect;
     public Bounds volumeBounds;
 
-    public float newTestFloat = 4.33f;
 
     public FurnitureData DeepCopy()
     {
@@ -39,10 +40,11 @@ public class FurnitureData
             posInRoom = this.posInRoom,
             rotInRoom = this.rotInRoom,
 
+            rotationAdjuster = this.rotationAdjuster,
+
             meshData = this.meshData, // Only copies the reference. Consider cloning if needed.
             planeRect = this.planeRect,
             volumeBounds = this.volumeBounds,
-            newTestFloat = this.newTestFloat
         };
     }
 }

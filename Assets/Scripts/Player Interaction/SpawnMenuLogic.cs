@@ -17,7 +17,7 @@ public class SpawnObjectMenu : MonoBehaviour
     public RoomsManager roomManager;
 
     [SerializeField]
-    private List<FurnitureItem> furnitureList = new List<FurnitureItem>();
+    private List<SpawnMenuFurnitureItem> furnitureList = new List<SpawnMenuFurnitureItem>();
 
     bool isOpened = false;
     int currentItem = 0;
@@ -78,7 +78,7 @@ public class SpawnObjectMenu : MonoBehaviour
 
     void SpawnFurniture()
     {
-        FurnitureItem furnitureItemToSpawn = furnitureList[currentItem];
+        SpawnMenuFurnitureItem furnitureItemToSpawn = furnitureList[currentItem];
 
         Vector3 spawnPoint = transform.position + (transform.forward * 0.5f) + (-Vector3.up * 0.5f);
 

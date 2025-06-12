@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class FurnitureItem
+public class SpawnMenuFurnitureItem
 {
     public string fName;
     public FurnitureData data;
