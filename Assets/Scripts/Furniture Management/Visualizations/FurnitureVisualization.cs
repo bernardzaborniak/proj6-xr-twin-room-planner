@@ -39,7 +39,6 @@ public class FurnitureVisualization : MonoBehaviour
         transform.localRotation = data.rotInRoom;
 
         // adjust rotation to change showing direction mostly 90/180 or 270 degrees
-        Debug.Log($"rotate scaling helper {gameObject} by {data.rotationAdjuster}");
         scaleHelper.Rotate(Vector3.up, data.rotationAdjuster);
 
         this.labelToMeshConversionTableRef = labelToMeshConversionTable;

@@ -241,12 +241,7 @@ public class RoomsManager : MonoBehaviour
         // 2 save changes to disk
         string savename = "roomScan.json";
 
-        for (int i = 0; i < roomScanData.furniture.Count; i++) {
-            Debug.Log($"save scan data {roomScanData.furniture[i].label} + {roomScanData.furniture[i].rotationAdjuster}");
-        }
-
         string jsonString = JsonUtility.ToJson(roomScanData);
-        Debug.Log(jsonString);
         //TODO why is the string not being saved here??
         string fullPath = Path.Combine(Application.persistentDataPath, savename);
 
