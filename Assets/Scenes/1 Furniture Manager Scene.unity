@@ -149,13 +149,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labelToMeshConversionTable: {fileID: 11400000, guid: 9b1b59bb95e386040b2e72e17f16572c, type: 2}
+  roomAnchorsVisualizationPrefab: {fileID: 8231694513585666829, guid: e9c9d9c5e0d32e743bad1755ef093d13, type: 3}
+  roomVariationVisualizationPrefab: {fileID: 3142179871477988062, guid: 3ae3caad2e1465d408aa1b686341b34c, type: 3}
   roomScanData:
     roomName: 
     furniture: []
   currentVisualization: {fileID: 0}
-  roomAnchorsVisualizationPrefab: {fileID: 8231694513585666829, guid: e9c9d9c5e0d32e743bad1755ef093d13, type: 3}
   roomVariationsData: []
-  roomVariationVisualizationPrefab: {fileID: 3142179871477988062, guid: 3ae3caad2e1465d408aa1b686341b34c, type: 3}
 --- !u!4 &2201320
 Transform:
   m_ObjectHideFlags: 0
@@ -12280,7 +12280,7 @@ MonoBehaviour:
   MeshMaterial: {fileID: 2100000, guid: 599b01c5f1d17436c89b88cc04257314, type: 2}
   Colliders: 0
   CutHoles: 64
-  castShadows: 1
+  castShadows: 0
   hideMesh: 1
   Layer: 0
   textureCoordinateModes:

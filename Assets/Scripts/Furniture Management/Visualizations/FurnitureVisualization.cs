@@ -20,7 +20,7 @@ public class FurnitureVisualization : MonoBehaviour
     /// <summary>
     /// Are used to recreate the scanned bounds for scaling and positoning.
     /// </summary>
-    [SerializeField] MeshFilter meshBounds;
+    [SerializeField] MeshFilter meshBoundsFilter;
     [SerializeField] MeshRenderer meshBoundsRenderer;
     [SerializeField] Transform scaleHelper;
 
@@ -31,14 +31,6 @@ public class FurnitureVisualization : MonoBehaviour
     /// </summary>
     public Vector3 CustomFurnitureDirection { get; private set; }
 
-    // Finn 04.06., used in SpawnMenuLogic for creating new furniture
-    public void Set(BoxCollider boxC, MeshFilter meshF, MeshRenderer meshR, Transform scaleH)
-    {
-        boxCollider = boxC;
-        meshBounds = meshF;
-        meshBoundsRenderer = meshR;
-        scaleHelper = scaleH;
-    }
 
     public void VisualizeFromData(FurnitureData data, LabelToModelConversionTable labelToMeshConversionTable)
     {
@@ -51,28 +43,23 @@ public class FurnitureVisualization : MonoBehaviour
         bool isWall = FurnitureLabelUtilities.IsLabelFlatWall(data.label);
 
         
-
         if (isWall)
         {
-            Debug.Log($"{data.label} is wall {gameObject.GetHashCode()}");
             visualizedFurniturePiece = CreateWallMesh(data, labelToMeshConversionTable.defaultWallMaterial);
-            Moveable = false;
+            meshBoundsFilter.sharedMesh = visualizedFurniturePiece.GetComponent<MeshFilter>().mesh;
+           Moveable = false;
         }
         else
         {
-            Debug.Log($"{data.label} is not wall  {gameObject.GetHashCode()}");
-
-
-            meshBounds.sharedMesh = CreateBoundsMesh(data);
+            meshBoundsFilter.sharedMesh = CreateBoundsMesh(data);
             visualizedFurniturePiece = SelectAndDisplayFurnitureMesh();
-            AdjustMeshRotation();
-            AdjustMeshPositionOffset(data);
             AdjustMeshScaling(data);
-            SetBoxCollider();
 
             Moveable = true;
 
         }
+
+        SetBoxCollider();
 
     }
 
@@ -122,32 +109,6 @@ public class FurnitureVisualization : MonoBehaviour
         return furnitureToSpawn;
     }
 
-    void AdjustMeshRotation()
-    {
-        // Metas scannedm eshes have weird rotations and centers, so we need to adjust them
-        visualizedFurniturePiece.transform.rotation = Quaternion.LookRotation(transform.up, Vector3.up);
-    }
-
-    void AdjustMeshPositionOffset(FurnitureData data)
-    {
-        Bounds bounds = meshBounds.sharedMesh.bounds;
-
-        Vector3 boundsInWorldSpace = meshBounds.transform.TransformVector(bounds.size);
-
-        Vector3 posOffset = Vector3.zero;
-
-        //why defuq does COUCH have a different origin meta?
-        if (data.label == FurnitureLabel.COUCH)
-        {
-            posOffset.y = -boundsInWorldSpace.y / 2;
-        }
-        else if (!FurnitureLabelUtilities.IsLabelFlatWall(data.label))
-        {
-            posOffset.y = -boundsInWorldSpace.y;
-        }
-
-        scaleHelper.transform.position += posOffset;
-    }
 
 
     void AdjustMeshScaling(FurnitureData data)

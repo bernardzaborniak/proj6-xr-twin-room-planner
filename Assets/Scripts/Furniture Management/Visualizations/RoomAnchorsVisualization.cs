@@ -18,6 +18,7 @@ public class RoomAnchorsVisualization : RoomVisualization
         {
             // spawn object based on save data
             AnchorVisualization newFurniture = Instantiate(furnitureScanVisualizationPrefab, this.transform).GetComponent<AnchorVisualization>();
+            newFurniture.gameObject.name = i.ToString() + ": " + roomData.furniture[i].label;
             newFurniture.VisualizeFromData(roomData.furniture[i]);
             anchorVisualizations.Add(newFurniture);
         }

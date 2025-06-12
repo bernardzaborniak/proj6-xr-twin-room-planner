@@ -21,6 +21,7 @@ public class RoomVariationVisualization : RoomVisualization
         {
             // spawn object based on save data
             FurnitureVisualization newFurniture = Instantiate(furnitureVisualizationPrefab, this.transform).GetComponent<FurnitureVisualization>();
+            newFurniture.gameObject.name = i.ToString() + ": " + roomData.furniture[i].label;
             newFurniture.VisualizeFromData(roomData.furniture[i], labelToModelConversionTable);
             furnitureVisualizations.Add(newFurniture);
         }
@@ -39,8 +40,10 @@ public class RoomVariationVisualization : RoomVisualization
         return newData;
     }
 
-    public void AddFurnitureFromCatalogue(FurnitureData data)
+    public void AddFurnitureFromCatalogue(FurnitureData data, Vector3 worldspacePos)
     {
+        data.posInRoom = transform.InverseTransformPoint(worldspacePos);
+
         FurnitureVisualization newFurniture = Instantiate(furnitureVisualizationPrefab, this.transform).GetComponent<FurnitureVisualization>();
         newFurniture.VisualizeFromData(data, labelToModelConversionTable);
         furnitureVisualizations.Add(newFurniture);
