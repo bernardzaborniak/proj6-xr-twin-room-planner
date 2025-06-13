@@ -427,7 +427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8978912707135809530
 Transform:
   m_ObjectHideFlags: 0
@@ -466,6 +466,7 @@ MonoBehaviour:
   uiMask:
     serializedVersion: 2
     m_Bits: 40
+  allowMoveFurniture: 0
 --- !u!1 &722621943965065891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2757344839270326115
 Transform:
   m_ObjectHideFlags: 0
@@ -1729,6 +1730,7 @@ MonoBehaviour:
   uiMask:
     serializedVersion: 2
     m_Bits: 40
+  allowMoveFurniture: 0
 --- !u!1 &1651484206670983843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +1963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 6cd54899-b080-42ce-94a2-5396b4166a3d
+  instanceId: 8871f5ce-6a5d-40c4-93a2-38d274cff014
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -5481,7 +5483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8813424389521956373
 Transform:
   m_ObjectHideFlags: 0
@@ -6434,7 +6436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 82b69154-90da-4597-929e-8ae5adeda2c8
+  instanceId: 57c09fc3-d55e-4f02-8f88-1218c3fcffa9
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -6783,11 +6785,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomsManager: {fileID: 0}
   ovrPassthroughLayer: {fileID: 0}
-  layoutModeInteraction: {fileID: 6000945968422206747}
-  spawnObjectMenu: {fileID: 6056764980299324677}
-  furnitureMoveInteraction: {fileID: 8789471843339394213}
-  scanModeInteraction: {fileID: 1247133618610313907}
-  temp: {fileID: 0}
+  refs:
+    spawnObjectMenu: {fileID: 6056764980299324677}
+    rayOrigin: {fileID: 7672157832789644506}
+    lineRenderer: {fileID: 8347619587088373014}
+  config:
+    switchRoomModeButton: 1
+    selectFurnitureButton: 67108864
+    deselectFurnitureButton: 2
+    pressUiButton: 67108864
+    moveFurnitureHoldButton: 134217728
+    moveFurnitureUpButton: 2
+    rotateFurnitureButton: 1
+    furnitureMask:
+      serializedVersion: 2
+      m_Bits: 64
+    uiMask:
+      serializedVersion: 2
+      m_Bits: 40
+    maxRaycastDistance: 10
+    heightChangeSpeed: 0
+    rotationChangeSpeed: 0
+  runtimeData:
+    hoveredOverFurniture: {fileID: 0}
+    selectedFurniture: {fileID: 0}
+    furnitureHasHit: 0
+    furnitureRayEnd: {x: 0, y: 0, z: 0}
+    uiHasHit: 0
+    uiRayEnd: {x: 0, y: 0, z: 0}
+  playerControllerStateMachine:
+    debugCurrentStateName: 
   currentMode: 0
 --- !u!1 &4758844852505407963
 GameObject:
@@ -8279,7 +8306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7672157832789644506}
   m_Layer: 0
-  m_Name: Shoot Point
+  m_Name: Raycast origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9764,7 +9791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 89902ef4-ec9e-4490-a91b-c7bdf62d7d06
+  instanceId: 791321b5-c257-448a-9cf4-40052c92a60d
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

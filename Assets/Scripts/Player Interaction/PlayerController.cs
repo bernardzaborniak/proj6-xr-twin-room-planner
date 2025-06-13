@@ -4,27 +4,38 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] RoomsManager roomsManager;
     [SerializeField] OVRPassthroughLayer ovrPassthroughLayer;
-    [Space]
-    [Header("Furniture Mode Controllers")]
-    [SerializeField] FurnitureInteractionController layoutModeInteraction;
-    [SerializeField] SpawnObjectMenu spawnObjectMenu;
-    [SerializeField] FurnitureInteraction furnitureMoveInteraction;
-    [Header("Scan Edit Mode Controllers")]
-    [SerializeField] FurnitureInteractionController scanModeInteraction;
 
-    [SerializeField] GameObject temp;
+    [Header("Player Controller Components")]
+    [SerializeField] PlayerControllerReferences refs;
+    [SerializeField] PlayerControllerConfig config;
+    [Tooltip("Do not set any values here before start")]
+    [SerializeField] PlayerControllerRuntimeData runtimeData;
 
 
-    enum CurrentMode
+    //[Space]
+    //[Header("Furniture Mode Controllers")]
+    //[SerializeField] FurnitureInteractionController layoutModeInteraction;
+    //[SerializeField] SpawnObjectMenu spawnObjectMenu;
+    //[SerializeField] FurnitureInteraction furnitureMoveInteraction;
+    //[Header("Scan Edit Mode Controllers")]
+    //[SerializeField] FurnitureInteractionController scanModeInteraction;
+
+    [SerializeField]
+    PlayerControllerInteractionStateMachine playerControllerStateMachine;
+
+
+    enum CurrentRoomMode
     {
         ScanMode,
         LayoutMode
     }
 
-    [SerializeField] CurrentMode currentMode;
+    [SerializeField] CurrentRoomMode currentMode;
 
     void Start()
     {
+        playerControllerStateMachine = new PlayerControllerInteractionStateMachine(refs,config,runtimeData);
+
         ChangeToScanMode();
         //roomsManager.ShowRoomScan();
         //SwitchMode();
@@ -32,26 +43,33 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.Two))
+        playerControllerStateMachine.Update();
+
+        if (OVRInput.GetDown(config.switchRoomModeButton))
         {
-            SwitchMode();
+            SwitchRoomMode();
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.One))
-        {
-            roomsManager.CaptureCurrentMetaRoom();
-        }
+        /* if (OVRInput.GetDown(OVRInput.Button.Two))
+         {
+             SwitchRoomMode();
+         }
+
+         if (OVRInput.GetDown(OVRInput.Button.One))
+         {
+             roomsManager.CaptureCurrentMetaRoom();
+         }*/
     }
 
-    void SwitchMode()
+    void SwitchRoomMode()
     {
         // change from AR to VR (ADD SKYBOX!!) -> enter Layout Mode
-        if (currentMode == CurrentMode.ScanMode)
+        if (currentMode == CurrentRoomMode.ScanMode)
         {
             ChangeToLayoutMode();
         }
         // change from VR to AR -> enter Scan Mode
-        else if (currentMode == CurrentMode.LayoutMode)
+        else if (currentMode == CurrentRoomMode.LayoutMode)
         {
             ChangeToScanMode();
         }
@@ -59,30 +77,24 @@ public class PlayerController : MonoBehaviour
 
     void ChangeToScanMode()
     {
-        currentMode = CurrentMode.ScanMode;
+        currentMode = CurrentRoomMode.ScanMode;
 
         roomsManager.SaveRoomVariationFromVisualization(0);
         ovrPassthroughLayer.enabled = true;
         roomsManager.ShowRoomScan();
 
-        layoutModeInteraction.gameObject.SetActive(false);
-        scanModeInteraction.gameObject.SetActive(true);
-        spawnObjectMenu.gameObject.SetActive(false);
-        furnitureMoveInteraction.gameObject.SetActive(false);
+        playerControllerStateMachine.SetState(playerControllerStateMachine.scanSelection);
     }
 
     void ChangeToLayoutMode()
     {
-        currentMode = CurrentMode.LayoutMode;
+        currentMode = CurrentRoomMode.LayoutMode;
 
         roomsManager.SaveRoomScanFromVisualization();
         ovrPassthroughLayer.enabled = false;
         roomsManager.ShowRoomVariation(0);
 
-        layoutModeInteraction.gameObject.SetActive(true);
-        scanModeInteraction.gameObject.SetActive(false);
-        spawnObjectMenu.gameObject.SetActive(true);
-        furnitureMoveInteraction.gameObject.SetActive(true);
+        playerControllerStateMachine.SetState(playerControllerStateMachine.layoutSelectionAndMove);
     }
 
    

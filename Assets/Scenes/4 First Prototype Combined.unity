@@ -3340,6 +3340,14 @@ PrefabInstance:
       propertyPath: ovrPassthroughLayer
       value: 
       objectReference: {fileID: 622944111}
+    - target: {fileID: 7235578225171160739, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: config.heightChangeSpeed
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235578225171160739, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: config.rotationChangeSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8144886826486766389, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -246.9693

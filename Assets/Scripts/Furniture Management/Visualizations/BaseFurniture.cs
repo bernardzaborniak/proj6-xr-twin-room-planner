@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
+public abstract class BaseFurniture : MonoBehaviour
 {
     protected FurnitureData localDataCopy;
     [Header("Hierarchy Refs")]
@@ -57,7 +57,6 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
         {
             selectState = HoverSelectState.Hovered;
 
-            Debug.Log($"{gameObject.name} OnHoverStart");
             rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, hoverMaterial };
         }
     }
@@ -68,7 +67,6 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
         {
             selectState = HoverSelectState.NotSelectedNorHovered;
 
-            Debug.Log($"{gameObject.name} OnHoverEnd");
             rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
         }
     }

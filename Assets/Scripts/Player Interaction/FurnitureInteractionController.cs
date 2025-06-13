@@ -14,8 +14,8 @@ public class FurnitureInteractionController : MonoBehaviour
     public OVRInput.RawButton pressUiButton;
     // public OVRInput.RawButton moveFuritureButton; // only in the layout version
 
-    IInteractableFurniture hoveredOverFurniture;
-    IInteractableFurniture selectedFurniture;
+    BaseFurniture hoveredOverFurniture;
+    BaseFurniture selectedFurniture;
 
     [Header("Raycast")]
     public Transform rayOrigin;
@@ -64,8 +64,9 @@ public class FurnitureInteractionController : MonoBehaviour
         HandleRayVisuals(uiHasHit);
 
 
-        HandleHoverInteractions();
-        HandleFurnitureSelectInput();
+        //HandleHoverInteractions();
+        //HandleFurnitureSelectInput();
+
         // handlemoveinput in other version
     }
 
@@ -135,8 +136,8 @@ public class FurnitureInteractionController : MonoBehaviour
         }   
         
 
-        IInteractableFurniture newHoveredFurniture = null;
-        if (furnitureHasHit) newHoveredFurniture = furnitureHit.transform.GetComponent<IInteractableFurniture>();
+        BaseFurniture newHoveredFurniture = null;
+        if (furnitureHasHit) newHoveredFurniture = furnitureHit.transform.GetComponent<BaseFurniture>();
 
         if (newHoveredFurniture != null && newHoveredFurniture.Interactable)
         {
@@ -184,7 +185,12 @@ public class FurnitureInteractionController : MonoBehaviour
         }
     }
 
-    protected virtual  void OnSelectedFurnitureDetails()
+    protected virtual void OnSelectedFurnitureDetails()
+    {
+
+    }
+
+    protected virtual void OnDeselectedFurnitureDetails()
     {
 
     }
