@@ -456,12 +456,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectFurnitureButton: 134217728
+  pressUiButton: 67108864
   rayOrigin: {fileID: 7672157832789644506}
   maxLineDistance: 10
   lineRenderer: {fileID: 8347619587088373014}
-  mask:
+  furnitureMask:
     serializedVersion: 2
     m_Bits: 64
+  uiMask:
+    serializedVersion: 2
+    m_Bits: 40
 --- !u!1 &722621943965065891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,12 +1719,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectFurnitureButton: 134217728
+  pressUiButton: 67108864
   rayOrigin: {fileID: 7672157832789644506}
   maxLineDistance: 10
   lineRenderer: {fileID: 8347619587088373014}
-  mask:
+  furnitureMask:
     serializedVersion: 2
     m_Bits: 64
+  uiMask:
+    serializedVersion: 2
+    m_Bits: 40
 --- !u!1 &1651484206670983843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,7 +1961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: f988534a-28fe-4b68-a1ab-2d1b018ce0f0
+  instanceId: 6cd54899-b080-42ce-94a2-5396b4166a3d
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -6426,7 +6434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: d60c0a72-0c14-4b6b-a0c6-d6ba0c7c1957
+  instanceId: 82b69154-90da-4597-929e-8ae5adeda2c8
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -6780,6 +6788,7 @@ MonoBehaviour:
   furnitureMoveInteraction: {fileID: 8789471843339394213}
   scanModeInteraction: {fileID: 1247133618610313907}
   temp: {fileID: 0}
+  currentMode: 0
 --- !u!1 &4758844852505407963
 GameObject:
   m_ObjectHideFlags: 0
@@ -9755,7 +9764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 197b84cf-dfa8-4390-a7e8-459dad70940c
+  instanceId: 89902ef4-ec9e-4490-a91b-c7bdf62d7d06
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

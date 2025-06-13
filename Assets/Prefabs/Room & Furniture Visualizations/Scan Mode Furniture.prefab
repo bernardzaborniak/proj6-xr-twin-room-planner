@@ -235,9 +235,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.3726415, b: 0.3726415, a: 1}
+    m_PressedColor: {r: 0.16371918, g: 1, b: 0, a: 1}
+    m_SelectedColor: {r: 0, g: 0.5110004, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -691,7 +691,7 @@ MonoBehaviour:
   boundingBoxMeshFilter: {fileID: 5885591802511184947}
   boundingBoxMeshRenderer: {fileID: 5708023890205167628}
   boxCollider: {fileID: 3009515581605496427}
-  uiMenu: {fileID: 3293174744815886875}
+  uiMenu: {fileID: 678260223704869150}
   hoverMaterial: {fileID: 2100000, guid: 075c019337e69054fbb6b8f70a672611, type: 2}
   selectedMaterial: {fileID: 2100000, guid: d4005436a48f0bb48a43d299e2bc0e83, type: 2}
   rendererToApplyOutlineTo: {fileID: 5708023890205167628}

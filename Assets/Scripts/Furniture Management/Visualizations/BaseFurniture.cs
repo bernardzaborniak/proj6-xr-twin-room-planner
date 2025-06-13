@@ -7,7 +7,7 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
     [SerializeField] protected MeshFilter boundingBoxMeshFilter;
     [SerializeField] protected MeshRenderer boundingBoxMeshRenderer;
     [SerializeField] protected BoxCollider boxCollider;
-    [SerializeField] protected GameObject uiMenu;
+    [SerializeField] protected SelectFurnitureUiMenu uiMenu;
 
     [Header("Material Refs")]
 
@@ -22,7 +22,7 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
 
     void Awake()
     {
-        uiMenu.SetActive(false);
+        uiMenu.gameObject.SetActive(false);
         if (rendererToApplyOutlineTo != null)
         {
             originalBeforeOutlineMaterial = rendererToApplyOutlineTo.materials[0];
@@ -55,15 +55,19 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
         rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
     }
 
-    public void OnSelect(Vector3 selectDiretion)
+    public void OnSelect(Vector3 selectDirection)
     {
         rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, selectedMaterial };
-        uiMenu.SetActive(true);
+        uiMenu.OrientToPlayer(selectDirection);
+        uiMenu.gameObject.SetActive(true);
+        
     }
 
     public void OnDeselect()
     {
-        rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
-        uiMenu.SetActive(false);
+        if(rendererToApplyOutlineTo != null) 
+            rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
+
+        uiMenu.gameObject.SetActive(false);
     }
 }

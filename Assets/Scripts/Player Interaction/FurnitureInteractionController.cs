@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FurnitureInteractionController : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class FurnitureInteractionController : MonoBehaviour
     // interact with some kind of interaction interface for the furniture
 
     public OVRInput.RawButton selectFurnitureButton;
+    public OVRInput.RawButton pressUiButton;
     // public OVRInput.RawButton moveFuritureButton; // only in the layout version
 
     IInteractableFurniture hoveredOverFurniture;
@@ -16,10 +18,11 @@ public class FurnitureInteractionController : MonoBehaviour
     public Transform rayOrigin;
     public float maxLineDistance;
     public LineRenderer lineRenderer;
-    public LayerMask mask;
+    public LayerMask furnitureMask;
+    public LayerMask uiMask;
 
     RaycastHit currentHit;
-    bool hasHit;
+    bool hasHitFurn;
     Vector3 currentRayEnd;
 
     void Start()
@@ -44,29 +47,70 @@ public class FurnitureInteractionController : MonoBehaviour
 
     void Update()
     {
-        HandleRayPhysicsCheck();
+        if ((!HandleUiRay()))
+        {         
+            HandleRayFurniturePhysicsCheck();
+        }
         HandleRayVisuals();
 
+        
         HandleHoverInteractions();
         HandleSelectInput();
         // handlemoveinput in other version
     }
 
-    protected void HandleRayPhysicsCheck()
+    protected bool HandleUiRay()
+    {
+        bool hitUi;
+        currentRayEnd = rayOrigin.position + rayOrigin.forward * maxLineDistance;
+        Ray ray = new Ray(rayOrigin.position, rayOrigin.forward);
+
+        if (Physics.Raycast(ray, out currentHit, maxLineDistance, uiMask))
+        {
+            currentRayEnd = currentHit.point;
+            hitUi =  true;
+
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            {
+                position = currentHit.point
+            };
+
+            // Trigger pointer enter event (like hovering over the UI element)
+            ExecuteEvents.Execute(currentHit.collider.gameObject, pointerData, ExecuteEvents.pointerEnterHandler);
+
+            // If the controller button is pressed, trigger the click event
+            if (OVRInput.GetDown(pressUiButton)) // Customize this based on your input button
+            {
+                ExecuteEvents.Execute(currentHit.collider.gameObject, pointerData, ExecuteEvents.pointerClickHandler);
+            }
+
+        }
+        else
+        {
+            hitUi =  false;
+        }
+
+
+        return hitUi;
+    }
+
+    protected void HandleRayFurniturePhysicsCheck()
     {
         currentRayEnd = rayOrigin.position + rayOrigin.forward * maxLineDistance;
         Ray ray = new Ray(rayOrigin.position, rayOrigin.forward);
-        if (Physics.Raycast(ray, out currentHit, maxLineDistance, mask))
+        if (Physics.Raycast(ray, out currentHit, maxLineDistance, furnitureMask))
         {
-            hasHit = true;
+            hasHitFurn = true;
             currentRayEnd = currentHit.point;
 
         }
         else
         {
-            hasHit = false;
+            hasHitFurn = false;
         }
     }
+
+
 
     protected void HandleRayVisuals()
     {
@@ -77,7 +121,7 @@ public class FurnitureInteractionController : MonoBehaviour
     protected void HandleHoverInteractions()
     {
         IInteractableFurniture newHoveredFurniture = null;
-        if (hasHit) newHoveredFurniture = currentHit.transform.GetComponent<IInteractableFurniture>();
+        if (hasHitFurn) newHoveredFurniture = currentHit.transform.GetComponent<IInteractableFurniture>();
 
         if (newHoveredFurniture != null && newHoveredFurniture.Interactable)
         {
