@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LayoutModeFurniture : MonoBehaviour, IInteractableFurniture
+public class LayoutModeFurniture : BaseFurniture, IInteractableFurniture
 {
     // used to isplay the furnitues, maybe also later have some collision etc to interact with furniture interactor to be able to be moved
 
@@ -9,19 +9,11 @@ public class LayoutModeFurniture : MonoBehaviour, IInteractableFurniture
     // for the visualization of furniture, only allow it to change position and rotation with ray interactor
 
 
-    FurnitureData localDataCopy;
+    //FurnitureData localDataCopy;
     GameObject visualizedFurniturePiece;
     LabelToModelConversionTable labelToMeshConversionTableRef;
 
-    /// <summary>
-    /// Will be used to interact with the pl,ayercontroller via raycasts.
-    /// </summary>
-    [SerializeField] BoxCollider boxCollider;
-    /// <summary>
-    /// Are used to recreate the scanned bounds for scaling and positoning.
-    /// </summary>
-    [SerializeField] MeshFilter meshBoundsFilter;
-    [SerializeField] MeshRenderer meshBoundsRenderer;
+
     [SerializeField] Transform scaleHelper;
 
     // todo add mvoeable readonly bool
@@ -49,12 +41,12 @@ public class LayoutModeFurniture : MonoBehaviour, IInteractableFurniture
         if (isWall)
         {
             visualizedFurniturePiece = CreateWallMesh(data, labelToMeshConversionTable.defaultWallMaterial);
-            meshBoundsFilter.sharedMesh = visualizedFurniturePiece.GetComponent<MeshFilter>().mesh;
+            boundingBoxMeshFilter.sharedMesh = visualizedFurniturePiece.GetComponent<MeshFilter>().mesh;
            Moveable = false;
         }
         else
         {
-            meshBoundsFilter.sharedMesh = CreateBoundsMesh(data);
+            boundingBoxMeshFilter.sharedMesh = CreateBoundsMesh(data);
             visualizedFurniturePiece = SelectAndDisplayFurnitureMesh();
             AdjustMeshScaling(data);
 
@@ -131,21 +123,6 @@ public class LayoutModeFurniture : MonoBehaviour, IInteractableFurniture
 
         visualizedFurniturePiece.transform.localScale = normalizedFurnitureScale;
 
-        scaleHelper.transform.localScale = meshBoundsRenderer.localBounds.size;
-    }
-
-    void SetBoxCollider()
-    {
-        boxCollider.center = meshBoundsRenderer.localBounds.center;
-        boxCollider.size = meshBoundsRenderer.localBounds.size;
-    }
-
-
-    public FurnitureData ConvertToFurnitureDataObject()
-    {
-        localDataCopy.posInRoom = transform.localPosition;
-        localDataCopy.rotInRoom = transform.localRotation;
-
-        return localDataCopy;
+        scaleHelper.transform.localScale = boundingBoxMeshRenderer.localBounds.size;
     }
 }

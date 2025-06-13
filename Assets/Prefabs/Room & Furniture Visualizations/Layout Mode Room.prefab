@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1057105425975427675}
   - component: {fileID: -9136705200079850706}
   m_Layer: 0
-  m_Name: Room Variation Visualization
+  m_Name: Layout Mode Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3142179871477988062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47257c621ed125049868ec1ccf2eee7a, type: 3}
+  m_Script: {fileID: 11500000, guid: a2518d0978b60154e88df65330d50702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   furnitureVisualizationPrefab: {fileID: 6668825394479169823, guid: c06f36ef79135254e816b5e125c9e7aa, type: 3}

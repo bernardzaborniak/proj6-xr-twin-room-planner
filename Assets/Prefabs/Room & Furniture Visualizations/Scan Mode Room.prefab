@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3014758679543139694}
   - component: {fileID: -1424762499343787274}
   m_Layer: 0
-  m_Name: Room Anchors Visualization
+  m_Name: Scan Mode Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
