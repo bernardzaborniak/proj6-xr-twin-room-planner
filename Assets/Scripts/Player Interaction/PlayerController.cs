@@ -6,21 +6,35 @@ public class PlayerController : MonoBehaviour
     [SerializeField] OVRPassthroughLayer ovrPassthroughLayer;
     [Space]
     [Header("Furniture Mode Controllers")]
+    [SerializeField] FurnitureInteractionController layoutModeInteraction;
     [SerializeField] SpawnObjectMenu spawnObjectMenu;
-    [SerializeField] FurnitureInteraction furnitureInteraction;
+    [SerializeField] FurnitureInteraction furnitureMoveInteraction;
     [Header("Scan Edit Mode Controllers")]
+    [SerializeField] FurnitureInteractionController scanModeInteraction;
+
     [SerializeField] GameObject temp;
+
+
+    enum CurrentMode
+    {
+        ScanMode,
+        LayoutMode
+    }
+
+    [SerializeField] CurrentMode currentMode;
 
     void Start()
     {
-        roomsManager.ShowRoomScan();
+        ChangeToScanMode();
+        //roomsManager.ShowRoomScan();
+        //SwitchMode();
     }
 
     void Update()
     {
         if (OVRInput.GetDown(OVRInput.Button.Two))
         {
-            switchScene();
+            SwitchMode();
         }
 
         if (OVRInput.GetDown(OVRInput.Button.One))
@@ -29,21 +43,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void switchScene()
+    void SwitchMode()
     {
-        // change from AR to VR (ADD SKYBOX!!)
-        if (ovrPassthroughLayer.enabled)
+        // change from AR to VR (ADD SKYBOX!!) -> enter Layout Mode
+        if (currentMode == CurrentMode.ScanMode)
         {
-            roomsManager.SaveRoomScanFromVisualization();
-            ovrPassthroughLayer.enabled = !ovrPassthroughLayer.enabled;
-            roomsManager.ShowRoomVariation(0);
+            ChangeToLayoutMode();
         }
-        // change from VR to AR
-        else
+        // change from VR to AR -> enter Scan Mode
+        else if (currentMode == CurrentMode.LayoutMode)
         {
-            roomsManager.SaveRoomVariationFromVisualization(0);
-            ovrPassthroughLayer.enabled = !ovrPassthroughLayer.enabled;
-            roomsManager.ShowRoomScan();
+            ChangeToScanMode();
         }
     }
+
+    void ChangeToScanMode()
+    {
+        roomsManager.SaveRoomVariationFromVisualization(0);
+        ovrPassthroughLayer.enabled = true;
+        roomsManager.ShowRoomScan();
+
+        layoutModeInteraction.gameObject.SetActive(false);
+        scanModeInteraction.gameObject.SetActive(true);
+        spawnObjectMenu.gameObject.SetActive(false);
+        furnitureMoveInteraction.gameObject.SetActive(false);
+    }
+
+    void ChangeToLayoutMode()
+    {
+        roomsManager.SaveRoomScanFromVisualization();
+        ovrPassthroughLayer.enabled = false;
+        roomsManager.ShowRoomVariation(0);
+
+        layoutModeInteraction.gameObject.SetActive(true);
+        scanModeInteraction.gameObject.SetActive(false);
+        spawnObjectMenu.gameObject.SetActive(true);
+        furnitureMoveInteraction.gameObject.SetActive(true);
+    }
+
+   
 }

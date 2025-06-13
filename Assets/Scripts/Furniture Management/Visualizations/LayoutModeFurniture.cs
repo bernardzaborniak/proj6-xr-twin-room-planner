@@ -1,7 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LayoutModeFurniture : BaseFurniture, IInteractableFurniture
+public class LayoutModeFurniture : BaseFurniture
 {
     // used to isplay the furnitues, maybe also later have some collision etc to interact with furniture interactor to be able to be moved
 
@@ -37,12 +38,13 @@ public class LayoutModeFurniture : BaseFurniture, IInteractableFurniture
 
         bool isWall = FurnitureLabelUtilities.IsLabelFlatWall(data.label);
 
-        
+
         if (isWall)
         {
             visualizedFurniturePiece = CreateWallMesh(data, labelToMeshConversionTable.defaultWallMaterial);
             boundingBoxMeshFilter.sharedMesh = visualizedFurniturePiece.GetComponent<MeshFilter>().mesh;
-           Moveable = false;
+            Moveable = false;
+            Interactable = false;
         }
         else
         {
@@ -51,7 +53,7 @@ public class LayoutModeFurniture : BaseFurniture, IInteractableFurniture
             AdjustMeshScaling(data);
 
             Moveable = true;
-
+            Interactable = true;
         }
 
         SetBoxCollider();
@@ -82,7 +84,13 @@ public class LayoutModeFurniture : BaseFurniture, IInteractableFurniture
             furnitureToSpawn = labelToMeshConversionTableRef.defaultPrefab;
         }
 
-        return Instantiate(furnitureToSpawn, scaleHelper);
+        GameObject instantiatedFurniture = Instantiate(furnitureToSpawn, scaleHelper);
+
+        rendererToApplyOutlineTo = instantiatedFurniture.GetComponent<MeshRenderer>();
+        originalBeforeOutlineMaterial = rendererToApplyOutlineTo.materials[0];
+
+
+        return instantiatedFurniture;
     }
 
     GameObject CreateWallMesh(FurnitureData data, Material defaultWallMaterial)

@@ -272,6 +272,13 @@ public class RoomsManager : MonoBehaviour
 
     public void SaveRoomVariationFromVisualization(int varId)
     {
+        if (currentVisualization == null)
+        {
+            Debug.Log("SaveRoomVariationFromVisualization exited as currentVisualization was null");
+            return;
+        }
+            
+
         roomVariationsData[varId] = currentVisualization.SaveChangesToNewRoomData();
         SaveRoomVariation(varId);
 

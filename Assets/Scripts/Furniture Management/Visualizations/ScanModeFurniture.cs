@@ -1,7 +1,7 @@
 using System.Data.Common;
 using UnityEngine;
 
-public class ScanModeFurniture : BaseFurniture, IInteractableFurniture
+public class ScanModeFurniture : BaseFurniture
 {
     // visualizes the bounds and tags, maybe also offer option to edit them?
 
@@ -28,5 +28,14 @@ public class ScanModeFurniture : BaseFurniture, IInteractableFurniture
         boundingBoxMeshFilter.sharedMesh = newMesh;
 
         SetBoxCollider();
+
+        if (FurnitureLabelUtilities.IsLabelFlatWall(data.label))
+        {
+            Interactable = false;
+        }
+        else
+        {
+            Interactable = true;
+        }
     } 
 }
