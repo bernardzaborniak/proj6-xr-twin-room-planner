@@ -112,7 +112,7 @@ public class FurnitureInteractionController : MonoBehaviour
             }
 
             selectedFurniture = hoveredOverFurniture;
-            selectedFurniture.OnSelect();
+            selectedFurniture.OnSelect(rayOrigin.forward);
         }
     }
 

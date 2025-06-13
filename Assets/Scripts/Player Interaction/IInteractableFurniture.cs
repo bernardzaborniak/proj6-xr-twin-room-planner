@@ -9,7 +9,7 @@ public interface IInteractableFurniture
 
     public void OnHoverEnd();
 
-    public void OnSelect();
+    public void OnSelect(Vector3 selectDirection);
 
     public void OnDeselect();
 }

@@ -55,7 +55,7 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
         rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
     }
 
-    public void OnSelect()
+    public void OnSelect(Vector3 selectDiretion)
     {
         rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, selectedMaterial };
         uiMenu.SetActive(true);
