@@ -312,9 +312,9 @@ public class RoomsManager : MonoBehaviour
 
     public void AddFurnitureToCurrentVisualization(FurnitureData data, Vector3 worldspacePosition)
     {
-        if(currentVisualization is RoomVariationVisualization)
+        if(currentVisualization is LayoutModeRoom)
         {
-            (currentVisualization as RoomVariationVisualization).AddFurnitureFromCatalogue(data, worldspacePosition);
+            (currentVisualization as LayoutModeRoom).AddFurnitureFromCatalogue(data, worldspacePosition);
         }
     }
 }

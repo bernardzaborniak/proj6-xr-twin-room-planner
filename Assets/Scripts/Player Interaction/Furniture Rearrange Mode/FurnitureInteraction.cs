@@ -75,7 +75,7 @@ public class FurnitureInteraction : MonoBehaviour
         if (!hasHit)
             return;
 
-        FurnitureVisualization visualization = currentHit.transform.GetComponent<FurnitureVisualization>();
+        LayoutModeFurniture visualization = currentHit.transform.GetComponent<LayoutModeFurniture>();
 
         if (visualization != null && visualization.Moveable) 
         {

@@ -4,6 +4,12 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] RoomsManager roomsManager;
     [SerializeField] OVRPassthroughLayer ovrPassthroughLayer;
+    [Space]
+    [Header("Furniture Mode Controllers")]
+    [SerializeField] SpawnObjectMenu spawnObjectMenu;
+    [SerializeField] FurnitureInteraction furnitureInteraction;
+    [Header("Scan Edit Mode Controllers")]
+    [SerializeField] GameObject temp;
 
     void Start()
     {

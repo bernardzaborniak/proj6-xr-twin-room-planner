@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RoomAnchorsVisualization : RoomVisualization
+public class ScanModeRoom : RoomVisualization
 {
     [SerializeField] GameObject furnitureScanVisualizationPrefab;
 
-    List<AnchorVisualization> anchorVisualizations = new List<AnchorVisualization>();
+    List<ScanModeFurniture> anchorVisualizations = new List<ScanModeFurniture>();
     string currentRoomName;
 
     public override void SetUpFromSaveData(RoomData roomData, LabelToModelConversionTable labelToMeshConversionTable)
@@ -17,7 +17,7 @@ public class RoomAnchorsVisualization : RoomVisualization
         for (int i = 0; i < roomData.furniture.Count; i++)
         {
             // spawn object based on save data
-            AnchorVisualization newFurniture = Instantiate(furnitureScanVisualizationPrefab, this.transform).GetComponent<AnchorVisualization>();
+            ScanModeFurniture newFurniture = Instantiate(furnitureScanVisualizationPrefab, this.transform).GetComponent<ScanModeFurniture>();
             newFurniture.gameObject.name = i.ToString() + ": " + roomData.furniture[i].label;
             newFurniture.VisualizeFromData(roomData.furniture[i]);
             anchorVisualizations.Add(newFurniture);
@@ -29,7 +29,7 @@ public class RoomAnchorsVisualization : RoomVisualization
         RoomData newData = new RoomData();
         newData.roomName = currentRoomName;
 
-        foreach (AnchorVisualization furniture in anchorVisualizations)
+        foreach (ScanModeFurniture furniture in anchorVisualizations)
         {
             newData.furniture.Add(furniture.ConvertToFurnitureDataObject());
         }

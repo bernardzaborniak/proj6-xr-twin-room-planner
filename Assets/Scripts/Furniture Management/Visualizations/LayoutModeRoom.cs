@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-public class RoomVariationVisualization : RoomVisualization
+public class LayoutModeRoom : RoomVisualization
 {
 
     LabelToModelConversionTable labelToModelConversionTable;
     [SerializeField] GameObject furnitureVisualizationPrefab;
 
-    List<FurnitureVisualization> furnitureVisualizations = new List<FurnitureVisualization> ();
+    List<LayoutModeFurniture> furnitureVisualizations = new List<LayoutModeFurniture> ();
     string currentRoomName;
 
 
@@ -20,7 +20,7 @@ public class RoomVariationVisualization : RoomVisualization
         for (int i = 0; i < roomData.furniture.Count; i++)
         {
             // spawn object based on save data
-            FurnitureVisualization newFurniture = Instantiate(furnitureVisualizationPrefab, this.transform).GetComponent<FurnitureVisualization>();
+            LayoutModeFurniture newFurniture = Instantiate(furnitureVisualizationPrefab, this.transform).GetComponent<LayoutModeFurniture>();
             newFurniture.gameObject.name = i.ToString() + ": " + roomData.furniture[i].label;
             newFurniture.VisualizeFromData(roomData.furniture[i], labelToModelConversionTable);
             furnitureVisualizations.Add(newFurniture);
@@ -32,7 +32,7 @@ public class RoomVariationVisualization : RoomVisualization
         RoomData newData = new RoomData();
         newData.roomName = currentRoomName;
 
-        foreach (FurnitureVisualization furniture in furnitureVisualizations)
+        foreach (LayoutModeFurniture furniture in furnitureVisualizations)
         {
             newData.furniture.Add(furniture.ConvertToFurnitureDataObject());
         }
@@ -44,7 +44,7 @@ public class RoomVariationVisualization : RoomVisualization
     {
         data.posInRoom = transform.InverseTransformPoint(worldspacePos);
 
-        FurnitureVisualization newFurniture = Instantiate(furnitureVisualizationPrefab, this.transform).GetComponent<FurnitureVisualization>();
+        LayoutModeFurniture newFurniture = Instantiate(furnitureVisualizationPrefab, this.transform).GetComponent<LayoutModeFurniture>();
         newFurniture.VisualizeFromData(data, labelToModelConversionTable);
         furnitureVisualizations.Add(newFurniture);
     }

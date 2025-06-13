@@ -1,7 +1,7 @@
 using System.Data.Common;
 using UnityEngine;
 
-public class AnchorVisualization:MonoBehaviour
+public class ScanModeFurniture:MonoBehaviour, IInteractableFurniture
 {
     // visualizes the bounds and tags, maybe also offer option to edit them?
 
