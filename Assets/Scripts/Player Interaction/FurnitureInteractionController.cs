@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class FurnitureInteractionController : MonoBehaviour
 {
@@ -18,12 +19,18 @@ public class FurnitureInteractionController : MonoBehaviour
     public Transform rayOrigin;
     public float maxLineDistance;
     public LineRenderer lineRenderer;
-    public LayerMask furnitureMask;
-    public LayerMask uiMask;
 
-    RaycastHit currentHit;
-    bool hasHitFurn;
-    Vector3 currentRayEnd;
+    // Furniture Raycast
+    public LayerMask furnitureMask;
+    bool furnitureHasHit;
+    RaycastHit furnitureHit;
+    Vector3 furnitureRayEnd;
+
+    // Ui Raycast
+    public LayerMask uiMask;
+    bool uiHasHit;
+    RaycastHit uiHit;
+    Vector3 uiRayEnd;
 
     void Start()
     {
@@ -47,66 +54,53 @@ public class FurnitureInteractionController : MonoBehaviour
 
     void Update()
     {
-        if ((!HandleUiRay()))
-        {         
-            HandleRayFurniturePhysicsCheck();
-        }
+        HandleUiRay();
+        HandleRayFurniturePhysicsCheck();
         HandleRayVisuals();
 
-        
+
         HandleHoverInteractions();
-        HandleSelectInput();
+        HandleFurnitureSelectInput();
         // handlemoveinput in other version
     }
 
-    protected bool HandleUiRay()
+
+    protected void HandleUiRay()
     {
-        bool hitUi;
-        currentRayEnd = rayOrigin.position + rayOrigin.forward * maxLineDistance;
+        furnitureRayEnd = rayOrigin.position + rayOrigin.forward * maxLineDistance;
         Ray ray = new Ray(rayOrigin.position, rayOrigin.forward);
 
-        if (Physics.Raycast(ray, out currentHit, maxLineDistance, uiMask))
+        if (Physics.Raycast(ray, out uiHit, maxLineDistance, uiMask))
         {
-            currentRayEnd = currentHit.point;
-            hitUi =  true;
+            uiRayEnd = uiHit.point;
+            uiHasHit = true;
 
-            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            UiInteractionHelper uiInteractionHelper = uiHit.collider.gameObject.GetComponent<UiInteractionHelper>();
+
+            if (OVRInput.GetDown(pressUiButton) && uiInteractionHelper != null)
             {
-                position = currentHit.point
-            };
-
-            // Trigger pointer enter event (like hovering over the UI element)
-            ExecuteEvents.Execute(currentHit.collider.gameObject, pointerData, ExecuteEvents.pointerEnterHandler);
-
-            // If the controller button is pressed, trigger the click event
-            if (OVRInput.GetDown(pressUiButton)) // Customize this based on your input button
-            {
-                ExecuteEvents.Execute(currentHit.collider.gameObject, pointerData, ExecuteEvents.pointerClickHandler);
+                uiInteractionHelper.OnClick();
             }
-
         }
         else
         {
-            hitUi =  false;
+            uiHasHit = false;
         }
-
-
-        return hitUi;
     }
 
     protected void HandleRayFurniturePhysicsCheck()
     {
-        currentRayEnd = rayOrigin.position + rayOrigin.forward * maxLineDistance;
+        furnitureRayEnd = rayOrigin.position + rayOrigin.forward * maxLineDistance;
         Ray ray = new Ray(rayOrigin.position, rayOrigin.forward);
-        if (Physics.Raycast(ray, out currentHit, maxLineDistance, furnitureMask))
+        if (Physics.Raycast(ray, out furnitureHit, maxLineDistance, furnitureMask))
         {
-            hasHitFurn = true;
-            currentRayEnd = currentHit.point;
+            furnitureHasHit = true;
+            furnitureRayEnd = furnitureHit.point;
 
         }
         else
         {
-            hasHitFurn = false;
+            furnitureHasHit = false;
         }
     }
 
@@ -114,14 +108,32 @@ public class FurnitureInteractionController : MonoBehaviour
 
     protected void HandleRayVisuals()
     {
+        // UI has priority over furniture
+
         lineRenderer.SetPosition(0, rayOrigin.position);
-        lineRenderer.SetPosition(1, currentRayEnd);
+
+        if (uiHasHit)
+        {
+            lineRenderer.SetPosition(1, uiRayEnd);
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, furnitureRayEnd);
+        }
     }
 
     protected void HandleHoverInteractions()
     {
+        if(uiHasHit)
+        {
+            hoveredOverFurniture?.OnHoverEnd();
+            hoveredOverFurniture = null;
+            return;
+        }   
+        
+
         IInteractableFurniture newHoveredFurniture = null;
-        if (hasHitFurn) newHoveredFurniture = currentHit.transform.GetComponent<IInteractableFurniture>();
+        if (furnitureHasHit) newHoveredFurniture = furnitureHit.transform.GetComponent<IInteractableFurniture>();
 
         if (newHoveredFurniture != null && newHoveredFurniture.Interactable)
         {
@@ -135,9 +147,9 @@ public class FurnitureInteractionController : MonoBehaviour
 
                 hoveredOverFurniture = newHoveredFurniture;
                 hoveredOverFurniture.OnHoverStart();
-            }  
+            }
         }
-        else 
+        else
         {
             // stop previus hover
             hoveredOverFurniture?.OnHoverEnd();
@@ -146,8 +158,11 @@ public class FurnitureInteractionController : MonoBehaviour
     }
 
 
-    protected void HandleSelectInput()
+    protected void HandleFurnitureSelectInput()
     {
+        if (uiHasHit) return;
+
+
         if (OVRInput.GetDown(selectFurnitureButton) && hoveredOverFurniture != null)
         {
             if (selectedFurniture != null)

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
@@ -68,6 +69,9 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
         if(rendererToApplyOutlineTo != null) 
             rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
 
-        uiMenu.gameObject.SetActive(false);
+        if (!uiMenu.IsDestroyed())
+        {
+            uiMenu?.gameObject.SetActive(false);
+        } 
     }
 }

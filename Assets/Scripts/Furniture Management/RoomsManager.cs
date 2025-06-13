@@ -34,7 +34,7 @@ public class RoomsManager : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         LoadSavedRoomData(); // load stuff saved on persistence drive first
     }
