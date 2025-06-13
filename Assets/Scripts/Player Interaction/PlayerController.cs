@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
     void ChangeToScanMode()
     {
+        currentMode = CurrentMode.ScanMode;
+
         roomsManager.SaveRoomVariationFromVisualization(0);
         ovrPassthroughLayer.enabled = true;
         roomsManager.ShowRoomScan();
@@ -71,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
     void ChangeToLayoutMode()
     {
+        currentMode = CurrentMode.LayoutMode;
+
         roomsManager.SaveRoomScanFromVisualization();
         ovrPassthroughLayer.enabled = false;
         roomsManager.ShowRoomVariation(0);
