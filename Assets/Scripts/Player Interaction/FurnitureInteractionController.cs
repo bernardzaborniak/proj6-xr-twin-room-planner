@@ -8,6 +8,8 @@ public class FurnitureInteractionController : MonoBehaviour
     // able to select one,than hover material changes and UI is being displayed
     // interact with some kind of interaction interface for the furniture
 
+   
+
     public OVRInput.RawButton selectFurnitureButton;
     public OVRInput.RawButton pressUiButton;
     // public OVRInput.RawButton moveFuritureButton; // only in the layout version
@@ -32,7 +34,10 @@ public class FurnitureInteractionController : MonoBehaviour
     RaycastHit uiHit;
     Vector3 uiRayEnd;
 
-    void Start()
+    [Header("Additional Functionalities")]
+    [SerializeField] bool allowMoveFurniture;
+
+    protected virtual void Start()
     {
         lineRenderer.positionCount = 2;
     }
@@ -52,11 +57,11 @@ public class FurnitureInteractionController : MonoBehaviour
         selectedFurniture = null;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         HandleUiRay();
         HandleRayFurniturePhysicsCheck();
-        HandleRayVisuals();
+        HandleRayVisuals(uiHasHit);
 
 
         HandleHoverInteractions();
@@ -104,15 +109,13 @@ public class FurnitureInteractionController : MonoBehaviour
         }
     }
 
-
-
-    protected void HandleRayVisuals()
+    protected void HandleRayVisuals(bool setToUiRay)
     {
         // UI has priority over furniture
 
         lineRenderer.SetPosition(0, rayOrigin.position);
 
-        if (uiHasHit)
+        if (setToUiRay)
         {
             lineRenderer.SetPosition(1, uiRayEnd);
         }
@@ -157,6 +160,11 @@ public class FurnitureInteractionController : MonoBehaviour
         }
     }
 
+    protected void HandleMoveFurniture()
+    {
+        if (!allowMoveFurniture)
+            return;
+    }
 
     protected void HandleFurnitureSelectInput()
     {
@@ -171,8 +179,14 @@ public class FurnitureInteractionController : MonoBehaviour
             }
 
             selectedFurniture = hoveredOverFurniture;
+            //hoveredOverFurniture = null;
             selectedFurniture.OnSelect(rayOrigin.forward);
         }
+    }
+
+    protected virtual  void OnSelectedFurnitureDetails()
+    {
+
     }
 
 }

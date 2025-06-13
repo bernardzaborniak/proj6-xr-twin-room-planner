@@ -14,6 +14,13 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
 
     [SerializeField] protected Material hoverMaterial;
     [SerializeField] protected Material selectedMaterial;
+    enum HoverSelectState
+    {
+       NotSelectedNorHovered,
+       Hovered,
+       Selected
+    }
+    HoverSelectState selectState;
 
     [Header("Hover & Select Outline Visuals")]
     [SerializeField] protected MeshRenderer rendererToApplyOutlineTo;
@@ -46,32 +53,50 @@ public abstract class BaseFurniture : MonoBehaviour, IInteractableFurniture
 
     public void OnHoverStart()
     {
-        Debug.Log($"{gameObject.name} OnHoverStart");
-        rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, hoverMaterial };
+        if (selectState == HoverSelectState.NotSelectedNorHovered)
+        {
+            selectState = HoverSelectState.Hovered;
+
+            Debug.Log($"{gameObject.name} OnHoverStart");
+            rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, hoverMaterial };
+        }
     }
 
     public void OnHoverEnd()
     {
-        Debug.Log($"{gameObject.name} OnHoverEnd");
-        rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
+        if (selectState == HoverSelectState.Hovered)
+        {
+            selectState = HoverSelectState.NotSelectedNorHovered;
+
+            Debug.Log($"{gameObject.name} OnHoverEnd");
+            rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
+        }
     }
 
     public void OnSelect(Vector3 selectDirection)
     {
-        rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, selectedMaterial };
-        uiMenu.OrientToPlayer(selectDirection);
-        uiMenu.gameObject.SetActive(true);
-        
+        if (selectState == HoverSelectState.Hovered)
+        {
+            selectState = HoverSelectState.Selected;
+
+            rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, selectedMaterial };
+            uiMenu.OrientToPlayer(selectDirection);
+            uiMenu.gameObject.SetActive(true);
+        }        
     }
 
     public void OnDeselect()
     {
-        if(rendererToApplyOutlineTo != null) 
-            rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
-
-        if (!uiMenu.IsDestroyed())
+        if (selectState == HoverSelectState.Selected)
         {
-            uiMenu?.gameObject.SetActive(false);
-        } 
+            selectState = HoverSelectState.NotSelectedNorHovered;
+            if (rendererToApplyOutlineTo != null)
+                rendererToApplyOutlineTo.materials = new Material[1] { originalBeforeOutlineMaterial };
+
+            if (!uiMenu.IsDestroyed())
+            {
+                uiMenu?.gameObject.SetActive(false);
+            }
+        }
     }
 }
