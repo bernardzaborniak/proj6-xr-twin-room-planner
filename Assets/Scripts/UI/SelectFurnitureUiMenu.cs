@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class SelectFurnitureUiMenu : MonoBehaviour
 {
-    [SerializeField] Button tempButton;
+    [SerializeField] UiInteractionCustomButton tempButton;
     [SerializeField] GameObject rectEnabledByButton;
 
     void Start()
     {
-        tempButton.onClick.AddListener(ToggleRect);
+        tempButton.OnClick += ToggleRect;
     }
 
     public void OrientToPlayer(Vector3 orientation)

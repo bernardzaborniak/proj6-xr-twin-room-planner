@@ -13,7 +13,6 @@ public class SpawnObjectMenu : MonoBehaviour
     public UnityEngine.UI.Image menuImage;
     public TMP_Text count;
 
-    public FurnitureInteraction rayInteraction;
     public RoomsManager roomManager;
 
     [SerializeField]
