@@ -1810,12 +1810,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8144886826486766389}
-  - component: {fileID: 2053654376769581990}
-  - component: {fileID: 5829715892618280877}
-  - component: {fileID: 339117210175427005}
-  - component: {fileID: 4308316237209304393}
+  - component: {fileID: 1496581754107071710}
   m_Layer: 0
-  m_Name: '[BuildingBlock] Camera Rig'
+  m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1835,10 +1832,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 755750736558291820}
-  - {fileID: 6455536496161427571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2053654376769581990
+--- !u!114 &1496581754107071710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1847,135 +1843,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1736446803079154595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
+  m_Script: {fileID: 11500000, guid: eb690b5dc9e84194ca2f5c820c07fc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 792770bd-2b61-41db-b784-318419163b3d
-  version: 1
-  installationRoutineCheckpoint:
-    _installationRoutineId: 
-    _installationVariants: []
---- !u!114 &5829715892618280877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736446803079154595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usePerEyeCameras: 0
-  useFixedUpdateForTracking: 0
-  disableEyeAnchorCameras: 0
---- !u!114 &339117210175427005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736446803079154595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e933e81d3c20c74ea6fdc708a67e3a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _monoscopic: 0
-  _sharpenType: 0
-  _enableDynamicResolution: 0
-  minDynamicResolutionScale: 1
-  maxDynamicResolutionScale: 1
-  quest2MinDynamicResolutionScale: 0.7
-  quest2MaxDynamicResolutionScale: 1.3
-  quest3MinDynamicResolutionScale: 0.7
-  quest3MaxDynamicResolutionScale: 1.6
-  minRenderScale: 0.7
-  maxRenderScale: 1
-  _headPoseRelativeOffsetRotation: {x: 0, y: 0, z: 0}
-  _headPoseRelativeOffsetTranslation: {x: 0, y: 0, z: 0}
-  profilerTcpPort: 32419
-  expandMixedRealityCapturePropertySheet: 0
-  enableMixedReality: 0
-  compositionMethod: 0
-  extraHiddenLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  extraVisibleLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  dynamicCullingMask: 1
-  externalCompositionBackdropColorRift: {r: 0, g: 1, b: 0, a: 1}
-  externalCompositionBackdropColorQuest: {r: 0, g: 0, b: 0, a: 0}
-  capturingCameraDevice: 0
-  flipCameraFrameHorizontally: 0
-  flipCameraFrameVertically: 0
-  handPoseStateLatency: 0
-  sandwichCompositionRenderLatency: 0
-  sandwichCompositionBufferedFrames: 8
-  chromaKeyColor: {r: 0, g: 1, b: 0, a: 1}
-  chromaKeySimilarity: 0.6
-  chromaKeySmoothRange: 0.03
-  chromaKeySpillRange: 0.06
-  useDynamicLighting: 0
-  depthQuality: 1
-  dynamicLightingSmoothFactor: 8
-  dynamicLightingDepthVariationClampingValue: 0.001
-  virtualGreenScreenType: 0
-  virtualGreenScreenTopY: 10
-  virtualGreenScreenBottomY: -10
-  virtualGreenScreenApplyDepthCulling: 0
-  virtualGreenScreenDepthTolerance: 0.2
-  mrcActivationMode: 0
-  launchSimultaneousHandsControllersOnStartup: 0
-  isInsightPassthroughEnabled: 1
-  shouldBoundaryVisibilityBeSuppressed: 0
-  requestBodyTrackingPermissionOnStartup: 0
-  requestFaceTrackingPermissionOnStartup: 0
-  requestEyeTrackingPermissionOnStartup: 0
-  requestScenePermissionOnStartup: 1
-  requestRecordAudioPermissionOnStartup: 0
-  _localDimming: 1
-  _trackingOriginType: 1
-  usePositionTracking: 1
-  useRotationTracking: 1
-  useIPDInPositionTracking: 1
-  resetTrackerOnLoad: 0
-  AllowRecenter: 1
-  LateControllerUpdate: 1
-  LateLatching: 0
-  controllerDrivenHandPosesType: 0
-  SimultaneousHandsAndControllersEnabled: 0
-  _readOnlyWideMotionModeHandPosesEnabled: 0
-  wideMotionModeHandPosesEnabled: 0
-  dynamicResolutionVersion: 1
---- !u!114 &4308316237209304393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736446803079154595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5178bc8574ce2bf4388e787a2e2af326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opMode: 1
-  resetHmdPoseOnRelease: 1
-  resetHmdPoseByMiddleMouseButton: 1
-  activateKeys: 3201000031010000
-  activateKeyBindings:
-  - <Keyboard>/leftCtrl
-  - <Keyboard>/rightCtrl
-  - <Keyboard>/f1
-  pitchKeys: 3401000033010000
-  pitchKeyBindings:
-  - <Keyboard>/leftAlt
-  - <Keyboard>/rightAlt
-  - <Keyboard>/f2
+  roomsManager: {fileID: 0}
+  ovrPassthroughLayer: {fileID: 0}
+  refs:
+    spawnObjectMenu: {fileID: 6056764980299324677}
+    rayOrigin: {fileID: 7672157832789644506}
+    lineRenderer: {fileID: 8347619587088373014}
+  config:
+    switchRoomModeButton: 1
+    selectFurnitureButton: 67108864
+    deselectFurnitureButton: 2
+    pressUiButton: 67108864
+    moveFurnitureHoldButton: 134217728
+    moveFurnitureUpButton: 2
+    rotateFurnitureButton: 1
+    furnitureMask:
+      serializedVersion: 2
+      m_Bits: 64
+    uiMask:
+      serializedVersion: 2
+      m_Bits: 40
+    maxRaycastDistance: 10
+    heightChangeSpeed: 0.1
+    rotationChangeSpeed: 1
+  runtimeData:
+    hoveredOverFurniture: {fileID: 0}
+    selectedFurniture: {fileID: 0}
+    furnitureHasHit: 0
+    furnitureRayEnd: {x: 0, y: 0, z: 0}
+    uiHasHit: 0
+    uiRayEnd: {x: 0, y: 0, z: 0}
+  playerControllerStateMachine:
+    debugCurrentStateName: 
+  currentMode: 0
 --- !u!1 &1748950750801779525
 GameObject:
   m_ObjectHideFlags: 0
@@ -4772,7 +4675,7 @@ Transform:
   - {fileID: 7036065708657866868}
   - {fileID: 7806035309469403324}
   - {fileID: 1617219208791830359}
-  m_Father: {fileID: 8144886826486766389}
+  m_Father: {fileID: 755750736558291820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3528798713033654392
 GameObject:
@@ -5242,7 +5145,6 @@ MonoBehaviour:
   menuOption: {fileID: 8216249011454201317}
   menuImage: {fileID: 8285479179788646127}
   count: {fileID: 5202714236057264706}
-  rayInteraction: {fileID: 0}
   roomManager: {fileID: 0}
   furnitureList:
   - fName: Couch 01
@@ -6162,7 +6064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 2e9ec2ff-42ba-475b-9032-d9c2534783fa
+  instanceId: f3f1fc40-c29e-4841-a9a9-9b1f27891ede
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -6472,9 +6374,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755750736558291820}
-  - component: {fileID: 7235578225171160739}
+  - component: {fileID: 9097781922615442294}
+  - component: {fileID: 932101466611869569}
+  - component: {fileID: 6001694855420921959}
+  - component: {fileID: 1842219759907745149}
   m_Layer: 0
-  m_Name: Player Controller
+  m_Name: Meta Camera Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6492,10 +6397,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6455536496161427571}
   m_Father: {fileID: 8144886826486766389}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7235578225171160739
+--- !u!114 &9097781922615442294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6504,42 +6410,135 @@ MonoBehaviour:
   m_GameObject: {fileID: 4700956682157438293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb690b5dc9e84194ca2f5c820c07fc1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomsManager: {fileID: 0}
-  ovrPassthroughLayer: {fileID: 0}
-  refs:
-    spawnObjectMenu: {fileID: 6056764980299324677}
-    rayOrigin: {fileID: 7672157832789644506}
-    lineRenderer: {fileID: 8347619587088373014}
-  config:
-    switchRoomModeButton: 1
-    selectFurnitureButton: 67108864
-    deselectFurnitureButton: 2
-    pressUiButton: 67108864
-    moveFurnitureHoldButton: 134217728
-    moveFurnitureUpButton: 2
-    rotateFurnitureButton: 1
-    furnitureMask:
-      serializedVersion: 2
-      m_Bits: 64
-    uiMask:
-      serializedVersion: 2
-      m_Bits: 40
-    maxRaycastDistance: 10
-    heightChangeSpeed: 0
-    rotationChangeSpeed: 0
-  runtimeData:
-    hoveredOverFurniture: {fileID: 0}
-    selectedFurniture: {fileID: 0}
-    furnitureHasHit: 0
-    furnitureRayEnd: {x: 0, y: 0, z: 0}
-    uiHasHit: 0
-    uiRayEnd: {x: 0, y: 0, z: 0}
-  playerControllerStateMachine:
-    debugCurrentStateName: 
-  currentMode: 0
+  blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
+  instanceId: e214c0ec-ae64-456a-8b36-45df673dfcc5
+  version: 1
+  installationRoutineCheckpoint:
+    _installationRoutineId: 
+    _installationVariants: []
+--- !u!114 &932101466611869569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700956682157438293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usePerEyeCameras: 0
+  useFixedUpdateForTracking: 0
+  disableEyeAnchorCameras: 0
+--- !u!114 &6001694855420921959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700956682157438293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e933e81d3c20c74ea6fdc708a67e3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _monoscopic: 0
+  _sharpenType: 0
+  _enableDynamicResolution: 0
+  minDynamicResolutionScale: 1
+  maxDynamicResolutionScale: 1
+  quest2MinDynamicResolutionScale: 0.7
+  quest2MaxDynamicResolutionScale: 1.3
+  quest3MinDynamicResolutionScale: 0.7
+  quest3MaxDynamicResolutionScale: 1.6
+  minRenderScale: 0.7
+  maxRenderScale: 1
+  _headPoseRelativeOffsetRotation: {x: 0, y: 0, z: 0}
+  _headPoseRelativeOffsetTranslation: {x: 0, y: 0, z: 0}
+  profilerTcpPort: 32419
+  expandMixedRealityCapturePropertySheet: 0
+  enableMixedReality: 0
+  compositionMethod: 0
+  extraHiddenLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  extraVisibleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  dynamicCullingMask: 1
+  externalCompositionBackdropColorRift: {r: 0, g: 1, b: 0, a: 1}
+  externalCompositionBackdropColorQuest: {r: 0, g: 0, b: 0, a: 0}
+  capturingCameraDevice: 0
+  flipCameraFrameHorizontally: 0
+  flipCameraFrameVertically: 0
+  handPoseStateLatency: 0
+  sandwichCompositionRenderLatency: 0
+  sandwichCompositionBufferedFrames: 8
+  chromaKeyColor: {r: 0, g: 1, b: 0, a: 1}
+  chromaKeySimilarity: 0.6
+  chromaKeySmoothRange: 0.03
+  chromaKeySpillRange: 0.06
+  useDynamicLighting: 0
+  depthQuality: 1
+  dynamicLightingSmoothFactor: 8
+  dynamicLightingDepthVariationClampingValue: 0.001
+  virtualGreenScreenType: 0
+  virtualGreenScreenTopY: 10
+  virtualGreenScreenBottomY: -10
+  virtualGreenScreenApplyDepthCulling: 0
+  virtualGreenScreenDepthTolerance: 0.2
+  mrcActivationMode: 0
+  launchSimultaneousHandsControllersOnStartup: 0
+  isInsightPassthroughEnabled: 1
+  shouldBoundaryVisibilityBeSuppressed: 0
+  requestBodyTrackingPermissionOnStartup: 0
+  requestFaceTrackingPermissionOnStartup: 0
+  requestEyeTrackingPermissionOnStartup: 0
+  requestScenePermissionOnStartup: 1
+  requestRecordAudioPermissionOnStartup: 0
+  _localDimming: 1
+  _trackingOriginType: 1
+  usePositionTracking: 1
+  useRotationTracking: 1
+  useIPDInPositionTracking: 1
+  resetTrackerOnLoad: 0
+  AllowRecenter: 1
+  LateControllerUpdate: 1
+  LateLatching: 0
+  controllerDrivenHandPosesType: 0
+  SimultaneousHandsAndControllersEnabled: 0
+  _readOnlyWideMotionModeHandPosesEnabled: 0
+  wideMotionModeHandPosesEnabled: 0
+  dynamicResolutionVersion: 1
+--- !u!114 &1842219759907745149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700956682157438293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5178bc8574ce2bf4388e787a2e2af326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opMode: 1
+  resetHmdPoseOnRelease: 1
+  resetHmdPoseByMiddleMouseButton: 1
+  activateKeys: 3201000031010000
+  activateKeyBindings:
+  - <Keyboard>/leftCtrl
+  - <Keyboard>/rightCtrl
+  - <Keyboard>/f1
+  pitchKeys: 3401000033010000
+  pitchKeyBindings:
+  - <Keyboard>/leftAlt
+  - <Keyboard>/rightAlt
+  - <Keyboard>/f2
 --- !u!1 &4758844852505407963
 GameObject:
   m_ObjectHideFlags: 0
@@ -9514,7 +9513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 13c6f8cd-a0ea-41aa-b17c-0ccec693fc4d
+  instanceId: 2d678b0b-4958-42a7-af07-07fac1360964
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
