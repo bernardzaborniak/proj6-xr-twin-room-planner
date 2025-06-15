@@ -32,17 +32,22 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] CurrentRoomMode currentMode;
 
+    bool controllerStarted = false;
+
     void Start()
     {
         playerControllerStateMachine = new PlayerControllerInteractionStateMachine(refs,config,runtimeData);
 
-        ChangeToScanMode();
+       
         //roomsManager.ShowRoomScan();
         //SwitchMode();
     }
 
     void Update()
     {
+        if (!controllerStarted)
+            return;
+
         playerControllerStateMachine.Update();
 
         if (OVRInput.GetDown(config.switchRoomModeButton))
@@ -59,6 +64,17 @@ public class PlayerController : MonoBehaviour
          {
              roomsManager.CaptureCurrentMetaRoom();
          }*/
+    }
+
+
+    /// <summary>
+    ///  needs to be called by application manager when the rooms are loaded
+    /// </summary>
+    public void StartWithScanMode()
+    {
+        controllerStarted = true;
+
+        ChangeToScanMode();
     }
 
     void SwitchRoomMode()

@@ -36,11 +36,15 @@ public class RoomsManager : MonoBehaviour
 
     void Awake()
     {
-        LoadSavedRoomData(); // load stuff saved on persistence drive first
+        // klet the application manager do this all now
+
+       // LoadSavedRoomData(); // load stuff saved on persistence drive first
     }
 
     void Update()
     {
+        /*
+
         // Record current room
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -60,6 +64,8 @@ public class RoomsManager : MonoBehaviour
         {
             SaveRoomScan();
         }
+
+        */
     }
 
     public void LoadSavedRoomData()
@@ -127,6 +133,11 @@ public class RoomsManager : MonoBehaviour
         
     }
 
+    public void CreateNewEmptyRoomScan()
+    {
+        roomScanData = new RoomData();
+        SaveRoomScan();
+    }
 
     public RoomData ConvertMetaRoomToAppRoom(MRUKRoom mrukRoom)
     {
@@ -154,7 +165,7 @@ public class RoomsManager : MonoBehaviour
             {
                 furniture.type = FurnitureType.Furniture;
                 furniture.volumeBounds = (Bounds)anchor.VolumeBounds;
-                Debug.Log($"[Bern] Global Mesh before was: {anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh}");
+                //Debug.Log($"[Bern] Global Mesh before was: {anchor.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh}");
             }
             else if (anchor.PlaneRect != null)
             {
