@@ -13,6 +13,9 @@ public class ScanModeFurniture : BaseFurniture
     //[SerializeField] MeshRenderer boundingBoxMeshRenderer;
     //[SerializeField] BoxCollider boxCollider;
 
+    ScanModeFurnitureUiMenu scanUiMenu;
+
+
     public void VisualizeFromData(FurnitureData data)
     {
         localDataCopy = data.DeepCopy();
@@ -37,5 +40,9 @@ public class ScanModeFurniture : BaseFurniture
         {
             Interactable = true;
         }
+
+        if (!(uiMenu is ScanModeFurnitureUiMenu)) Debug.Log("mak sure the uiMenu assigned is of type ScanModeFurnitureUiMenu ");
+        scanUiMenu = uiMenu as ScanModeFurnitureUiMenu;
+        scanUiMenu.SetUp(this);
     } 
 }

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,6 +25,10 @@ public class LayoutModeFurniture : BaseFurniture
     /// </summary>
     public Vector3 CustomFurnitureDirection { get; private set; }
 
+    protected LayoutModeFurnitureUiMenu layoutUiMenu;
+
+
+    #region Default Methods 
 
     public void VisualizeFromData(FurnitureData data, LabelToModelConversionTable labelToMeshConversionTable)
     {
@@ -32,7 +37,7 @@ public class LayoutModeFurniture : BaseFurniture
         transform.localRotation = data.rotInRoom;
 
         // adjust rotation to change showing direction mostly 90/180 or 270 degrees
-        scaleHelper.Rotate(Vector3.up, data.rotationAdjuster);
+        //scaleHelper.Rotate(Vector3.up, data.rotationAdjuster);
 
         this.labelToMeshConversionTableRef = labelToMeshConversionTable;
 
@@ -50,6 +55,8 @@ public class LayoutModeFurniture : BaseFurniture
         {
             boundingBoxMeshFilter.sharedMesh = CreateBoundsMesh(data);
             visualizedFurniturePiece = SelectAndDisplayFurnitureMesh();
+            // adjust rotation to change showing direction mostly 90/180 or 270 degrees
+            visualizedFurniturePiece.transform.Rotate(Vector3.up, data.rotationAdjuster);
             AdjustMeshScaling(data);
 
             Moveable = true;
@@ -58,6 +65,16 @@ public class LayoutModeFurniture : BaseFurniture
 
         SetBoxCollider();
 
+        if (!(uiMenu is LayoutModeFurnitureUiMenu)) Debug.Log("mak sure the uiMenu assigned is of type LayoutModeFurnitureUiMenu ");
+        layoutUiMenu = uiMenu as LayoutModeFurnitureUiMenu;
+        layoutUiMenu.SetUp(this);
+
+    }
+
+    void UpdateVisualization()
+    {
+        Destroy(visualizedFurniturePiece);
+        VisualizeFromData(localDataCopy, labelToMeshConversionTableRef);
     }
 
 
@@ -113,7 +130,6 @@ public class LayoutModeFurniture : BaseFurniture
     }
 
 
-
     void AdjustMeshScaling(FurnitureData data)
     {
         // Resize to unit size 1x1x1   , thats all for now
@@ -131,6 +147,29 @@ public class LayoutModeFurniture : BaseFurniture
 
         visualizedFurniturePiece.transform.localScale = normalizedFurnitureScale;
 
+        // todo maybe this needs to be rotated with the rotation adjuster matrix?
         scaleHelper.transform.localScale = boundingBoxMeshRenderer.localBounds.size;
     }
+
+    #endregion
+
+    #region UI Methods
+
+    public void RotateRightByUi()
+    {
+        Debug.Log($"[Furniture] rot right adjuster before {localDataCopy.rotationAdjuster}");
+        localDataCopy.rotationAdjuster += 90f;
+        Debug.Log($"[Furniture] rot right adjuster after {localDataCopy.rotationAdjuster}");
+        UpdateVisualization();
+    }
+
+    public void RotateLeftByUi()
+    {
+        Debug.Log($"[Furniture] rot right adjuster before {localDataCopy.rotationAdjuster}");
+        localDataCopy.rotationAdjuster -= 90f;
+        Debug.Log($"[Furniture] rot right adjuster after {localDataCopy.rotationAdjuster}");
+        UpdateVisualization();
+    }
+
+    #endregion
 }

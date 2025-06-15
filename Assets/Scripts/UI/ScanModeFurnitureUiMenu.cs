@@ -1,24 +1,26 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class SelectFurnitureUiMenu : MonoBehaviour
+public class ScanModeFurnitureUiMenu : FurnitureUiMenu
 {
     [SerializeField] UiInteractionCustomButton tempButton;
     [SerializeField] GameObject rectEnabledByButton;
+
+
+    ScanModeFurniture furniture;
 
     void Start()
     {
         tempButton.OnClick += ToggleRect;
     }
 
-    public void OrientToPlayer(Vector3 orientation)
+    public void SetUp(ScanModeFurniture furniture)
     {
-        transform.forward = orientation;
+        this.furniture = furniture;
     }
 
+   
     void ToggleRect()
     {
         rectEnabledByButton.SetActive(!rectEnabledByButton.activeSelf);
     }
-
 }

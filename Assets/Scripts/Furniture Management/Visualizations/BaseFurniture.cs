@@ -8,7 +8,8 @@ public abstract class BaseFurniture : MonoBehaviour
     [SerializeField] protected MeshFilter boundingBoxMeshFilter;
     [SerializeField] protected MeshRenderer boundingBoxMeshRenderer;
     [SerializeField] protected BoxCollider boxCollider;
-    [SerializeField] protected SelectFurnitureUiMenu uiMenu;
+    [SerializeField] protected FurnitureUiMenu uiMenu;
+   
 
     [Header("Material Refs")]
 

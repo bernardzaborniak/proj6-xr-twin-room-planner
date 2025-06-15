@@ -356,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1977807207824289706}
-  - component: {fileID: 9106074664970270038}
+  - component: {fileID: 6615806171261161497}
   - component: {fileID: 7559467283423744633}
   - component: {fileID: 4883799941066171648}
   - component: {fileID: 7921191057509291410}
@@ -390,7 +390,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.533}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9106074664970270038
+--- !u!114 &6615806171261161497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8513498420089947810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4847dba6a4012a41928c8ab6b031afe, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f7feecddf8df884993801d979252fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tempButton: {fileID: 2596798192500902719}
@@ -538,7 +538,7 @@ MonoBehaviour:
   boundingBoxMeshFilter: {fileID: 5885591802511184947}
   boundingBoxMeshRenderer: {fileID: 5708023890205167628}
   boxCollider: {fileID: 3009515581605496427}
-  uiMenu: {fileID: 9106074664970270038}
+  uiMenu: {fileID: 6615806171261161497}
   hoverMaterial: {fileID: 2100000, guid: 075c019337e69054fbb6b8f70a672611, type: 2}
   selectedMaterial: {fileID: 2100000, guid: d4005436a48f0bb48a43d299e2bc0e83, type: 2}
   rendererToApplyOutlineTo: {fileID: 5708023890205167628}
