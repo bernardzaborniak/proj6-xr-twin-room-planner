@@ -32,7 +32,7 @@ public class LayoutModeFurniture : BaseFurniture
 
     public void VisualizeFromData(FurnitureData data, LabelToModelConversionTable labelToMeshConversionTable)
     {
-        localDataCopy = data.DeepCopy();
+        LocalDataCopy = data.DeepCopy();
         transform.localPosition = data.posInRoom;
         transform.localRotation = data.rotInRoom;
 
@@ -71,12 +71,6 @@ public class LayoutModeFurniture : BaseFurniture
 
     }
 
-    void UpdateVisualization()
-    {
-        Destroy(visualizedFurniturePiece);
-        VisualizeFromData(localDataCopy, labelToMeshConversionTableRef);
-    }
-
 
     Mesh CreateBoundsMesh(FurnitureData data)
     {
@@ -92,9 +86,9 @@ public class LayoutModeFurniture : BaseFurniture
     {
         GameObject furnitureToSpawn = null;
 
-        if (labelToMeshConversionTableRef.labelToPrefabDict.ContainsKey(localDataCopy.label))
+        if (labelToMeshConversionTableRef.labelToPrefabDict.ContainsKey(LocalDataCopy.label))
         {
-            furnitureToSpawn = labelToMeshConversionTableRef.labelToPrefabDict[localDataCopy.label];
+            furnitureToSpawn = labelToMeshConversionTableRef.labelToPrefabDict[LocalDataCopy.label];
         }
         else
         {
@@ -155,20 +149,26 @@ public class LayoutModeFurniture : BaseFurniture
 
     #region UI Methods
 
+    protected override void OnUiChangedData()
+    {
+        Destroy(visualizedFurniturePiece);
+        VisualizeFromData(LocalDataCopy, labelToMeshConversionTableRef);
+    }
+
     public void RotateRightByUi()
     {
-        Debug.Log($"[Furniture] rot right adjuster before {localDataCopy.rotationAdjuster}");
-        localDataCopy.rotationAdjuster += 90f;
-        Debug.Log($"[Furniture] rot right adjuster after {localDataCopy.rotationAdjuster}");
-        UpdateVisualization();
+        Debug.Log($"[Furniture] rot right adjuster before {LocalDataCopy.rotationAdjuster}");
+        LocalDataCopy.rotationAdjuster += 90f;
+        Debug.Log($"[Furniture] rot right adjuster after {LocalDataCopy.rotationAdjuster}");
+        OnUiChangedData();
     }
 
     public void RotateLeftByUi()
     {
-        Debug.Log($"[Furniture] rot right adjuster before {localDataCopy.rotationAdjuster}");
-        localDataCopy.rotationAdjuster -= 90f;
-        Debug.Log($"[Furniture] rot right adjuster after {localDataCopy.rotationAdjuster}");
-        UpdateVisualization();
+        Debug.Log($"[Furniture] rot right adjuster before {LocalDataCopy.rotationAdjuster}");
+        LocalDataCopy.rotationAdjuster -= 90f;
+        Debug.Log($"[Furniture] rot right adjuster after {LocalDataCopy.rotationAdjuster}");
+        OnUiChangedData();
     }
 
     #endregion

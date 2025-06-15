@@ -35,11 +35,13 @@ public abstract class PlayerControllerInteractionState
             runtimeData.uiRayEnd = runtimeData.uiHit.point;
             runtimeData.uiHasHit = true;
 
-            UiInteractionCustomButton uiInteractionHelper = runtimeData.uiHit.collider.gameObject.GetComponent<UiInteractionCustomButton>();
+            UiCustomButton uiButton = runtimeData.uiHit.collider.gameObject.GetComponent<UiCustomButton>();
 
-            if (OVRInput.GetDown(config.pressUiButton) && uiInteractionHelper != null)
+            if (OVRInput.GetDown(config.pressUiButton) && uiButton != null)
             {
-                uiInteractionHelper.OnClick.Invoke();
+                Debug.Log($"[Label UI] OVRInput.GetDown(config.pressUiButton) in frame: {Time.frameCount}");
+
+                uiButton.OnClick();
             }
         }
         else

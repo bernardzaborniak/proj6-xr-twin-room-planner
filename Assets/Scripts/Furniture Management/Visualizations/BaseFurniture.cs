@@ -1,9 +1,10 @@
+using Unity.Android.Gradle.Manifest;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class BaseFurniture : MonoBehaviour
 {
-    protected FurnitureData localDataCopy;
+    public FurnitureData LocalDataCopy { get; protected set; }
     [Header("Hierarchy Refs")]
     [SerializeField] protected MeshFilter boundingBoxMeshFilter;
     [SerializeField] protected MeshRenderer boundingBoxMeshRenderer;
@@ -29,6 +30,8 @@ public abstract class BaseFurniture : MonoBehaviour
 
     public bool Interactable { get; set; }
 
+    #region Default Methods  
+
     void Awake()
     {
         uiMenu.gameObject.SetActive(false);
@@ -40,10 +43,10 @@ public abstract class BaseFurniture : MonoBehaviour
 
     public FurnitureData ConvertToFurnitureDataObject()
     {
-        localDataCopy.posInRoom = transform.localPosition;
-        localDataCopy.rotInRoom = transform.localRotation;
+        LocalDataCopy.posInRoom = transform.localPosition;
+        LocalDataCopy.rotInRoom = transform.localRotation;
 
-        return localDataCopy;
+        return LocalDataCopy;
     }
 
     protected void SetBoxCollider()
@@ -98,4 +101,21 @@ public abstract class BaseFurniture : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+
+    #region UI Methods 
+
+    protected abstract void OnUiChangedData();
+
+    public void ChangeLabelByUi(FurnitureLabel newLabel)
+    {
+        LocalDataCopy.label = newLabel;
+        LocalDataCopy.tempLabelString = newLabel.ToString();
+        OnUiChangedData();
+    }
+
+
+    #endregion
 }

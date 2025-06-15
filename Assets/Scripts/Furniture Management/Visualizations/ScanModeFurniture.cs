@@ -18,7 +18,7 @@ public class ScanModeFurniture : BaseFurniture
 
     public void VisualizeFromData(FurnitureData data)
     {
-        localDataCopy = data.DeepCopy();
+        LocalDataCopy = data.DeepCopy();
         transform.localPosition = data.posInRoom;
         transform.localRotation = data.rotInRoom;
 
@@ -45,4 +45,9 @@ public class ScanModeFurniture : BaseFurniture
         scanUiMenu = uiMenu as ScanModeFurnitureUiMenu;
         scanUiMenu.SetUp(this);
     } 
+
+    protected override void OnUiChangedData()
+    {
+
+    }
 }

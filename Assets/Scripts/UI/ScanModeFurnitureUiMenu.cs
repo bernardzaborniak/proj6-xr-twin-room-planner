@@ -2,23 +2,27 @@ using UnityEngine;
 
 public class ScanModeFurnitureUiMenu : FurnitureUiMenu
 {
-    [SerializeField] UiInteractionCustomButton tempButton;
+    [SerializeField] UiCustomButton tempButton;
     [SerializeField] GameObject rectEnabledByButton;
+    [SerializeField] LabelSelectorUi labelSelectorUi;
+
 
 
     ScanModeFurniture furniture;
 
     void Start()
     {
-        tempButton.OnClick += ToggleRect;
+        tempButton.OnClickCallback += ToggleRect;
     }
 
     public void SetUp(ScanModeFurniture furniture)
     {
         this.furniture = furniture;
+        labelSelectorUi.SetUp(furniture);
+
     }
 
-   
+
     void ToggleRect()
     {
         rectEnabledByButton.SetActive(!rectEnabledByButton.activeSelf);
