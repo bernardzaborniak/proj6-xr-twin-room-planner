@@ -25,10 +25,11 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
 
     public override void UpdateState()
     {
-        HandleFurnitureRay();
-        HandleRayVisuals(runtimeData.furnitureRayEnd);
+        HandleRightHandRay(RaycastType.HitBothPriorityOnUi);
+        HandleRayVisuals();
 
-        HandleHoverInteractions();
+        HandleUiInteraction();
+        HandleHoverOverFurniture();
 
         // TODO implement move inside this state
         // HandleMoveFurniture();

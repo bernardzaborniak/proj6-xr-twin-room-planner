@@ -21,9 +21,6 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
     public override void OnStateEnter()
     {
-        Debug.Log($"[UI4] On Enter Scan register new state");
-
-
         createBoxState = CreateBoxState.FirstPointGround;
 
         // set up hand menu
@@ -53,8 +50,15 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
     public override void UpdateState()
     {
-        HandleUiRay();
-        HandleRayVisuals(runtimeData.uiRayEnd);
+        HandleRightHandRay(RaycastType.OnlyHitUI);
+        HandleRayVisuals();
+
+        HandleUiInteraction();
+
+        if (OVRInput.GetDown(config.generalReturnButton))
+        {
+            sm.SetState(sm.scanSelection);
+        }
     }
 
     void OnCancelAddBoxClicked()

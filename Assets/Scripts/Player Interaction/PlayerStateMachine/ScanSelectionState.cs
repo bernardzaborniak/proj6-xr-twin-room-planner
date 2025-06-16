@@ -22,20 +22,11 @@ public class ScanSelectionState : PlayerControllerInteractionState
 
     public override void UpdateState()
     {
-        HandleUiRay();
-        if (!runtimeData.uiHasHit)
-        {
-            HandleFurnitureRay();
-            HandleRayVisuals(runtimeData.furnitureRayEnd);
-        }
-        else
-        {
-            HandleRayVisuals(runtimeData.uiRayEnd);
-        }
+        HandleRightHandRay(RaycastType.HitBothPriorityOnUi);
+        HandleRayVisuals();
 
-        
-
-        HandleHoverInteractions();
+        HandleUiInteraction();
+        HandleHoverOverFurniture();
 
         // If we press the select button on a furniture we select it and enter the scan edit state
         if (HandleFurnitureSelect())
@@ -46,8 +37,6 @@ public class ScanSelectionState : PlayerControllerInteractionState
 
     void OnMenuAddFurnitureClicked()
     {
-        Debug.Log($"[UI3] OnAddFurnitureClicked");
-
         sm.SetState(sm.scanRegisterNew);
     }
 }

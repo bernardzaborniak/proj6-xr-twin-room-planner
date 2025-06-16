@@ -23,16 +23,16 @@ public class CreateNewBoundingBoxScanMenu : MonoBehaviour
     void OnAddFurnitureClicked()
     {
         Debug.Log($"[UI] OnAddFurnitureClicked");
-        OnAddFurnitureClickedCallback.Invoke();
+        OnAddFurnitureClickedCallback?.Invoke();
     }
 
     void OnAddWallClicked()
     {
-        OnAddWallClickedCallback.Invoke();
+        OnAddWallClickedCallback?.Invoke();
     }
 
     void OnCancelClicked()
     {
-        OnCancelClickedCallback.Invoke();
+        OnCancelClickedCallback?.Invoke();
     }
 }

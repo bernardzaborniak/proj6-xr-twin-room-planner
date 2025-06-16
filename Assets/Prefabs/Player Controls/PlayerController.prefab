@@ -1776,6 +1776,7 @@ MonoBehaviour:
     switchRoomModeButton: 1
     selectFurnitureButton: 67108864
     deselectFurnitureButton: 2
+    generalReturnButton: 2
     pressUiButton: 67108864
     moveFurnitureHoldButton: 134217728
     moveFurnitureUpButton: 2
@@ -1793,10 +1794,11 @@ MonoBehaviour:
   runtimeData:
     hoveredOverFurniture: {fileID: 0}
     selectedFurniture: {fileID: 0}
-    furnitureHasHit: 0
-    furnitureRayEnd: {x: 0, y: 0, z: 0}
-    uiHasHit: 0
-    uiRayEnd: {x: 0, y: 0, z: 0}
+    raycastWasSuccessfull: 0
+    raycastHitType: 0
+    raycastEnd: {x: 0, y: 0, z: 0}
+    uiHitByRay: {fileID: 0}
+    furnitureHitByRay: {fileID: 0}
   playerControllerStateMachine:
     debugCurrentStateName: 
   currentMode: 0
@@ -5747,7 +5749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: b707baa1-de25-419c-a66d-0a5ac1ea575c
+  instanceId: 227536c0-e3a7-4335-bcff-4b7405ca7a54
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -6097,7 +6099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 87e39a87-c166-42a1-9ad3-e408f1dd4d0f
+  instanceId: 3e35d31a-185a-419c-864e-051413f911be
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -8796,7 +8798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 354a5ed8-95dc-40e3-b8eb-848d899a4bf3
+  instanceId: a90095d3-3d04-4029-9c46-5fb516d25747
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

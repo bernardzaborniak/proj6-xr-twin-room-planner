@@ -1,11 +1,18 @@
 using UnityEngine;
 
-public abstract class PlayerControllerInteractionState 
+public abstract class PlayerControllerInteractionState
 {
     protected PlayerControllerInteractionStateMachine sm;
     protected PlayerControllerReferences refs;
     protected PlayerControllerConfig config;
     protected PlayerControllerRuntimeData runtimeData;
+
+    public enum RaycastType
+    {
+        OnlyHitUI,
+        OnlyHitFurniture,
+        HitBothPriorityOnUi
+    }
 
     public void Initialize(PlayerControllerInteractionStateMachine sm, PlayerControllerReferences refs, PlayerControllerConfig config, PlayerControllerRuntimeData runtimeData)
     {
@@ -15,7 +22,7 @@ public abstract class PlayerControllerInteractionState
         this.runtimeData = runtimeData;
     }
 
-    
+
     public abstract void OnStateEnter();
 
     public abstract void OnStateExit();
@@ -25,63 +32,103 @@ public abstract class PlayerControllerInteractionState
 
     // Utility Methods used by multiple states here
 
-    protected void HandleUiRay()
+    protected void HandleRightHandRay(RaycastType castType)
     {
-        runtimeData.uiRayEnd = refs.rayOrigin.position + refs.rayOrigin.forward * config.maxRaycastDistance;
-        Ray ray = new Ray(refs.rayOrigin.position, refs.rayOrigin.forward);
-
-        if (Physics.Raycast(ray, out runtimeData.uiHit, config.maxRaycastDistance, config.uiMask))
+        if (castType == RaycastType.OnlyHitUI)
         {
-            runtimeData.uiRayEnd = runtimeData.uiHit.point;
-            runtimeData.uiHasHit = true;
+            HandleUiRay();
+        }
+        else if (castType == RaycastType.OnlyHitFurniture)
+        {
+            HandleFurnitureRay();
+        }
+        else if (castType == RaycastType.HitBothPriorityOnUi)
+        {
+            HandleUiRay();
 
-            UiCustomButton uiButton = runtimeData.uiHit.collider.gameObject.GetComponent<UiCustomButton>();
-
-            if (OVRInput.GetDown(config.pressUiButton) && uiButton != null)
+            if (!runtimeData.raycastWasSuccessfull)
             {
-                Debug.Log($"[Label UI] OVRInput.GetDown(config.pressUiButton) in frame: {Time.frameCount}");
-
-                uiButton.OnClick();
+                HandleFurnitureRay();
             }
         }
-        else
-        {
-            runtimeData.uiHasHit = false;
-        }
     }
 
-    protected void HandleFurnitureRay()
+    void ResetRaycastDataForThisFrame()
     {
-        runtimeData.furnitureRayEnd = refs.rayOrigin.position + refs.rayOrigin.forward * config.maxRaycastDistance;
-        Ray ray = new Ray(refs.rayOrigin.position, refs.rayOrigin.forward);
-        if (Physics.Raycast(ray, out runtimeData.furnitureHit, config.maxRaycastDistance, config.furnitureMask))
-        {
-            runtimeData.furnitureHasHit = true;
-            runtimeData.furnitureRayEnd = runtimeData.furnitureHit.point;
+        runtimeData.raycastWasSuccessfull = false;
+        runtimeData.raycastEnd = Vector3.zero ;
+        runtimeData.uiHitByRay = null;
+        runtimeData.furnitureHitByRay = null;
+    }
 
+    void HandleUiRay()
+    {
+        ResetRaycastDataForThisFrame();
+
+        runtimeData.raycastEnd = refs.rayOrigin.position + refs.rayOrigin.forward * config.maxRaycastDistance;
+        Ray ray = new Ray(refs.rayOrigin.position, refs.rayOrigin.forward);
+
+        if (Physics.Raycast(ray, out runtimeData.raycastHitInfo, config.maxRaycastDistance, config.uiMask))
+        {
+            runtimeData.raycastEnd = runtimeData.raycastHitInfo.point;
+            runtimeData.raycastWasSuccessfull = true;
+
+            //Debug.Log($"[UI] Hit UI");
+
+            runtimeData.uiHitByRay = runtimeData.raycastHitInfo.collider.gameObject.GetComponent<UiCustomButton>();
+            //Debug.Log($"[UI] runtimeData.uiHitByRa: {runtimeData.uiHitByRay}");
+            runtimeData.raycastHitType = PlayerControllerRuntimeData.RaycastResultType.HitUi;
+
+            // todo move this to Handle Ui Interaction
         }
         else
         {
-            runtimeData.furnitureHasHit = false;
+            runtimeData.raycastWasSuccessfull = false;
         }
     }
 
-    protected void HandleRayVisuals(Vector3 rayEnd)
+    public void HandleUiInteraction()
+    {
+        if (OVRInput.GetDown(config.pressUiButton) && runtimeData.uiHitByRay != null)
+        {
+            runtimeData.uiHitByRay.OnClick();
+        }
+    }
+
+    void HandleFurnitureRay()
+    {
+        ResetRaycastDataForThisFrame();
+
+        runtimeData.raycastEnd = refs.rayOrigin.position + refs.rayOrigin.forward * config.maxRaycastDistance;
+        Ray ray = new Ray(refs.rayOrigin.position, refs.rayOrigin.forward);
+
+        if (Physics.Raycast(ray, out runtimeData.raycastHitInfo, config.maxRaycastDistance, config.furnitureMask))
+        {
+            runtimeData.raycastEnd = runtimeData.raycastHitInfo.point;
+            runtimeData.raycastWasSuccessfull = true;
+
+            runtimeData.furnitureHitByRay = runtimeData.raycastHitInfo.collider.gameObject.GetComponent<BaseFurniture>();
+            runtimeData.raycastHitType = PlayerControllerRuntimeData.RaycastResultType.HitFurniture;
+        }
+        else
+        {
+            runtimeData.raycastWasSuccessfull = false;
+        }
+    }
+
+    public void HandleRayVisuals()
     {
         // UI has priority over furniture
 
         refs.lineRenderer.SetPosition(0, refs.rayOrigin.position);
-        refs.lineRenderer.SetPosition(1, rayEnd); 
+        refs.lineRenderer.SetPosition(1, runtimeData.raycastEnd);
     }
 
-    protected void HandleHoverInteractions()
+    protected void HandleHoverOverFurniture()
     {
-        BaseFurniture newHoveredFurniture = null;
-        if (runtimeData.furnitureHasHit) newHoveredFurniture = runtimeData.furnitureHit.transform.GetComponent<BaseFurniture>();
-
-        if (newHoveredFurniture != null && newHoveredFurniture.Interactable)
+        if (runtimeData.furnitureHitByRay != null && runtimeData.furnitureHitByRay.Interactable)
         {
-            if (newHoveredFurniture != runtimeData.selectedFurniture && newHoveredFurniture != runtimeData.hoveredOverFurniture)
+            if (runtimeData.furnitureHitByRay != runtimeData.selectedFurniture && runtimeData.furnitureHitByRay != runtimeData.hoveredOverFurniture)
             {
                 if (runtimeData.hoveredOverFurniture != null)
                 {
@@ -89,7 +136,7 @@ public abstract class PlayerControllerInteractionState
                     runtimeData.hoveredOverFurniture.OnHoverEnd();
                 }
 
-                runtimeData.hoveredOverFurniture = newHoveredFurniture;
+                runtimeData.hoveredOverFurniture = runtimeData.furnitureHitByRay;
                 runtimeData.hoveredOverFurniture.OnHoverStart();
             }
         }

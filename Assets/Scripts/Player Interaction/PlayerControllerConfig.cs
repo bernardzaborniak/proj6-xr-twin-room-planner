@@ -8,6 +8,7 @@ public class PlayerControllerConfig
 
     public OVRInput.RawButton selectFurnitureButton;
     public OVRInput.RawButton deselectFurnitureButton;
+    public OVRInput.RawButton generalReturnButton;
     public OVRInput.RawButton pressUiButton;
 
     public OVRInput.RawButton moveFurnitureHoldButton;
