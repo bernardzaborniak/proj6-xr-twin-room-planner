@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerControllerReferences
 {
     public SpawnObjectMenu spawnObjectMenu;
+    public CreateNewBoundingBoxScanMenu scanAddObjectsMenu;
 
     [Header("Raycast")]
     public Transform rayOrigin;

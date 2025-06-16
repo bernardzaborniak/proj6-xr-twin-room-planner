@@ -5,7 +5,8 @@ public class PlayerControllerInteractionStateMachine
 {
     // All states
     public ScanSelectionState scanSelection = new ScanSelectionState();
-    public ScanEditState scanEdit = new ScanEditState();
+    public ScanEditDetailsState scanEditDetails = new ScanEditDetailsState();
+    public ScanRegisterNewFurnitureState scanRegisterNew = new ScanRegisterNewFurnitureState();
 
     public LayoutSelectionAndMoveState layoutSelectionAndMove = new LayoutSelectionAndMoveState();
     public LayoutEditState layoutEdit = new LayoutEditState();
@@ -18,7 +19,8 @@ public class PlayerControllerInteractionStateMachine
     public PlayerControllerInteractionStateMachine(PlayerControllerReferences refs, PlayerControllerConfig config, PlayerControllerRuntimeData runtimeData)
     {
         scanSelection.Initialize(this, refs, config, runtimeData);
-        scanEdit.Initialize(this, refs, config, runtimeData);
+        scanEditDetails.Initialize(this, refs, config, runtimeData);
+        scanRegisterNew.Initialize(this, refs, config, runtimeData);
 
         layoutSelectionAndMove.Initialize(this, refs, config, runtimeData);
         layoutEdit.Initialize(this, refs, config, runtimeData);

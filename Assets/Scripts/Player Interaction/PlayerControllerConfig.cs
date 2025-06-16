@@ -23,5 +23,8 @@ public class PlayerControllerConfig
     public float heightChangeSpeed;
     public float rotationChangeSpeed;
 
+    [Header("Create new Bounding Boxes in Scan Mode")]
+    public Color addNewBoxScanSelectionLineColor;
+
 
 }

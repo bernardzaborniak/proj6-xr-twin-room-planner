@@ -1,4 +1,4 @@
-public class ScanEditState : PlayerControllerInteractionState
+public class ScanEditDetailsState : PlayerControllerInteractionState
 {
     public override void OnStateEnter()
     {
