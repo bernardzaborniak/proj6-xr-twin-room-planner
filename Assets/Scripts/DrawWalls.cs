@@ -48,7 +48,7 @@ public class DrawWalls : MonoBehaviour
                 ShowPreviewWall(wallPoints[wallPoints.Count - 1], hit.point);
             }
 
-            if (OVRInput.GetDown(OVRInput.RawButton.Y))
+            if (OVRInput.GetDown(OVRInput.RawButton.A))
             {
                 PlacePoint(hit.point);
             }
