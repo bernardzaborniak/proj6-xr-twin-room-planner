@@ -4540,13 +4540,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labelToMeshConversionTable: {fileID: 11400000, guid: 9b1b59bb95e386040b2e72e17f16572c, type: 2}
+  roomAnchorsVisualizationPrefab: {fileID: 8231694513585666829, guid: e9c9d9c5e0d32e743bad1755ef093d13, type: 3}
+  roomVariationVisualizationPrefab: {fileID: 3142179871477988062, guid: 3ae3caad2e1465d408aa1b686341b34c, type: 3}
   roomScanData:
     roomName: 
     furniture: []
   currentVisualization: {fileID: 0}
-  roomAnchorsVisualizationPrefab: {fileID: 8231694513585666829, guid: e9c9d9c5e0d32e743bad1755ef093d13, type: 3}
   roomVariationsData: []
-  roomVariationVisualizationPrefab: {fileID: 3142179871477988062, guid: 3ae3caad2e1465d408aa1b686341b34c, type: 3}
 --- !u!4 &676192693
 Transform:
   m_ObjectHideFlags: 0
@@ -7028,6 +7028,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
+  heightChangeSpeed: 0
+  rotationChangeSpeed: 0
 --- !u!120 &950758264
 LineRenderer:
   serializedVersion: 2
@@ -10893,7 +10895,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385315853}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
@@ -15162,6 +15164,7 @@ MonoBehaviour:
       tempLabelString: 
       posInRoom: {x: 0, y: 0, z: 0}
       rotInRoom: {x: 0, y: 0, z: 0, w: 0}
+      rotationAdjuster: 0
       meshData:
         triangles: 000000000200000001000000000000000300000002000000030000000700000002000000020000000700000006000000070000000500000006000000070000000400000005000000000000000100000005000000000000000500000004000000000000000400000007000000000000000700000003000000010000000200000006000000010000000600000005000000
         vertices:
@@ -15183,7 +15186,6 @@ MonoBehaviour:
       volumeBounds:
         m_Center: {x: 0, y: 0, z: 0}
         m_Extent: {x: 0, y: 0, z: 0}
-      newTestFloat: 4.33
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
   - fName: Desk 06
     data:
@@ -15192,6 +15194,7 @@ MonoBehaviour:
       tempLabelString: 
       posInRoom: {x: 0, y: 0, z: 0}
       rotInRoom: {x: 0, y: 0, z: 0, w: 0}
+      rotationAdjuster: 0
       meshData:
         triangles: 
         vertices: []
@@ -15205,7 +15208,6 @@ MonoBehaviour:
       volumeBounds:
         m_Center: {x: 0, y: 0, z: 0}
         m_Extent: {x: 0, y: 0, z: 0}
-      newTestFloat: 4.33
     image: {fileID: 21300000, guid: b7bad1260586fa746a0b67e930892936, type: 3}
 --- !u!1 &2058227443
 GameObject:
