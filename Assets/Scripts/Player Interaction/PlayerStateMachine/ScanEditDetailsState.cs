@@ -13,12 +13,12 @@ public class ScanEditDetailsState : PlayerControllerInteractionState
 
     public override void UpdateState()
     {
-        HandleRightHandRay(RaycastType.OnlyHitUI);
+        HandleRightHandRay(RaycastType.OnlyHitUi);
         HandleRayVisuals();
 
         HandleUiInteraction();
 
-        // If we press the select button again, exit the scan edit state
+        // If we press the deselect button again, exit the scan edit state
         if (OVRInput.GetDown(config.deselectFurnitureButton))
         {
             sm.SetState(sm.scanSelection);

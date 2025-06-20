@@ -7,6 +7,7 @@ public class PlayerControllerInteractionStateMachine
     public ScanSelectionState scanSelection = new ScanSelectionState();
     public ScanEditDetailsState scanEditDetails = new ScanEditDetailsState();
     public ScanRegisterNewFurnitureState scanRegisterNew = new ScanRegisterNewFurnitureState();
+    public ScanCreateWallState scanCreateWall = new ScanCreateWallState();
 
     public LayoutSelectionAndMoveState layoutSelectionAndMove = new LayoutSelectionAndMoveState();
     public LayoutEditState layoutEdit = new LayoutEditState();
@@ -21,6 +22,7 @@ public class PlayerControllerInteractionStateMachine
         scanSelection.Initialize(this, refs, config, runtimeData);
         scanEditDetails.Initialize(this, refs, config, runtimeData);
         scanRegisterNew.Initialize(this, refs, config, runtimeData);
+        scanCreateWall.Initialize(this, refs, config, runtimeData);
 
         layoutSelectionAndMove.Initialize(this, refs, config, runtimeData);
         layoutEdit.Initialize(this, refs, config, runtimeData);

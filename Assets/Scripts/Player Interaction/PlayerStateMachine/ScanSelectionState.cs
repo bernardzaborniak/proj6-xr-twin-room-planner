@@ -8,6 +8,7 @@ public class ScanSelectionState : PlayerControllerInteractionState
         refs.scanAddObjectsMenu.gameObject.SetActive(true);
         // Hookup to the menu callbacks state change to this menu?
         refs.scanAddObjectsMenu.OnAddFurnitureClickedCallback += OnMenuAddFurnitureClicked;
+        refs.scanAddObjectsMenu.OnAddWallClickedCallback += OnMenuCreateWallClicked;
     }
 
     public override void OnStateExit()
@@ -18,6 +19,7 @@ public class ScanSelectionState : PlayerControllerInteractionState
         // loose  hand menu
         refs.scanAddObjectsMenu.gameObject.SetActive(false);
         refs.scanAddObjectsMenu.OnAddFurnitureClickedCallback -= OnMenuAddFurnitureClicked;
+        refs.scanAddObjectsMenu.OnAddWallClickedCallback -= OnMenuCreateWallClicked;
     }
 
     public override void UpdateState()
@@ -38,5 +40,10 @@ public class ScanSelectionState : PlayerControllerInteractionState
     void OnMenuAddFurnitureClicked()
     {
         sm.SetState(sm.scanRegisterNew);
+    }
+
+    void OnMenuCreateWallClicked()
+    {
+        sm.SetState(sm.scanCreateWall);
     }
 }

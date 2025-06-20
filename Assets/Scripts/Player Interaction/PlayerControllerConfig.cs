@@ -15,6 +15,9 @@ public class PlayerControllerConfig
     public OVRInput.Axis2D moveFurnitureUpButton;
     public OVRInput.Axis2D rotateFurnitureButton;
 
+    public OVRInput.RawButton placeWallButton;
+
+
     [Header("Raycasts")]
     public LayerMask furnitureMask;
     public LayerMask uiMask;
@@ -26,6 +29,11 @@ public class PlayerControllerConfig
 
     [Header("Create new Bounding Boxes in Scan Mode")]
     public Color addNewBoxScanSelectionLineColor;
+
+    [Header("Wall Placement")]
+    public float wallPlacementThickness = 0.1f;
+    public float wallPlacementSnapDistance = 0.4f;
+    public LayerMask placeWallMask;
 
 
 }

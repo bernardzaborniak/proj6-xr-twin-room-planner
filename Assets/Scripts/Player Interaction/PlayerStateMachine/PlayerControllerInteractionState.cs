@@ -9,9 +9,9 @@ public abstract class PlayerControllerInteractionState
 
     public enum RaycastType
     {
-        OnlyHitUI,
+        OnlyHitUi,
         OnlyHitFurniture,
-        HitBothPriorityOnUi
+        HitBothPriorityOnUi,
     }
 
     public void Initialize(PlayerControllerInteractionStateMachine sm, PlayerControllerReferences refs, PlayerControllerConfig config, PlayerControllerRuntimeData runtimeData)
@@ -34,7 +34,7 @@ public abstract class PlayerControllerInteractionState
 
     protected void HandleRightHandRay(RaycastType castType)
     {
-        if (castType == RaycastType.OnlyHitUI)
+        if (castType == RaycastType.OnlyHitUi)
         {
             HandleUiRay();
         }

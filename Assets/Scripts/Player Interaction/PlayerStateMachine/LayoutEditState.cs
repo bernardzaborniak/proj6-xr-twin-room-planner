@@ -13,7 +13,7 @@ public class LayoutEditState : PlayerControllerInteractionState
 
     public override void UpdateState()
     {
-        HandleRightHandRay(RaycastType.OnlyHitUI);
+        HandleRightHandRay(RaycastType.OnlyHitUi);
         HandleRayVisuals();
 
         HandleUiInteraction();

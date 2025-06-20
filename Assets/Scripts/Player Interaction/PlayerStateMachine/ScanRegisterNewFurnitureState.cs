@@ -50,7 +50,7 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
     public override void UpdateState()
     {
-        HandleRightHandRay(RaycastType.OnlyHitUI);
+        HandleRightHandRay(RaycastType.OnlyHitUi);
         HandleRayVisuals();
 
         HandleUiInteraction();

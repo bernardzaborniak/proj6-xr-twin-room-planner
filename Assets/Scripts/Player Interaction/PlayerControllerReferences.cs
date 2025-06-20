@@ -11,4 +11,8 @@ public class PlayerControllerReferences
     public Transform rayOrigin;
     public LineRenderer lineRenderer;
 
+    [Header("Wall placement")]
+    public GameObject placeWallPrefab;
+    public Material wallMaterial;
+    public Material wallPreviewMaterial;
 }
