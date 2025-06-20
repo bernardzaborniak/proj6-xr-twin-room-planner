@@ -1784,7 +1784,7 @@ MonoBehaviour:
     moveFurnitureHoldButton: 134217728
     moveFurnitureUpButton: 2
     rotateFurnitureButton: 1
-    placeWallButton: 1
+    placeWallButton: 67108864
     furnitureMask:
       serializedVersion: 2
       m_Bits: 64
