@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ScanModeFurnitureUiMenu : FurnitureUiMenu
 {
-    [SerializeField] UiCustomButton tempButton;
-    [SerializeField] GameObject rectEnabledByButton;
     [SerializeField] LabelSelectorUi labelSelectorUi;
     [SerializeField] UiCustomButton deleteButton;
 
@@ -13,7 +11,6 @@ public class ScanModeFurnitureUiMenu : FurnitureUiMenu
 
     void Start()
     {
-        tempButton.OnClickCallback += ToggleRect;
         deleteButton.OnClickCallback += Delete;
     }
 
@@ -24,11 +21,6 @@ public class ScanModeFurnitureUiMenu : FurnitureUiMenu
 
     }
 
-
-    void ToggleRect()
-    {
-        rectEnabledByButton.SetActive(!rectEnabledByButton.activeSelf);
-    }
 
     void Delete()
     {
