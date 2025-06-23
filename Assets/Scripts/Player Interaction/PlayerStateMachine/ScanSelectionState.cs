@@ -33,6 +33,7 @@ public class ScanSelectionState : PlayerControllerInteractionState
         // If we press the select button on a furniture we select it and enter the scan edit state
         if (HandleFurnitureSelect())
         {
+            sm.scanEditDetails.SetCurrentFurniture(runtimeData.selectedFurniture as ScanModeFurniture);
             sm.SetState(sm.scanEditDetails);
         }
     }

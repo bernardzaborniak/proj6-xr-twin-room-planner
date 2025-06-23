@@ -31,7 +31,10 @@ public class ScanModeRoom : RoomVisualization
 
         foreach (ScanModeFurniture furniture in anchorVisualizations)
         {
-            newData.furniture.Add(furniture.ConvertToFurnitureDataObject());
+            if (furniture != null) // they could become deleted
+            {
+                newData.furniture.Add(furniture.ConvertToFurnitureDataObject());
+            }
         }
 
         return newData;

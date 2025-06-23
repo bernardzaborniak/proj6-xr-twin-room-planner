@@ -34,7 +34,10 @@ public class LayoutModeRoom : RoomVisualization
 
         foreach (LayoutModeFurniture furniture in furnitureVisualizations)
         {
-            newData.furniture.Add(furniture.ConvertToFurnitureDataObject());
+            if (furniture != null) // they could become deleted
+            {
+                newData.furniture.Add(furniture.ConvertToFurnitureDataObject());
+            }
         }
 
         return newData;
