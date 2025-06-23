@@ -2894,6 +2894,10 @@ PrefabInstance:
       propertyPath: ovrPassthroughLayer
       value: 
       objectReference: {fileID: 622944111}
+    - target: {fileID: 1496581754107071710, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: refs.createNewBoundingBoxVisualizationPrefab
+      value: 
+      objectReference: {fileID: 7075545522146566668, guid: 201cc21b3206fc749b4014a4afecaef3, type: 3}
     - target: {fileID: 1736446803079154595, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
       propertyPath: m_Name
       value: PlayerController

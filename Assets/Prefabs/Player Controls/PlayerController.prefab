@@ -1775,6 +1775,7 @@ MonoBehaviour:
     placeWallPrefab: {fileID: 9063558452120584885, guid: 3e55f0290e1e2134782a89aa5cfcd16e, type: 3}
     wallMaterial: {fileID: 2100000, guid: 1bf6361aae83a8b4689ff19a568f7ab3, type: 2}
     wallPreviewMaterial: {fileID: 2100000, guid: b12cafc7b89cba249b66b5089fbbf72f, type: 2}
+    createNewBoundingBoxVisualizationPrefab: {fileID: 0}
   config:
     switchRoomModeButton: 1
     selectFurnitureButton: 67108864
@@ -1785,6 +1786,7 @@ MonoBehaviour:
     moveFurnitureUpButton: 2
     rotateFurnitureButton: 1
     placeWallButton: 67108864
+    createBoundingBoxPointButton: 67108864
     furnitureMask:
       serializedVersion: 2
       m_Bits: 64
@@ -1798,6 +1800,9 @@ MonoBehaviour:
     wallPlacementThickness: 0.1
     wallPlacementSnapDistance: 0.4
     placeWallMask:
+      serializedVersion: 2
+      m_Bits: 128
+    createNewBoundingBoxUniversalGround:
       serializedVersion: 2
       m_Bits: 128
   runtimeData:

@@ -17,6 +17,8 @@ public class PlayerControllerConfig
 
     public OVRInput.RawButton placeWallButton;
 
+    public OVRInput.RawButton createBoundingBoxPointButton;
+
 
     [Header("Raycasts")]
     public LayerMask furnitureMask;
@@ -34,6 +36,9 @@ public class PlayerControllerConfig
     public float wallPlacementThickness = 0.1f;
     public float wallPlacementSnapDistance = 0.4f;
     public LayerMask placeWallMask;
+
+    [Header("Create new bounding box ")]
+    public LayerMask createNewBoundingBoxUniversalGround;
 
 
 }

@@ -83,7 +83,6 @@ public class ScanCreateWallState : PlayerControllerInteractionState
             {
                 PlacePoint(runtimeData.raycastEnd);
             }
-
         }
     }
 

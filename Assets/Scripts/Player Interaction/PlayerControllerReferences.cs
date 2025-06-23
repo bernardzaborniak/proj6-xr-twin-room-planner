@@ -15,4 +15,7 @@ public class PlayerControllerReferences
     public GameObject placeWallPrefab;
     public Material wallMaterial;
     public Material wallPreviewMaterial;
+
+    [Header("Create new bounding Box")]
+    public GameObject createNewBoundingBoxVisualizationPrefab;
 }
