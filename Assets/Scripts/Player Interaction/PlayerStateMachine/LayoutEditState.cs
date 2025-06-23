@@ -1,14 +1,31 @@
+using UnityEngine;
+
 public class LayoutEditState : PlayerControllerInteractionState
 {
+    // TODO have a reference which furniture to delete
+
+    LayoutModeFurniture selectedFurniture;
+
+    public void SetCurrentFurniture(LayoutModeFurniture furniture)
+    {
+        this.selectedFurniture = furniture;
+        Debug.Log($"[Delete1] selectedFurniture.OnDeleteByUiClicked");
+    }
+
     public override void OnStateEnter()
     {
 
+        selectedFurniture.OnDeleteByUiClicked += OnDeletedInspectedFurniture;
     }
+    
 
     public override void OnStateExit()
     {
         runtimeData.selectedFurniture?.OnDeselect();
         runtimeData.selectedFurniture = null;
+
+        selectedFurniture.OnDeleteByUiClicked -= OnDeletedInspectedFurniture;
+
     }
 
     public override void UpdateState()
@@ -23,5 +40,13 @@ public class LayoutEditState : PlayerControllerInteractionState
         {
             sm.SetState(sm.layoutSelectionAndMove);
         }
+    }
+
+    void OnDeletedInspectedFurniture()
+    {
+        Debug.Log($"[Delete1] LayoutEditState - On deleted by UI inside base furniture");
+
+
+        sm.SetState(sm.layoutSelectionAndMove);
     }
 }

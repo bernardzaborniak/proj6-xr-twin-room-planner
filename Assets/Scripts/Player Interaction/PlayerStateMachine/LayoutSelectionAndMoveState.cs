@@ -37,6 +37,7 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
         // If we press the select button on a furniture we select it and enter the scan edit state
         if (HandleFurnitureSelect())
         {
+            sm.layoutEdit.SetCurrentFurniture(runtimeData.selectedFurniture as LayoutModeFurniture);
             sm.SetState(sm.layoutEdit);
             return;
         }

@@ -6,6 +6,7 @@ public class LayoutModeFurnitureUiMenu : FurnitureUiMenu
     [SerializeField] UiCustomButton rotateLeft;
     [SerializeField] UiCustomButton rotateRight;
     [SerializeField] LabelSelectorUi labelSelectorUi; 
+    [SerializeField] UiCustomButton deleteButton; 
 
     LayoutModeFurniture furniture;
 
@@ -13,6 +14,7 @@ public class LayoutModeFurnitureUiMenu : FurnitureUiMenu
     {
         rotateLeft.OnClickCallback += RotateLeft;
         rotateRight.OnClickCallback += RotateRight;
+        deleteButton.OnClickCallback += Delete;
 
         
     }
@@ -31,5 +33,10 @@ public class LayoutModeFurnitureUiMenu : FurnitureUiMenu
     void RotateRight()
     {
         furniture.RotateRightByUi();
+    }
+
+    void Delete()
+    {
+        furniture.DeleteByUi();
     }
 }

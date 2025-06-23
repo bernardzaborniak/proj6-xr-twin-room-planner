@@ -1,4 +1,4 @@
-using Unity.Android.Gradle.Manifest;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -29,6 +29,8 @@ public abstract class BaseFurniture : MonoBehaviour
     protected Material originalBeforeOutlineMaterial;
 
     public bool Interactable { get; set; }
+
+    public Action OnDeleteByUiClicked;
 
     #region Default Methods  
 
@@ -116,6 +118,14 @@ public abstract class BaseFurniture : MonoBehaviour
         OnUiChangedData();
     }
 
+
+    public void DeleteByUi()
+    {
+        Debug.Log($"[Delete1] On deleted by UI inside base furniture");
+        Debug.Log($"[Delete1] OnDeleteByUiClicked invok list {OnDeleteByUiClicked.GetInvocationList()}");
+        OnDeleteByUiClicked?.Invoke();
+        Destroy(gameObject);
+    } 
 
     #endregion
 }

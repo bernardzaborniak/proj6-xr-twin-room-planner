@@ -171,5 +171,7 @@ public class LayoutModeFurniture : BaseFurniture
         OnUiChangedData();
     }
 
+
+
     #endregion
 }
