@@ -9,6 +9,9 @@ using System.Collections.Generic;
 /// Logs events to the console and stores them for review of user study.
 /// EventLogger.Instance.LogInteraction("...");
 /// </summary>
+/// 
+
+// TODO: classify type of action, add logger to each interaction, set folder path for Quest
 
 public class EventLogger : MonoBehaviour
 {
@@ -18,8 +21,6 @@ public class EventLogger : MonoBehaviour
     private string filePath;
     private string logFolderPath;
     private List<string> actions = new List<string>();
-    private DateTime lastActionTimestamp;
-    private TimeSpan idleThreshold = TimeSpan.FromSeconds(10);
 
     private void Awake()
     {
@@ -43,17 +44,11 @@ public class EventLogger : MonoBehaviour
         string timestamp = DateTime.Now.ToString("dd-MM_HH-mm");
         filePath = Path.Combine(logFolderPath, $"log-{timestamp}.log");
         File.WriteAllText(filePath, $"{getTimestamp()} Application started\n");
-        
     }
 
     private string getTimestamp()
     {
         return DateTime.Now.ToString("[HH:mm:ss]");
-    }
-
-    private string FormatTimeSpan(TimeSpan ts)
-    {
-        return $"{ts.Hours:D2}:{ts.Minutes:D2}:{ts.Seconds:D2}";
     }
 
     public void LogInteraction(string action)
@@ -62,26 +57,6 @@ public class EventLogger : MonoBehaviour
         actions.Add(line);
         WriteInFile(line);
         return;
-    }
-
-    public void LogAction(string message)
-    {
-        DateTime now = DateTime.Now;
-        if (lastActionTimestamp != default)
-        {
-            TimeSpan idleDuration = now - lastActionTimestamp;
-
-            if (idleDuration > idleThreshold)
-            {
-                string idleLine = $"[{now:HH:mm:ss}] Idle for {FormatTimeSpan(idleDuration)}";
-                WriteInFile(idleLine);
-            }
-        }
-
-        string logEntry = $"[{now:HH:mm:ss}] {message}";
-        WriteInFile(logEntry);
-
-        lastActionTimestamp = now;
     }
 
     private void WriteInFile(string line)
