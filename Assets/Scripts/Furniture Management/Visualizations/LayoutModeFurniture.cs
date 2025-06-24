@@ -1,5 +1,5 @@
 using TMPro;
-using Unity.Android.Gradle.Manifest;
+//using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.AI;
 

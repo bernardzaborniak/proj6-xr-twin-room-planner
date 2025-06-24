@@ -1,0 +1,2 @@
+C:\Users\danie\Documents\GitHub\proj6-xr-twin-room-planner\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\danie\Documents\GitHub\proj6-xr-twin-room-planner\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
