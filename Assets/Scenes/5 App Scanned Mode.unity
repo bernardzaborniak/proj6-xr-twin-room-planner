@@ -2891,6 +2891,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1017816717}
     - target: {fileID: 1496581754107071710, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: refs.roomManager
+      value: 
+      objectReference: {fileID: 1017816717}
+    - target: {fileID: 1496581754107071710, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
       propertyPath: ovrPassthroughLayer
       value: 
       objectReference: {fileID: 622944111}
