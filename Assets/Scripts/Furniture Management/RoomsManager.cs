@@ -334,5 +334,9 @@ public class RoomsManager : MonoBehaviour
         {
             (currentVisualization as LayoutModeRoom).AddFurnitureFromCatalogue(data, worldspacePosition);
         }
+        else if(currentVisualization is ScanModeRoom)
+        {
+            (currentVisualization as ScanModeRoom).AddNewlyCreatedBoundingBox(data, worldspacePosition);
+        }
     }
 }

@@ -40,4 +40,13 @@ public class ScanModeRoom : RoomVisualization
         return newData;
     }
 
+    public void AddNewlyCreatedBoundingBox(FurnitureData data, Vector3 worldspacePos)
+    {
+        data.posInRoom = transform.InverseTransformPoint(worldspacePos);
+
+        ScanModeFurniture newFurniture = Instantiate(furnitureScanVisualizationPrefab, this.transform).GetComponent<ScanModeFurniture>();
+        newFurniture.VisualizeFromData(data);
+        anchorVisualizations.Add(newFurniture);
+    }
+
 }

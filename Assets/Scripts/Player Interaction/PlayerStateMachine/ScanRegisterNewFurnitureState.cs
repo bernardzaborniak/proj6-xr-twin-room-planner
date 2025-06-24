@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 {
@@ -53,6 +54,8 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
         refs.lineRenderer.startColor = lineRendererColorBefore;
         refs.lineRenderer.endColor = lineRendererColorBefore;
+
+        GameObject.Destroy(createBoxVisualization.gameObject);
     }
 
     public override void UpdateState()
@@ -79,7 +82,7 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
 
     /// <summary>
-    /// Here the main logic happens
+    /// Here the main logic happens, its a bit dirt, but working ok
     /// </summary>
     void HandlePlaceBoundingBoxPoint()
     {
@@ -88,6 +91,8 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
             return;
         }
 
+
+
         // Do Rayast first
         Ray ray = new Ray(refs.rayOrigin.transform.position, refs.rayOrigin.transform.forward);
         // RaycastHit hit;
@@ -95,12 +100,53 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
         runtimeData.raycastEnd = refs.rayOrigin.position + refs.rayOrigin.forward * config.maxRaycastDistance;
         runtimeData.raycastWasSuccessfull = Physics.Raycast(ray, out runtimeData.raycastHitInfo, config.maxRaycastDistance, config.createNewBoundingBoxUniversalGround);
 
+        // do this outshide the raycast
+        if (createBoxState == CreateBoxState.FourthPointHeight)
+        {
+            // TODO only allow to place it vertical
+
+            // Constrain point vertically above boxPoint3
+
+            Plane invisiblePlane = new Plane(-ray.direction, boxPoint3);
+            Vector3 verticalPoint = Vector3.zero;
+
+            float enter = 0.0f;
+            if (invisiblePlane.Raycast(ray, out enter))
+            {
+                // The ray intersects the plane
+                verticalPoint = ray.origin + ray.direction * enter;
+                //Debug.Log("Ray hit the plane at: " + hitPoint);
+            }
+            /*
+            else
+            {
+                // Ray did not hit the plane
+                Debug.Log("Ray did not hit the plane");
+            }
+            */
+            verticalPoint.x = boxPoint3.x;
+            verticalPoint.z = boxPoint3.z;
+
+            if (OVRInput.GetDown(config.createBoundingBoxPointButton))
+            {
+
+                // finito
+                boxPoint4 = verticalPoint;
+                CreateMeshBasedOnPoints(boxPoint1, boxPoint2, boxPoint3, boxPoint4);
+                sm.SetState(sm.scanSelection);
+            }
+
+            createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
+            createBoxVisualization.currentTargetSphere.transform.position = verticalPoint;
+            createBoxVisualization.lineRenderer.positionCount = 4;
+            createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, boxPoint3, verticalPoint });
+        }
+
         if (runtimeData.raycastWasSuccessfull)
         {
             runtimeData.raycastEnd = runtimeData.raycastHitInfo.point;
 
             createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
-            createBoxVisualization.currentTargetSphere.transform.position = runtimeData.raycastEnd;
 
             switch (createBoxState)
             {
@@ -112,8 +158,9 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
                             boxPoint1 = runtimeData.raycastEnd;
                         }
 
-                        
 
+                        createBoxVisualization.currentTargetSphere.transform.position = runtimeData.raycastEnd;
+                        createBoxVisualization.lineRenderer.positionCount = 1;
                         createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { runtimeData.raycastEnd });
                     }
                     break;
@@ -125,42 +172,116 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
                             boxPoint2 = runtimeData.raycastEnd;
                         }
 
+                        createBoxVisualization.currentTargetSphere.transform.position = runtimeData.raycastEnd;
+                        createBoxVisualization.lineRenderer.positionCount = 2;
                         createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, runtimeData.raycastEnd });
                     }
                     break;
                 case CreateBoxState.ThirdPointPerpendicular:
                     {
-                        // TODO only allow to place it perpendicular
+                        Vector3 directionSoFar = (boxPoint2 - boxPoint1).normalized;
+                        Vector3 perpendicularLine = Vector3.Cross(Vector3.up, directionSoFar).normalized;
+
+                        // Project hit point onto the perpendicular direction
+                        Vector3 origin = boxPoint2;
+                        Vector3 toHit = runtimeData.raycastEnd - origin;
+                        float distance = Vector3.Dot(toHit, perpendicularLine);
+                        Vector3 projectedPoint = origin + perpendicularLine * distance;
+
 
                         if (OVRInput.GetDown(config.createBoundingBoxPointButton))
                         {
                             createBoxState = CreateBoxState.FourthPointHeight;
-                            boxPoint3 = runtimeData.raycastEnd;
+                            boxPoint3 = projectedPoint;
                         }
 
-                        createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, runtimeData.raycastEnd });
+
+                        createBoxVisualization.currentTargetSphere.transform.position = projectedPoint;
+                        createBoxVisualization.lineRenderer.positionCount = 3;
+                        createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, projectedPoint });
                     }
                     break;
-                case CreateBoxState.FourthPointHeight:
-                    {
-                        // TODO only allow to place it vertical
-
-
-                        if (OVRInput.GetDown(config.createBoundingBoxPointButton))
-                        {
-                            // finito
-                            boxPoint4 = runtimeData.raycastEnd;
-                            sm.SetState(sm.scanSelection);
-                        }
-
-                        createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, boxPoint3, runtimeData.raycastEnd });
-                    }
-                    break;
-
-
-
             }
         }
+    }
 
+    void CreateMeshBasedOnPoints(Vector3 point1, Vector3 point2, Vector3 point3, Vector3 point7)
+    {
+        Vector3 objectDirection = (point2 - point1).normalized;
+        Vector3 point4 = (point1 + point3 - point2); // point 5 is above of the cube
+        Vector3 centroid = (point1 + point2 + point3 + point4) / 4;
+
+
+        FurnitureData newData = new FurnitureData();
+
+        //newData.posInRoom = centroid;
+        newData.rotInRoom = Quaternion.LookRotation(objectDirection);
+        newData.label = FurnitureLabel.OTHER;
+
+        // calculate all vertices in worldspace
+        Vector3[] worldSpaceVertices = new Vector3[8]
+        {
+            point1,
+            point2,
+            point3,
+            point4,
+            new Vector3(point1.x,point7.y,point1.z),
+            new Vector3(point2.x,point7.y,point2.z),
+            point7,
+            new Vector3(point4.x,point7.y,point4.z),
+        };
+
+
+
+
+        //Create Mesh
+        Mesh mesh = new Mesh();
+        // Convert world space vertices to local space
+        Matrix4x4 rotationMatrix = Matrix4x4.Rotate(newData.rotInRoom);
+        Vector3[] localVertices = new Vector3[worldSpaceVertices.Length];
+        for (int i = 0; i < worldSpaceVertices.Length; i++)
+        {
+
+            Vector3 translatedPoint = worldSpaceVertices[i] - centroid;
+            // InverseTransformPoint to convert from world space to local space manually
+            localVertices[i] = rotationMatrix.inverse.MultiplyPoint(translatedPoint);
+        }
+
+        mesh.vertices = localVertices;
+
+        int[] triangles = new int[]
+        {
+           // Bottom face (1, 2, 3, 4)
+            0, 1, 2,   // Triangle 1: (1, 2, 3)
+            0, 2, 3,   // Triangle 2: (1, 3, 4)
+    
+            // Top face (5, 6, 7, 8)
+            4, 6, 5,   // Triangle 3: (5, 7, 6)
+            4, 7, 6,   // Triangle 4: (5, 8, 7)
+
+            // Front face (1, 2, 5, 6)
+            0, 1, 5,   // Triangle 5: (1, 2, 6)
+            0, 5, 4,   // Triangle 6: (1, 6, 5)
+
+            // Back face (3, 4, 7, 8)
+            2, 6, 7,   // Triangle 7: (3, 7, 4)
+            2, 7, 3,   // Triangle 8: (3, 8, 7)
+
+            // Left face (1, 4, 5, 8)
+            0, 3, 7,   // Triangle 9: (1, 4, 8)
+            0, 7, 4,   // Triangle 10: (1, 8, 5)
+
+            // Right face (2, 3, 6, 7)
+            1, 2, 6,   // Triangle 11: (2, 3, 7)
+            1, 6, 5    // Triangle 12: (2, 7, 6)
+        };
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+
+        newData.meshData = new MeshSaveData(mesh);
+
+        refs.roomManager.AddFurnitureToCurrentVisualization(newData, centroid);
+
+        // rooms manager add the newly added data
     }
 }

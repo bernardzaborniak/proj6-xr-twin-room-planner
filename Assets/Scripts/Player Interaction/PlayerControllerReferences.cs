@@ -6,6 +6,7 @@ public class PlayerControllerReferences
 {
     public SpawnObjectMenu spawnObjectMenu;
     public CreateNewBoundingBoxScanMenu scanAddObjectsMenu;
+    public RoomsManager roomManager;
 
     [Header("Raycast")]
     public Transform rayOrigin;
@@ -18,4 +19,5 @@ public class PlayerControllerReferences
 
     [Header("Create new bounding Box")]
     public GameObject createNewBoundingBoxVisualizationPrefab;
+    //public GameObject scannedFurniturePrefab;
 }

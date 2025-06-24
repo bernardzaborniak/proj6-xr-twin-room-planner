@@ -1770,12 +1770,13 @@ MonoBehaviour:
   refs:
     spawnObjectMenu: {fileID: 6056764980299324677}
     scanAddObjectsMenu: {fileID: 3186533059641470149}
+    roomManager: {fileID: 0}
     rayOrigin: {fileID: 7672157832789644506}
     lineRenderer: {fileID: 8347619587088373014}
     placeWallPrefab: {fileID: 9063558452120584885, guid: 3e55f0290e1e2134782a89aa5cfcd16e, type: 3}
     wallMaterial: {fileID: 2100000, guid: 1bf6361aae83a8b4689ff19a568f7ab3, type: 2}
     wallPreviewMaterial: {fileID: 2100000, guid: b12cafc7b89cba249b66b5089fbbf72f, type: 2}
-    createNewBoundingBoxVisualizationPrefab: {fileID: 0}
+    createNewBoundingBoxVisualizationPrefab: {fileID: 7075545522146566668, guid: 201cc21b3206fc749b4014a4afecaef3, type: 3}
   config:
     switchRoomModeButton: 1
     selectFurnitureButton: 67108864
