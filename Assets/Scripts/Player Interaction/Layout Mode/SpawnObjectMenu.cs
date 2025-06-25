@@ -18,12 +18,12 @@ public class SpawnObjectMenu : MonoBehaviour
     [SerializeField]
     private List<SpawnMenuFurnitureItem> furnitureList = new List<SpawnMenuFurnitureItem>();
 
-    bool isOpened = false;
+    //bool isOpened = false;
     int currentItem = 0;
 
     private void Start()
     {
-        spawnMenu.SetActive(false);
+        //spawnMenu.SetActive(false);
     }
 
     void Update()
@@ -33,12 +33,12 @@ public class SpawnObjectMenu : MonoBehaviour
             OpenMenu();
             Debug.Log("Spawn Menu used");
         }
-        if (OVRInput.GetDown(OVRInput.RawButton.Y) && isOpened)
+        if (OVRInput.GetDown(OVRInput.RawButton.Y))
         {
             SpawnFurniture();
             updateMenu(currentItem);
         }
-        if (OVRInput.GetDown(OVRInput.RawButton.LThumbstickLeft) && isOpened)
+        if (OVRInput.GetDown(OVRInput.RawButton.LThumbstickLeft))
         {
             if (currentItem > 0)
             {
@@ -51,7 +51,7 @@ public class SpawnObjectMenu : MonoBehaviour
             updateMenu(currentItem);
         }
 
-        if (OVRInput.GetDown(OVRInput.RawButton.LThumbstickRight) && isOpened)
+        if (OVRInput.GetDown(OVRInput.RawButton.LThumbstickRight))
         {
             if (currentItem < furnitureList.Count - 1)
             {
@@ -69,9 +69,6 @@ public class SpawnObjectMenu : MonoBehaviour
     {
         EventLogger.Instance.LogInteraction("Opened furniture spawn menu.");
         updateMenu(currentItem);
-
-        spawnMenu.SetActive(!isOpened);
-        isOpened = !isOpened;
     }
 
     private GameObject furniture;

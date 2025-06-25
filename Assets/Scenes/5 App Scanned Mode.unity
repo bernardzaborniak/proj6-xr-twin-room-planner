@@ -2902,6 +2902,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 3855416713827963847, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6056764980299324677, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: roomManager
+      value: 
+      objectReference: {fileID: 1017816717}
     - target: {fileID: 8144886826486766389, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
