@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 2965063526493397525}
   - component: {fileID: 8878191949959603005}
   m_Layer: 0
-  m_Name: CreateNewBoundingBoxScanMenu
+  m_Name: AdjustScanMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
