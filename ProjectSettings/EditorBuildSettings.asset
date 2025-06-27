@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/5 App Scanned Mode.unity
+    path: Assets/Scenes/8 Main Menu.unity
+    guid: aca52bf94017b4e48a7f4dac6a8bad4e
+  - enabled: 1
+    path: Assets/Scenes/9 App Empty Mode.unity
+    guid: 1fe17f4f6756d664b9929608510d8ee9
+  - enabled: 1
+    path: Assets/Scenes/10 App Scanned Mode.unity
     guid: b8f291e6fced6f9448d1301358076b47
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9c0ec225ffe951e409721868faf98cf4, type: 2}
