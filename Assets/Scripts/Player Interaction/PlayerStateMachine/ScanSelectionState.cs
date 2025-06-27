@@ -9,6 +9,7 @@ public class ScanSelectionState : PlayerControllerInteractionState
         // Hookup to the menu callbacks state change to this menu?
         refs.scanAddObjectsMenu.OnAddFurnitureClickedCallback += OnMenuAddFurnitureClicked;
         refs.scanAddObjectsMenu.OnAddWallClickedCallback += OnMenuCreateWallClicked;
+        refs.scanAddObjectsMenu.OnDeleteWallsClickedCallback += OnDeleteWallsClicked;
     }
 
     public override void OnStateExit()
@@ -20,6 +21,7 @@ public class ScanSelectionState : PlayerControllerInteractionState
         refs.scanAddObjectsMenu.gameObject.SetActive(false);
         refs.scanAddObjectsMenu.OnAddFurnitureClickedCallback -= OnMenuAddFurnitureClicked;
         refs.scanAddObjectsMenu.OnAddWallClickedCallback -= OnMenuCreateWallClicked;
+        refs.scanAddObjectsMenu.OnDeleteWallsClickedCallback -= OnDeleteWallsClicked;
 
         refs.inGameMenu.HideMenu();
     }
@@ -52,5 +54,19 @@ public class ScanSelectionState : PlayerControllerInteractionState
     void OnMenuCreateWallClicked()
     {
         sm.SetState(sm.scanCreateWall);
+    }
+
+    void OnDeleteWallsClicked()
+    {
+        Debug.Log("[Walls] on Delete clicked");
+
+        // very hacked but works
+        WallPlacedByPlayer[] walls = GameObject.FindObjectsByType<WallPlacedByPlayer>(FindObjectsSortMode.None);
+
+        for (int i = 0; i < walls.Length; i++)
+        {
+            GameObject.Destroy(walls[i].gameObject);
+        }
+
     }
 }

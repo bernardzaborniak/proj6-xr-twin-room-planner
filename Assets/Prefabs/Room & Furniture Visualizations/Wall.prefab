@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6963430024466201193}
   - component: {fileID: 2179723820907294876}
   - component: {fileID: 5578942051065692746}
+  - component: {fileID: 2224695008900148950}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -86,3 +87,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2224695008900148950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9063558452120584885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c9e267da578b948b51da12f583eb9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
