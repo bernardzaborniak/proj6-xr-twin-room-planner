@@ -1,8 +1,9 @@
 using UnityEngine;
+using static Oculus.Interaction.Context;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] RoomsManager roomsManager;
+    //[SerializeField] RoomsManager roomsManager;
     [SerializeField] OVRPassthroughLayer ovrPassthroughLayer;
 
     [Header("Player Controller Components")]
@@ -38,7 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         playerControllerStateMachine = new PlayerControllerInteractionStateMachine(refs,config,runtimeData);
 
-       
+        refs.roomManager = RoomsManager.Instance;
+
         //roomsManager.ShowRoomScan();
         //SwitchMode();
     }
@@ -95,9 +97,9 @@ public class PlayerController : MonoBehaviour
     {
         currentMode = CurrentRoomMode.ScanMode;
 
-        roomsManager.SaveRoomVariationFromVisualization(0);
+        refs.roomManager.SaveRoomVariationFromVisualization(0);
         ovrPassthroughLayer.enabled = true;
-        roomsManager.ShowRoomScan();
+        refs.roomManager.ShowRoomScan();
 
         playerControllerStateMachine.SetState(playerControllerStateMachine.scanSelection);
     }
@@ -106,9 +108,9 @@ public class PlayerController : MonoBehaviour
     {
         currentMode = CurrentRoomMode.LayoutMode;
 
-        roomsManager.SaveRoomScanFromVisualization();
+        refs.roomManager.SaveRoomScanFromVisualization();
         ovrPassthroughLayer.enabled = false;
-        roomsManager.ShowRoomVariation(0);
+        refs.roomManager.ShowRoomVariation(0);
 
         playerControllerStateMachine.SetState(playerControllerStateMachine.layoutSelectionAndMove);
     }

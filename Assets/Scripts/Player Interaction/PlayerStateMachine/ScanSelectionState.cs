@@ -20,6 +20,8 @@ public class ScanSelectionState : PlayerControllerInteractionState
         refs.scanAddObjectsMenu.gameObject.SetActive(false);
         refs.scanAddObjectsMenu.OnAddFurnitureClickedCallback -= OnMenuAddFurnitureClicked;
         refs.scanAddObjectsMenu.OnAddWallClickedCallback -= OnMenuCreateWallClicked;
+
+        refs.inGameMenu.HideMenu();
     }
 
     public override void UpdateState()
@@ -30,12 +32,16 @@ public class ScanSelectionState : PlayerControllerInteractionState
         HandleUiInteraction();
         HandleHoverOverFurniture();
 
+
         // If we press the select button on a furniture we select it and enter the scan edit state
         if (HandleFurnitureSelect())
         {
             sm.scanEditDetails.SetCurrentFurniture(runtimeData.selectedFurniture as ScanModeFurniture);
             sm.SetState(sm.scanEditDetails);
         }
+
+        HandleInGameMenuEnableByButton();
+
     }
 
     void OnMenuAddFurnitureClicked()

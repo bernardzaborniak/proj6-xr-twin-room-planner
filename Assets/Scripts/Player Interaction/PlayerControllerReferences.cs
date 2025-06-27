@@ -7,6 +7,10 @@ public class PlayerControllerReferences
     public SpawnObjectMenu spawnObjectMenu;
     public CreateNewBoundingBoxScanMenu scanAddObjectsMenu;
     public RoomsManager roomManager;
+    public InGameMenu inGameMenu;
+    public Transform playerCameraTransform;
+
+
 
     [Header("Raycast")]
     public Transform rayOrigin;

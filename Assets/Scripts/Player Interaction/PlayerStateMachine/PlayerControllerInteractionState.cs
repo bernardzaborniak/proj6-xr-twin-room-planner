@@ -170,4 +170,11 @@ public abstract class PlayerControllerInteractionState
         return false;
     }
 
+    protected void HandleInGameMenuEnableByButton()
+    {
+        if (OVRInput.GetDown(config.showInGameMenuButton))
+        {
+            refs.inGameMenu.ToggleMenu(refs.playerCameraTransform.position, refs.playerCameraTransform.forward);
+        }
+    }
 }

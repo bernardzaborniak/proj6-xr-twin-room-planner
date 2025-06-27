@@ -19,6 +19,8 @@ public class PlayerControllerConfig
 
     public OVRInput.RawButton createBoundingBoxPointButton;
 
+    public OVRInput.RawButton showInGameMenuButton;
+
 
     [Header("Raycasts")]
     public LayerMask furnitureMask;

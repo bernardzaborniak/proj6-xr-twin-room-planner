@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.IO;
 using TMPro;
 using static UnityEngine.Mesh;
+using static Oculus.Interaction.Context;
 
 public class RoomsManager : MonoBehaviour
 {
@@ -31,14 +32,19 @@ public class RoomsManager : MonoBehaviour
     [SerializeField] List<RoomData> roomVariationsData;
 
 
-
+    public static RoomsManager Instance { get; private set; }
 
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+            
         // klet the application manager do this all now
 
-       // LoadSavedRoomData(); // load stuff saved on persistence drive first
+        // LoadSavedRoomData(); // load stuff saved on persistence drive first
     }
 
     void Update()

@@ -21,6 +21,8 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
 
         refs.spawnObjectMenu.gameObject.SetActive(false);
         // place object menu - set false
+
+        refs.inGameMenu.HideMenu();
     }
 
     public override void UpdateState()
@@ -43,6 +45,8 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
         }
 
         HandleFurnitureMove();
+
+        HandleInGameMenuEnableByButton();
     }
 
     void HandleFurnitureMove()
