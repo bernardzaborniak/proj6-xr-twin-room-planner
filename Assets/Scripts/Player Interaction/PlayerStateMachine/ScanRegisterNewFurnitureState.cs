@@ -127,6 +127,8 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
             verticalPoint.x = boxPoint3.x;
             verticalPoint.z = boxPoint3.z;
 
+            verticalPoint.y = Mathf.Max(verticalPoint.y, boxPoint1.y + 0.1f);
+
             if (OVRInput.GetDown(config.createBoundingBoxPointButton))
             {
 
