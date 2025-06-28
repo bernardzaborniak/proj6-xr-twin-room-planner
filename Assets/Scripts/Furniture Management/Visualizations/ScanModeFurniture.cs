@@ -28,6 +28,9 @@ public class ScanModeFurniture : BaseFurniture
         newMesh.triangles = data.meshData.triangles;
         newMesh.normals = data.meshData.normals;
 
+        Vector2[] uv = new Vector2[8] {new Vector2(0,0), new Vector2(0,1), new Vector2(1,1), new Vector2(1,0), new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0) };
+        newMesh.uv = uv;
+
         boundingBoxMeshFilter.sharedMesh = newMesh;
 
         SetBoxCollider();
