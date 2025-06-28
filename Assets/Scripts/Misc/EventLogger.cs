@@ -11,10 +11,14 @@ using System.Collections.Generic;
 /// </summary>
 /// 
 
-// TODO: classify type of action, add logger to each interaction, set folder path for Quest
+// TODO: add logger to each interaction, set folder path for Quest
 
 public class EventLogger : MonoBehaviour
 {
+
+    public enum actionTypes { MenuOpened, MenuClosed, MenuInteraction, ObjectMoved, ObjectAdded, ObjectRemoved, WallDrawn }
+    static Dictionary<actionTypes, int> actionCounts = new Dictionary<actionTypes, int>();
+
 
     public static EventLogger Instance { get; private set; }
 
@@ -51,9 +55,18 @@ public class EventLogger : MonoBehaviour
         return DateTime.Now.ToString("[HH:mm:ss]");
     }
 
-    public void LogInteraction(string action)
+    public void LogInteraction(string action, actionTypes actionType)
     {
-        string line = $"{getTimestamp()} {action}";
+        if (actionCounts.ContainsKey(actionType))
+        {
+            actionCounts[actionType]++;
+        }
+        else
+        {
+            actionCounts[actionType] = 1;
+        }
+
+        string line = $"{getTimestamp()} [{actionType}] {action}";
         actions.Add(line);
         WriteInFile(line);
         return;
@@ -68,6 +81,13 @@ public class EventLogger : MonoBehaviour
     {
         WriteInFile("\n\n=== Session Summary ===");
         WriteInFile($"\nAmount of actions: {actions.Count()}\nUsage time: {getTimeSinceStart()}\n");
+
+        foreach (actionTypes actionType in Enum.GetValues(typeof(actionTypes)))
+        {
+            int count = actionCounts.ContainsKey(actionType) ? actionCounts[actionType] : 0;
+            WriteInFile($"{actionType}: {count}\n");
+        }
+
         WriteInFile("=======================");
         return;
     }

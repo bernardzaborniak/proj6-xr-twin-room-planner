@@ -67,7 +67,7 @@ public class SpawnObjectMenu : MonoBehaviour
 
     void OpenMenu()
     {
-        EventLogger.Instance.LogInteraction("Opened furniture spawn menu.");
+        EventLogger.Instance.LogInteraction("Opened furniture spawn menu.", EventLogger.actionTypes.MenuOpened);
         updateMenu(currentItem);
     }
 
@@ -75,7 +75,7 @@ public class SpawnObjectMenu : MonoBehaviour
 
     void SpawnFurniture()
     {
-        EventLogger.Instance.LogInteraction("Furniture spawned.");
+        EventLogger.Instance.LogInteraction("Furniture spawned.", EventLogger.actionTypes.ObjectAdded);
 
         SpawnMenuFurnitureItem furnitureItemToSpawn = furnitureList[currentItem];
 
@@ -86,7 +86,7 @@ public class SpawnObjectMenu : MonoBehaviour
 
     private void updateMenu(int item)
     {
-        EventLogger.Instance.LogInteraction("Switched furniture menu selection.");
+        EventLogger.Instance.LogInteraction("Switched furniture menu selection.", EventLogger.actionTypes.MenuInteraction);
         Debug.Log("Updating menu");
 
         menuOption.text = furnitureList[item].fName;
