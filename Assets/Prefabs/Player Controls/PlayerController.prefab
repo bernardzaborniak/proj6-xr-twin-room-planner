@@ -1807,7 +1807,7 @@ MonoBehaviour:
       m_Bits: 128
     createNewBoundingBoxUniversalGround:
       serializedVersion: 2
-      m_Bits: 128
+      m_Bits: 192
   runtimeData:
     hoveredOverFurniture: {fileID: 0}
     selectedFurniture: {fileID: 0}
@@ -5766,7 +5766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 6f87ff9f-b3b2-4548-9173-dcfa47f7d69b
+  instanceId: 0b3e8cca-1806-46cd-a4d1-5990e1aec496
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -6116,7 +6116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 3294ebe5-dd43-4ee3-b0dd-347d6798436b
+  instanceId: 08954418-553d-447c-99e4-95de24858abc
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -8815,7 +8815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: e3a00a82-74dc-4df4-848f-506462cd6964
+  instanceId: 9d6fafec-7b08-40a3-8846-a7a65cb3ab8b
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

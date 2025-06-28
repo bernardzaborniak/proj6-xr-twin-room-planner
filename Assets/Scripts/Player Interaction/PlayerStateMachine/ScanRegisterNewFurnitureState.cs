@@ -15,6 +15,8 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
     Vector3 boxPoint3;
     Vector3 boxPoint4;
 
+    Plane planeFromPoint1;
+
     enum CreateBoxState
     {
         FirstPointGround,
@@ -92,7 +94,6 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
         }
 
 
-
         // Do Rayast first
         Ray ray = new Ray(refs.rayOrigin.transform.position, refs.rayOrigin.transform.forward);
         // RaycastHit hit;
@@ -100,64 +101,23 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
         runtimeData.raycastEnd = refs.rayOrigin.position + refs.rayOrigin.forward * config.maxRaycastDistance;
         runtimeData.raycastWasSuccessfull = Physics.Raycast(ray, out runtimeData.raycastHitInfo, config.maxRaycastDistance, config.createNewBoundingBoxUniversalGround);
 
-        // do this outshide the raycast
-        if (createBoxState == CreateBoxState.FourthPointHeight)
+
+
+        switch (createBoxState)
         {
-            // TODO only allow to place it vertical
-
-            // Constrain point vertically above boxPoint3
-
-            Plane invisiblePlane = new Plane(-ray.direction, boxPoint3);
-            Vector3 verticalPoint = Vector3.zero;
-
-            float enter = 0.0f;
-            if (invisiblePlane.Raycast(ray, out enter))
-            {
-                // The ray intersects the plane
-                verticalPoint = ray.origin + ray.direction * enter;
-                //Debug.Log("Ray hit the plane at: " + hitPoint);
-            }
-            /*
-            else
-            {
-                // Ray did not hit the plane
-                Debug.Log("Ray did not hit the plane");
-            }
-            */
-            verticalPoint.x = boxPoint3.x;
-            verticalPoint.z = boxPoint3.z;
-
-            verticalPoint.y = Mathf.Max(verticalPoint.y, boxPoint1.y + 0.1f);
-
-            if (OVRInput.GetDown(config.createBoundingBoxPointButton))
-            {
-
-                // finito
-                boxPoint4 = verticalPoint;
-                CreateMeshBasedOnPoints(boxPoint1, boxPoint2, boxPoint3, boxPoint4);
-                sm.SetState(sm.scanSelection);
-            }
-
-            createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
-            createBoxVisualization.currentTargetSphere.transform.position = verticalPoint;
-            createBoxVisualization.lineRenderer.positionCount = 4;
-            createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, boxPoint3, verticalPoint });
-        }
-
-        if (runtimeData.raycastWasSuccessfull)
-        {
-            runtimeData.raycastEnd = runtimeData.raycastHitInfo.point;
-
-            createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
-
-            switch (createBoxState)
-            {
-                case CreateBoxState.FirstPointGround:
+            case CreateBoxState.FirstPointGround:
+                {
+                    if (runtimeData.raycastWasSuccessfull)
                     {
+
+                        runtimeData.raycastEnd = runtimeData.raycastHitInfo.point;
+                        createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
+
                         if (OVRInput.GetDown(config.createBoundingBoxPointButton))
                         {
                             createBoxState = CreateBoxState.SecondPointGround;
                             boxPoint1 = runtimeData.raycastEnd;
+                            planeFromPoint1 = new Plane(Vector3.up, boxPoint1);
                         }
 
 
@@ -165,42 +125,140 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
                         createBoxVisualization.lineRenderer.positionCount = 1;
                         createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { runtimeData.raycastEnd });
                     }
+
+                    break;
+                }
+            case CreateBoxState.SecondPointGround:
+                {
+                    // custom intersect with the start placing new ground plane
+                    Vector3 intersectPoint = Vector3.zero;
+
+                    float enter = 0.0f;
+                    if (planeFromPoint1.Raycast(ray, out enter))
+                    {
+                        // The ray intersects the plane
+                        intersectPoint = ray.origin + ray.direction * enter;
+                    }
+
+
+                    runtimeData.raycastEnd = intersectPoint;
+                    createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
+
+                    if (OVRInput.GetDown(config.createBoundingBoxPointButton))
+                    {
+                        createBoxState = CreateBoxState.ThirdPointPerpendicular;
+                        boxPoint2 = runtimeData.raycastEnd;
+                    }
+
+                    createBoxVisualization.currentTargetSphere.transform.position = runtimeData.raycastEnd;
+                    createBoxVisualization.lineRenderer.positionCount = 2;
+                    createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, runtimeData.raycastEnd });
+
+
+                    break;
+                }
+            case CreateBoxState.ThirdPointPerpendicular:
+                {
+                    // custom intersect with the start placing new ground plane
+                    Vector3 intersectPoint = Vector3.zero;
+
+                    float enter = 0.0f;
+                    if (planeFromPoint1.Raycast(ray, out enter))
+                    {
+                        // The ray intersects the plane
+                        intersectPoint = ray.origin + ray.direction * enter;
+                    }
+
+
+                    runtimeData.raycastEnd = intersectPoint;
+
+
+                    createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
+
+                    Vector3 directionSoFar = (boxPoint2 - boxPoint1).normalized;
+                    Vector3 perpendicularLine = Vector3.Cross(Vector3.up, directionSoFar).normalized;
+
+                    // Project hit point onto the perpendicular direction
+                    Vector3 origin = boxPoint2;
+                    Vector3 toHit = runtimeData.raycastEnd - origin;
+                    float distance = Vector3.Dot(toHit, perpendicularLine);
+                    Vector3 projectedPoint = origin + perpendicularLine * distance;
+
+
+                    if (OVRInput.GetDown(config.createBoundingBoxPointButton))
+                    {
+                        createBoxState = CreateBoxState.FourthPointHeight;
+                        boxPoint3 = projectedPoint;
+                    }
+
+
+                    createBoxVisualization.currentTargetSphere.transform.position = projectedPoint;
+                    createBoxVisualization.lineRenderer.positionCount = 3;
+                    createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, projectedPoint });
+
+
+
+                    break;
+                }
+            case CreateBoxState.FourthPointHeight:
+                {
+                    // Constrain point vertically above boxPoint3
+
+                    Plane invisiblePlane = new Plane(-ray.direction, boxPoint3);
+                    Vector3 verticalIntersectPoint = Vector3.zero;
+
+                    float enter = 0.0f;
+                    if (invisiblePlane.Raycast(ray, out enter))
+                    {
+                        // The ray intersects the plane
+                        verticalIntersectPoint = ray.origin + ray.direction * enter;
+                    }
+
+                    verticalIntersectPoint.x = boxPoint3.x;
+                    verticalIntersectPoint.z = boxPoint3.z;
+
+                    verticalIntersectPoint.y = Mathf.Max(verticalIntersectPoint.y, boxPoint1.y + 0.1f);
+
+                    if (OVRInput.GetDown(config.createBoundingBoxPointButton))
+                    {
+
+                        // finito
+                        boxPoint4 = verticalIntersectPoint;
+                        CreateMeshBasedOnPoints(boxPoint1, boxPoint2, boxPoint3, boxPoint4);
+                        sm.SetState(sm.scanSelection);
+                    }
+
+                    createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
+                    createBoxVisualization.currentTargetSphere.transform.position = verticalIntersectPoint;
+                    createBoxVisualization.lineRenderer.positionCount = 4;
+                    createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, boxPoint3, verticalIntersectPoint });
+
+                    break;
+                }
+        }
+
+
+
+
+        if (runtimeData.raycastWasSuccessfull)
+        {
+
+
+            switch (createBoxState)
+            {
+                case CreateBoxState.FirstPointGround:
+                    {
+
+                    }
                     break;
                 case CreateBoxState.SecondPointGround:
                     {
-                        if (OVRInput.GetDown(config.createBoundingBoxPointButton))
-                        {
-                            createBoxState = CreateBoxState.ThirdPointPerpendicular;
-                            boxPoint2 = runtimeData.raycastEnd;
-                        }
 
-                        createBoxVisualization.currentTargetSphere.transform.position = runtimeData.raycastEnd;
-                        createBoxVisualization.lineRenderer.positionCount = 2;
-                        createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, runtimeData.raycastEnd });
                     }
                     break;
                 case CreateBoxState.ThirdPointPerpendicular:
                     {
-                        Vector3 directionSoFar = (boxPoint2 - boxPoint1).normalized;
-                        Vector3 perpendicularLine = Vector3.Cross(Vector3.up, directionSoFar).normalized;
 
-                        // Project hit point onto the perpendicular direction
-                        Vector3 origin = boxPoint2;
-                        Vector3 toHit = runtimeData.raycastEnd - origin;
-                        float distance = Vector3.Dot(toHit, perpendicularLine);
-                        Vector3 projectedPoint = origin + perpendicularLine * distance;
-
-
-                        if (OVRInput.GetDown(config.createBoundingBoxPointButton))
-                        {
-                            createBoxState = CreateBoxState.FourthPointHeight;
-                            boxPoint3 = projectedPoint;
-                        }
-
-
-                        createBoxVisualization.currentTargetSphere.transform.position = projectedPoint;
-                        createBoxVisualization.lineRenderer.positionCount = 3;
-                        createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, projectedPoint });
                     }
                     break;
             }
