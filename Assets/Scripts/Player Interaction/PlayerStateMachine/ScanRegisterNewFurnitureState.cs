@@ -17,6 +17,8 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
     Plane planeFromPoint1;
 
+    MeshFilter meshDuringCreation;
+
     enum CreateBoxState
     {
         FirstPointGround,
@@ -189,6 +191,13 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
                     {
                         createBoxState = CreateBoxState.FourthPointHeight;
                         boxPoint3 = projectedPoint;
+
+                        GameObject meshobj = new GameObject("temp volume box");
+                        meshDuringCreation = meshobj.AddComponent<MeshFilter>();
+                        MeshRenderer meshRend = meshobj.AddComponent<MeshRenderer>();
+                        meshRend.material = config.placeholderNewFurnitureScannedMaterial;
+
+
                     }
 
 
@@ -219,53 +228,108 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
                     verticalIntersectPoint.y = Mathf.Max(verticalIntersectPoint.y, boxPoint1.y + 0.1f);
 
-                    if (OVRInput.GetDown(config.createBoundingBoxPointButton))
-                    {
+                    CreateTempMeshBasedOnPoints(boxPoint1, boxPoint2, boxPoint3, verticalIntersectPoint);
+                    
 
-                        // finito
-                        boxPoint4 = verticalIntersectPoint;
-                        CreateMeshBasedOnPoints(boxPoint1, boxPoint2, boxPoint3, boxPoint4);
-                        sm.SetState(sm.scanSelection);
-                    }
+
 
                     createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
                     createBoxVisualization.currentTargetSphere.transform.position = verticalIntersectPoint;
                     createBoxVisualization.lineRenderer.positionCount = 4;
                     createBoxVisualization.lineRenderer.SetPositions(new Vector3[] { boxPoint1, boxPoint2, boxPoint3, verticalIntersectPoint });
 
+
+                    if (OVRInput.GetDown(config.createBoundingBoxPointButton))
+                    {
+                        GameObject.Destroy(meshDuringCreation.gameObject);
+
+                        // finito
+                        boxPoint4 = verticalIntersectPoint;
+                        CreateMeshAndDataBasedOnPoints(boxPoint1, boxPoint2, boxPoint3, boxPoint4);
+                        sm.SetState(sm.scanSelection);
+                    }
+
+
+                    
+
                     break;
                 }
         }
-
-
-
-
-        if (runtimeData.raycastWasSuccessfull)
-        {
-
-
-            switch (createBoxState)
-            {
-                case CreateBoxState.FirstPointGround:
-                    {
-
-                    }
-                    break;
-                case CreateBoxState.SecondPointGround:
-                    {
-
-                    }
-                    break;
-                case CreateBoxState.ThirdPointPerpendicular:
-                    {
-
-                    }
-                    break;
-            }
-        }
     }
 
-    void CreateMeshBasedOnPoints(Vector3 point1, Vector3 point2, Vector3 point3, Vector3 point7)
+    void CreateTempMeshBasedOnPoints(Vector3 point1, Vector3 point2, Vector3 point3, Vector3 point7)
+    {
+        Vector3 objectDirection = (point2 - point1).normalized;
+        Quaternion objectDirectionRot = Quaternion.LookRotation(objectDirection);
+        Vector3 point4 = (point1 + point3 - point2); // point 5 is above of the cube
+        Vector3 centroid = (point1 + point2 + point3 + point4) / 4;
+
+        Vector3[] worldSpaceVertices = new Vector3[8]
+       {
+            point1,
+            point2,
+            point3,
+            point4,
+            new Vector3(point1.x,point7.y,point1.z),
+            new Vector3(point2.x,point7.y,point2.z),
+            point7,
+            new Vector3(point4.x,point7.y,point4.z),
+       };
+
+
+        //Create Mesh
+        Mesh mesh = new Mesh();
+        // Convert world space vertices to local space
+        Matrix4x4 rotationMatrix = Matrix4x4.Rotate(objectDirectionRot);
+        Vector3[] localVertices = new Vector3[worldSpaceVertices.Length];
+        for (int i = 0; i < worldSpaceVertices.Length; i++)
+        {
+
+            Vector3 translatedPoint = worldSpaceVertices[i] - centroid;
+            // InverseTransformPoint to convert from world space to local space manually
+            localVertices[i] = rotationMatrix.inverse.MultiplyPoint(translatedPoint);
+        }
+
+        mesh.vertices = localVertices;
+
+        int[] triangles = new int[]
+        {
+           // Bottom face (1, 2, 3, 4)
+            0, 1, 2,   // Triangle 1: (1, 2, 3)
+            0, 2, 3,   // Triangle 2: (1, 3, 4)
+    
+            // Top face (5, 6, 7, 8)
+            4, 6, 5,   // Triangle 3: (5, 7, 6)
+            4, 7, 6,   // Triangle 4: (5, 8, 7)
+
+            // Front face (1, 2, 5, 6)
+            0, 1, 5,   // Triangle 5: (1, 2, 6)
+            0, 5, 4,   // Triangle 6: (1, 6, 5)
+
+            // Back face (3, 4, 7, 8)
+            2, 6, 7,   // Triangle 7: (3, 7, 4)
+            2, 7, 3,   // Triangle 8: (3, 8, 7)
+
+            // Left face (1, 4, 5, 8)
+            0, 3, 7,   // Triangle 9: (1, 4, 8)
+            0, 7, 4,   // Triangle 10: (1, 8, 5)
+
+            // Right face (2, 3, 6, 7)
+            1, 2, 6,   // Triangle 11: (2, 3, 7)
+            1, 6, 5    // Triangle 12: (2, 7, 6)
+        };
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+
+        meshDuringCreation.mesh = mesh;
+        meshDuringCreation.transform.position = centroid;
+        meshDuringCreation.transform.rotation = objectDirectionRot;
+
+
+
+    }
+
+    void CreateMeshAndDataBasedOnPoints(Vector3 point1, Vector3 point2, Vector3 point3, Vector3 point7)
     {
         Vector3 objectDirection = (point2 - point1).normalized;
         Vector3 point4 = (point1 + point3 - point2); // point 5 is above of the cube

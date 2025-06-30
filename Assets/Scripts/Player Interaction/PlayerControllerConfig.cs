@@ -33,6 +33,7 @@ public class PlayerControllerConfig
 
     [Header("Create new Bounding Boxes in Scan Mode")]
     public Color addNewBoxScanSelectionLineColor;
+    public Material placeholderNewFurnitureScannedMaterial;
 
     [Header("Wall Placement")]
     public float wallPlacementThickness = 0.1f;
