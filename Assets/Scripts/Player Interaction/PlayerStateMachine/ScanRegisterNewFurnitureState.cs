@@ -229,8 +229,6 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
                     verticalIntersectPoint.y = Mathf.Max(verticalIntersectPoint.y, boxPoint1.y + 0.1f);
 
                     CreateTempMeshBasedOnPoints(boxPoint1, boxPoint2, boxPoint3, verticalIntersectPoint);
-                    
-
 
 
                     createBoxVisualization.currentTargetSphere.gameObject.SetActive(true);
@@ -250,7 +248,7 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
                     }
 
 
-                    
+
 
                     break;
                 }
@@ -293,31 +291,31 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
         mesh.vertices = localVertices;
 
         int[] triangles = new int[]
-        {
-           // Bottom face (1, 2, 3, 4)
-            0, 1, 2,   // Triangle 1: (1, 2, 3)
-            0, 2, 3,   // Triangle 2: (1, 3, 4)
+       {
+           // bottom
+            0, 1, 2,
+            0, 2, 3,   
     
-            // Top face (5, 6, 7, 8)
-            4, 6, 5,   // Triangle 3: (5, 7, 6)
-            4, 7, 6,   // Triangle 4: (5, 8, 7)
+            // top
+            4, 5, 6,
+            4, 6, 7,   
 
-            // Front face (1, 2, 5, 6)
-            0, 1, 5,   // Triangle 5: (1, 2, 6)
-            0, 5, 4,   // Triangle 6: (1, 6, 5)
+           // front
+            0, 4, 7,
+            0, 7, 3,   
 
-            // Back face (3, 4, 7, 8)
-            2, 6, 7,   // Triangle 7: (3, 7, 4)
-            2, 7, 3,   // Triangle 8: (3, 8, 7)
+          // back
+            1, 5, 6,
+            1, 6, 2,   
 
-            // Left face (1, 4, 5, 8)
-            0, 3, 7,   // Triangle 9: (1, 4, 8)
-            0, 7, 4,   // Triangle 10: (1, 8, 5)
+            // left
+            0, 4, 5,
+            0, 5, 1,   
 
-            // Right face (2, 3, 6, 7)
-            1, 2, 6,   // Triangle 11: (2, 3, 7)
-            1, 6, 5    // Triangle 12: (2, 7, 6)
-        };
+            // right
+            3, 7, 6,
+            3, 6, 2
+       };
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
 
@@ -375,31 +373,34 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
         int[] triangles = new int[]
         {
-           // Bottom face (1, 2, 3, 4)
-            0, 1, 2,   // Triangle 1: (1, 2, 3)
-            0, 2, 3,   // Triangle 2: (1, 3, 4)
+           // bottom
+            0, 1, 2,   
+            0, 2, 3,   
     
-            // Top face (5, 6, 7, 8)
-            4, 6, 5,   // Triangle 3: (5, 7, 6)
-            4, 7, 6,   // Triangle 4: (5, 8, 7)
+            // top
+            4, 5, 6,   
+            4, 6, 7,   
 
-            // Front face (1, 2, 5, 6)
-            0, 1, 5,   // Triangle 5: (1, 2, 6)
-            0, 5, 4,   // Triangle 6: (1, 6, 5)
+           // front
+            0, 4, 7,   
+            0, 7, 3,   
 
-            // Back face (3, 4, 7, 8)
-            2, 6, 7,   // Triangle 7: (3, 7, 4)
-            2, 7, 3,   // Triangle 8: (3, 8, 7)
+          // back
+            1, 5, 6,   
+            1, 6, 2,   
 
-            // Left face (1, 4, 5, 8)
-            0, 3, 7,   // Triangle 9: (1, 4, 8)
-            0, 7, 4,   // Triangle 10: (1, 8, 5)
+            // left
+            0, 4, 5,   
+            0, 5, 1,   
 
-            // Right face (2, 3, 6, 7)
-            1, 2, 6,   // Triangle 11: (2, 3, 7)
-            1, 6, 5    // Triangle 12: (2, 7, 6)
+            // right
+            3, 7, 6,   
+            3, 6, 2   
         };
+
+
         mesh.triangles = triangles;
+        // mesh.normals = normals;
         mesh.RecalculateNormals();
 
         newData.meshData = new MeshSaveData(mesh);

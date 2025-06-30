@@ -53,4 +53,37 @@ public class ScanModeFurniture : BaseFurniture
     {
 
     }
+
+
+    void OnDrawGizmos()
+    {
+        //MeshFilter meshFilter = GetComponent<MeshFilter>();
+        //if (meshFilter == null || meshFilter.sharedMesh == null) return;
+
+        Mesh mesh = boundingBoxMeshFilter.sharedMesh;
+        Vector3[] vertices = mesh.vertices;
+        Vector3[] normals = mesh.normals;
+        int[] triangles = mesh.triangles;
+
+
+        Gizmos.color = Color.green;
+
+        // Transform from local to world space
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            // Get the three vertices of the triangle
+            Vector3 v0 = transform.TransformPoint(vertices[triangles[i]]);
+            Vector3 v1 = transform.TransformPoint(vertices[triangles[i + 1]]);
+            Vector3 v2 = transform.TransformPoint(vertices[triangles[i + 2]]);
+
+            // Compute the center of the triangle
+            Vector3 center = (v0 + v1 + v2) / 3f;
+
+            // Compute the face normal
+            Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0).normalized;
+
+            // Draw the normal
+            Gizmos.DrawLine(center, center + normal * 0.35f);
+        }
+    }
 }
