@@ -5,7 +5,7 @@ using Unity.IO.LowLevel.Unsafe;
 using System.Linq;
 using System.Collections.Generic;
 
-// TODO: add logger to each interaction
+// TODO: add logger to each interaction, fix actions count, add right trigger count
 public class EventLogger : MonoBehaviour
 {
 
@@ -17,19 +17,18 @@ public class EventLogger : MonoBehaviour
 
     private string filePath;
     private string logFolderPath;
-    private List<string> actions = new List<string>();
+    private int actions;
 
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
-        } 
-        else
-        {
-            Instance = this; 
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         //logFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DT4XR_Interaction_Logs"); Windows
         logFolderPath = Path.Combine(Application.persistentDataPath, "DT4XR_Interaction_Logs");
@@ -67,7 +66,7 @@ public class EventLogger : MonoBehaviour
         }
 
         string line = $"{getTimestamp()} [{actionType}] {action}";
-        actions.Add(line);
+        actions +=1;
         WriteInFile(line);
         return;
     }
@@ -80,7 +79,7 @@ public class EventLogger : MonoBehaviour
     private void Summary()
     {
         WriteInFile("\n\n=== Session Summary ===");
-        WriteInFile($"\nAmount of actions: {actions.Count()}\nUsage time: {getTimeSinceStart()}\n");
+        WriteInFile($"\nAmount of actions: {actions}\nUsage time: {getTimeSinceStart()}\n");
 
         foreach (actionTypes actionType in Enum.GetValues(typeof(actionTypes)))
         {

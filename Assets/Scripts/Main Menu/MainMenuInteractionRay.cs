@@ -50,7 +50,7 @@ public class MainMenuInteractionRay : MonoBehaviour
     {
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) && buttonHitByRay != null)
         {
-            EventLogger.Instance.LogInteraction("Menu option clicked.", EventLogger.actionTypes.MenuInteraction);
+            EventLogger.Instance?.LogInteraction("Menu option clicked.", EventLogger.actionTypes.MenuInteraction);
             buttonHitByRay.OnClick();
         }
     }
