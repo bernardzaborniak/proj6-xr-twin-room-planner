@@ -1789,7 +1789,7 @@ MonoBehaviour:
     rotateFurnitureButton: 1
     placeWallButton: 67108864
     createBoundingBoxPointButton: 67108864
-    showInGameMenuButton: 512
+    showInGameMenuButton: 1048576
     furnitureMask:
       serializedVersion: 2
       m_Bits: 64
@@ -1800,6 +1800,7 @@ MonoBehaviour:
     heightChangeSpeed: 0.1
     rotationChangeSpeed: 1
     addNewBoxScanSelectionLineColor: {r: 0.1315093, g: 0, b: 1, a: 1}
+    placeholderNewFurnitureScannedMaterial: {fileID: 0}
     wallPlacementThickness: 0.1
     wallPlacementSnapDistance: 0.4
     placeWallMask:

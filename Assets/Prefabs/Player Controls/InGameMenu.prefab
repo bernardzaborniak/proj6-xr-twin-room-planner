@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2537626729526464679}
   - component: {fileID: 8296591026043247764}
   - component: {fileID: 2458747909518484990}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3300215329322697238}
   - component: {fileID: 7918958400978700804}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InGameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1276,7 +1276,7 @@ GameObject:
   - component: {fileID: 1436712663901645152}
   - component: {fileID: 5684485003719098051}
   - component: {fileID: 5980877276221770136}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
