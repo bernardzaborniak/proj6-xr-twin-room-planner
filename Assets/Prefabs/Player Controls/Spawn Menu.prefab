@@ -1010,54 +1010,14 @@ MonoBehaviour:
   roomManager: {fileID: 0}
   furnitureList:
   - fName: Couch 01
-    data:
-      type: 2
-      label: 4
-      tempLabelString: 
-      posInRoom: {x: 0, y: 0, z: 0}
-      rotInRoom: {x: 0, y: 0, z: 0, w: 0}
-      rotationAdjuster: 0
-      meshData:
-        triangles: 000000000200000001000000000000000300000002000000030000000700000002000000020000000700000006000000070000000500000006000000070000000400000005000000000000000100000005000000000000000500000004000000000000000400000007000000000000000700000003000000010000000200000006000000010000000600000005000000
-        vertices:
-        - {x: 0, y: 0, z: 0}
-        - {x: 1, y: 0, z: 0}
-        - {x: 0, y: 1, z: 0}
-        - {x: 0, y: 0, z: 1}
-        - {x: 0, y: 1, z: 1}
-        - {x: 1, y: 1, z: 0}
-        - {x: 1, y: 1, z: 1}
-        - {x: 1, y: 0, z: 1}
-        normals: []
-      planeRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      volumeBounds:
-        m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 0, y: 0, z: 0}
+    label: 4
+    boundsSizeAdjustment: {x: 1.5, y: 0.5, z: 1}
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
   - fName: Desk 06
-    data:
-      type: 2
-      label: 3
-      tempLabelString: 
-      posInRoom: {x: 0, y: 0, z: 0}
-      rotInRoom: {x: 0, y: 0, z: 0, w: 0}
-      rotationAdjuster: 0
-      meshData:
-        triangles: 
-        vertices: []
-        normals: []
-      planeRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      volumeBounds:
-        m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 0, y: 0, z: 0}
+    label: 3
+    boundsSizeAdjustment: {x: 0.6, y: 0.6, z: 0.6}
     image: {fileID: 21300000, guid: b7bad1260586fa746a0b67e930892936, type: 3}
+  - fName: Storage
+    label: 8
+    boundsSizeAdjustment: {x: 0.5, y: 0.5, z: 0.5}
+    image: {fileID: 21300000, guid: a85d80c1edb5d2f458d42e79f78055b9, type: 3}

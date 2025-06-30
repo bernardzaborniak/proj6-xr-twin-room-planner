@@ -13,7 +13,7 @@ public class RoomsManager : MonoBehaviour
     // Manages the scanned room data and the various furniture rom variations.
 
     [SerializeField]
-    LabelToModelConversionTable labelToMeshConversionTable;
+    public LabelToModelConversionTable labelToMeshConversionTable;
     [SerializeField] GameObject roomAnchorsVisualizationPrefab;
     [SerializeField] GameObject roomVariationVisualizationPrefab;
     [Space]
