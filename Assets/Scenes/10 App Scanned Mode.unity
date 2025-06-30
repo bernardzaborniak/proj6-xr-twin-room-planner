@@ -2948,10 +2948,6 @@ PrefabInstance:
       propertyPath: ovrPassthroughLayer
       value: 
       objectReference: {fileID: 622944111}
-    - target: {fileID: 1496581754107071710, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
-      propertyPath: config.placeholderNewFurnitureScannedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: b12cafc7b89cba249b66b5089fbbf72f, type: 2}
     - target: {fileID: 1736446803079154595, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
       propertyPath: m_Name
       value: PlayerController
