@@ -13,7 +13,6 @@ public class SpawnObjectMenu : MonoBehaviour
     public UnityEngine.UI.Image menuImage;
     public TMP_Text count;
 
-    public RoomsManager roomManager;
 
     [SerializeField]
     private List<SpawnMenuFurnitureItem> furnitureList = new List<SpawnMenuFurnitureItem>();
@@ -103,7 +102,7 @@ public class SpawnObjectMenu : MonoBehaviour
         newData.meshData = new MeshSaveData(boundsMesh);
         newData.label = furnitureItemToSpawn.label;
 
-        roomManager.AddFurnitureToCurrentVisualization(newData, spawnPoint);
+        RoomsManager.Instance.AddFurnitureToCurrentVisualization(newData, spawnPoint);
     }
 
     private void updateMenu(int item)
