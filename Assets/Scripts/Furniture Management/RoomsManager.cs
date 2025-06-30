@@ -32,6 +32,10 @@ public class RoomsManager : MonoBehaviour
     [SerializeField] List<RoomData> roomVariationsData;
 
 
+    public Action OnChangeToScanMode;
+    public Action OnChangeToLayoutMode;
+
+
     public static RoomsManager Instance { get; private set; }
 
 
@@ -232,6 +236,8 @@ public class RoomsManager : MonoBehaviour
             Destroy(currentVisualization.gameObject); // maybe put this into seperate method later
         }
 
+        OnChangeToScanMode?.Invoke();
+
         currentVisualization = Instantiate(roomAnchorsVisualizationPrefab).GetComponent<RoomVisualization>();
         currentVisualization.SetUpFromSaveData(roomScanData, labelToMeshConversionTable);
 
@@ -271,6 +277,8 @@ public class RoomsManager : MonoBehaviour
         {
             Destroy(currentVisualization.gameObject);
         }
+
+        OnChangeToLayoutMode?.Invoke();
 
         currentVisualization = Instantiate(roomVariationVisualizationPrefab).GetComponent<RoomVisualization>();
         Debug.Log("currentVisualization.PopulateFromSaveData(roomVariationsData);");
