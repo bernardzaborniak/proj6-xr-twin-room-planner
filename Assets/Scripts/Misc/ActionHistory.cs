@@ -31,7 +31,7 @@ public class ActionHistory : MonoBehaviour
         if (actionHistory.Count > 0)
         {
             actionHistory.RemoveAt(actionHistory.Count - 1);
-            EventLogger.Instance.LogInteraction("Undo", EventLogger.actionTypes.Undo);
+            EventLogger.Instance?.LogInteraction("Undo", EventLogger.actionTypes.Undo);
         }
     }
 }
