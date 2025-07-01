@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.Rendering.ProbeAdjustmentVolume;
 
 public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
 {
@@ -6,6 +7,7 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
     GameObject currentInteractingObject;
     Plane currentInteractionPlane;
     Vector3 furnitureToRayOffset;
+    Vector3 startMoveFurnitureRaycastPoint;
     float heightOffset;
 
     public override void OnStateEnter()
@@ -64,7 +66,8 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
                 currentInteractionPlane = new Plane(Vector3.up, currentInteractingObject.transform.position);
                 float t = 0;
                 currentInteractionPlane.Raycast(ray, out t);
-                furnitureToRayOffset = currentInteractingObject.transform.position - (refs.rayOrigin.position + refs.rayOrigin.forward * t);
+                startMoveFurnitureRaycastPoint = (refs.rayOrigin.position + refs.rayOrigin.forward * t);
+                furnitureToRayOffset = currentInteractingObject.transform.position - startMoveFurnitureRaycastPoint;
             }
         }
 
@@ -87,8 +90,19 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
     {
         float t = 0;
         currentInteractionPlane.Raycast(ray, out t);
-        Vector3 newpos = refs.rayOrigin.position + refs.rayOrigin.forward * t;
-        currentInteractingObject.transform.position = newpos + furnitureToRayOffset + Vector3.up * heightOffset;
+        if (t < 0) t = 0;
+        Vector3 newPos = refs.rayOrigin.position + refs.rayOrigin.forward * t;
+        Vector3 oldPosToNewPose = newPos - startMoveFurnitureRaycastPoint;
+
+        // multiply by square root to slow down movement a bit
+        if (oldPosToNewPose.magnitude > 1)
+        {
+            oldPosToNewPose = oldPosToNewPose.normalized * Mathf.Sqrt(oldPosToNewPose.magnitude);
+        }
+
+        newPos = startMoveFurnitureRaycastPoint + oldPosToNewPose;
+
+        currentInteractingObject.transform.position = newPos + furnitureToRayOffset + Vector3.up * heightOffset;
     }
 
 
