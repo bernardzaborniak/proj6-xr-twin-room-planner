@@ -14,7 +14,8 @@ public static class FurnitureLabelUtilities
             label == FurnitureLabel.WINDOW_FRAME ||
             label == FurnitureLabel.DOOR_FRAME ||
             label == FurnitureLabel.GLOBAL_MESH ||
-            label == FurnitureLabel.WALL_ART
+            label == FurnitureLabel.WALL_ART ||
+            label == FurnitureLabel.INVISIBLE_WALL_FACE 
             );
     }
 }

@@ -8,7 +8,6 @@ public enum FurnitureLabel
     DOOR_FRAME,
     WINDOW_FRAME,
     OTHER,
-    STORAGE,
     BED,
     SCREEN,
     LAMP,
@@ -16,4 +15,7 @@ public enum FurnitureLabel
     WALL_ART,
     GLOBAL_MESH,
     INVISIBLE_WALL_FACE,
+    STORAGE,
+    STORAGE2,
+    STORAGE3,
 }

@@ -1007,17 +1007,20 @@ MonoBehaviour:
   menuOption: {fileID: 2408420477392564709}
   menuImage: {fileID: 2419128107472587503}
   count: {fileID: 1970982690222825026}
-  roomManager: {fileID: 0}
   furnitureList:
   - fName: Couch 01
     label: 4
-    boundsSizeAdjustment: {x: 1.5, y: 0.5, z: 1}
+    boundsSizeAdjustment: {x: 1, y: 0.5, z: 0.7}
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
   - fName: Desk 06
     label: 3
-    boundsSizeAdjustment: {x: 0.6, y: 0.6, z: 0.6}
+    boundsSizeAdjustment: {x: 0.5, y: 0.5, z: 0.5}
     image: {fileID: 21300000, guid: b7bad1260586fa746a0b67e930892936, type: 3}
   - fName: Storage
-    label: 8
+    label: 15
     boundsSizeAdjustment: {x: 0.5, y: 0.5, z: 0.5}
+    image: {fileID: 21300000, guid: a85d80c1edb5d2f458d42e79f78055b9, type: 3}
+  - fName: Bed
+    label: 8
+    boundsSizeAdjustment: {x: 1, y: 0.5, z: 0.5}
     image: {fileID: 21300000, guid: a85d80c1edb5d2f458d42e79f78055b9, type: 3}
