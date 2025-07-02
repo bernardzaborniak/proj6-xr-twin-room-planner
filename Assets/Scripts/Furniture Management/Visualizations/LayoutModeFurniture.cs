@@ -48,6 +48,7 @@ public class LayoutModeFurniture : BaseFurniture
         {
             visualizedFurniturePiece = CreateWallMesh(data, labelToMeshConversionTable.defaultWallMaterial);
             boundingBoxMeshFilter.sharedMesh = visualizedFurniturePiece.GetComponent<MeshFilter>().mesh;
+            visualizedFurniturePiece.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             Moveable = false;
             Interactable = false;
         }

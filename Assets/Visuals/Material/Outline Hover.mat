@@ -38,9 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Outline_Thickness: 1.1
+    - _Outline_Thickness: 1.02
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _XRMotionVectorsPass: 1
     m_Colors:
     - _Outline_Color: {r: 1, g: 0.56135505, b: 0.043137252, a: 1}
   m_BuildTextureStacks: []
