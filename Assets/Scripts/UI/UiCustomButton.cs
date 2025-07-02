@@ -9,6 +9,7 @@ public class UiCustomButton : MonoBehaviour
 
     public virtual void OnClick()
     {
+        EventLogger.Instance?.LogInteraction("Menu option clicked.", EventLogger.actionTypes.MenuInteraction);
         OnClickCallback?.Invoke();
     }
 }

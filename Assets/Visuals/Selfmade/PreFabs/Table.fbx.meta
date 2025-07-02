@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5fa5c574669dab24681b4052e6df47f6
+guid: a3179b8e51850484d8a95807103e7a1f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,43 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Black Plastic
+      name: Holz_Tisch
+    second: {fileID: 2100000, guid: 4cf310533a3b37546b7e70ec1b326089, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LegsPlastic
     second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Monitor_Staender_unten
+      name: Mitte_plasitc
     second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "Monitor_fu\xDF"
-    second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Monitor_staender_Oben
-    second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Monitor_staender_Oben.001
-    second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Monitor_staender_befestigung
-    second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Screen
-    second: {fileID: 2100000, guid: 4bed01bdd381f614c8b084ef70b3424d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: button
-    second: {fileID: 2100000, guid: 16f3da048373086479c0e855c44f8d36, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -83,6 +83,7 @@ public class InGameMenu : MonoBehaviour
     void ExitMenuClicked()
     {
         HideMenu();
+        EventLogger.Instance?.LogInteraction("Closed Menu.", EventLogger.actionTypes.MenuClosed);
     }
 
 }

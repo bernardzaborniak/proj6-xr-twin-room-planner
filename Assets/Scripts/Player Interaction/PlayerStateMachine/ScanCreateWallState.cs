@@ -81,6 +81,7 @@ public class ScanCreateWallState : PlayerControllerInteractionState
 
             if (OVRInput.GetDown(config.placeWallButton))
             {
+                EventLogger.Instance?.LogInteraction("Wall placed.", EventLogger.actionTypes.WallDrawn);
                 PlacePoint(runtimeData.raycastEnd);
             }
         }

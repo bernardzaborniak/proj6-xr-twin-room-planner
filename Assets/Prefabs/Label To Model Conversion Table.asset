@@ -34,5 +34,7 @@ MonoBehaviour:
       Value: {fileID: 116224, guid: 7468f1ed6e4846042b8588e8610d2b7b, type: 3}
     - Key: 17
       Value: {fileID: 176844, guid: 7c1725d03e832954ca3901cb5c564ec3, type: 3}
+    - Key: 18
+      Value: {fileID: 7823738325294450245, guid: 4ac3d3e5e47122c4285f3f15fd48e5bd, type: 3}
   defaultPrefab: {fileID: 190214, guid: 19750885284d69344a35d6aac8aa99d1, type: 3}
   defaultWallMaterial: {fileID: 2100000, guid: 1bf6361aae83a8b4689ff19a568f7ab3, type: 2}

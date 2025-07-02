@@ -60,6 +60,7 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
         {
             if (runtimeData.hoveredOverFurniture != null)
             {
+                EventLogger.Instance?.LogInteraction("Object moved.", EventLogger.actionTypes.ObjectMoved);
                 isInteractingWithObject = true;
                 currentInteractingObject = runtimeData.hoveredOverFurniture.gameObject;
                 heightOffset = 0;

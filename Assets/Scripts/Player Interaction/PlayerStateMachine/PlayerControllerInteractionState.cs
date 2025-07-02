@@ -91,6 +91,7 @@ public abstract class PlayerControllerInteractionState
     {
         if (OVRInput.GetDown(config.pressUiButton) && runtimeData.uiHitByRay != null)
         {
+            //EventLogger.Instance?.LogInteraction("Menu option clicked.", EventLogger.actionTypes.MenuInteraction);
             runtimeData.uiHitByRay.OnClick();
         }
     }
@@ -161,6 +162,8 @@ public abstract class PlayerControllerInteractionState
                 runtimeData.selectedFurniture.OnDeselect();
             }
 
+            EventLogger.Instance?.LogInteraction("Object moved.", EventLogger.actionTypes.ObjectMoved);
+
             runtimeData.selectedFurniture = runtimeData.hoveredOverFurniture;
             //hoveredOverFurniture = null;
             runtimeData.selectedFurniture.OnSelect(refs.rayOrigin.forward);
@@ -174,6 +177,7 @@ public abstract class PlayerControllerInteractionState
     {
         if (OVRInput.GetDown(config.showInGameMenuButton))
         {
+            EventLogger.Instance?.LogInteraction("Menu opened.", EventLogger.actionTypes.MenuOpened);
             refs.inGameMenu.ToggleMenu(refs.playerCameraTransform.position, refs.playerCameraTransform.forward);
         }
     }

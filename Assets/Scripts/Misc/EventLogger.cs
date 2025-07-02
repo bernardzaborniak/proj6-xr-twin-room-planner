@@ -1,11 +1,8 @@
 using UnityEngine;
 using System.IO;
 using System;
-using Unity.IO.LowLevel.Unsafe;
-using System.Linq;
 using System.Collections.Generic;
 
-// TODO: add logger to each interaction, fix actions count, add right trigger count
 public class EventLogger : MonoBehaviour
 {
 
@@ -18,10 +15,13 @@ public class EventLogger : MonoBehaviour
     private string filePath;
     private string logFolderPath;
     private int actions;
+    private int rIndexTriggerCount;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        string timestamp = DateTime.Now.ToString("dd-MM_HH-mm");
+
+        if (Instance != null && Instance != gameObject)
         {
             Destroy(gameObject);
             return;
@@ -30,17 +30,25 @@ public class EventLogger : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        //logFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DT4XR_Interaction_Logs"); Windows
+        //logFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DT4XR_Interaction_Logs"); //Windows
         logFolderPath = Path.Combine(Application.persistentDataPath, "DT4XR_Interaction_Logs");
 
         if (!Directory.Exists(logFolderPath))
         {
             Directory.CreateDirectory(logFolderPath);
         }
-
-        string timestamp = DateTime.Now.ToString("dd-MM_HH-mm");
+        
         filePath = Path.Combine(logFolderPath, $"log-{timestamp}.log");
         File.WriteAllText(filePath, $"{getTimestamp()} Application started\n");
+        Debug.Log($"{timestamp} Log started.");
+    }
+
+    private void Update()
+    {
+        if(OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+        {
+            rIndexTriggerCount++;
+        }
     }
 
     private string getTimestamp()
@@ -87,6 +95,7 @@ public class EventLogger : MonoBehaviour
             WriteInFile($"{actionType}: {count}\n");
         }
 
+        WriteInFile($"Amount of inputs for RIndexTrigger: {rIndexTriggerCount}\n");
         WriteInFile("=======================");
         return;
     }
