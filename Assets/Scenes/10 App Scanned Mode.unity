@@ -3051,6 +3051,14 @@ PrefabInstance:
       value: 167.1
       objectReference: {fileID: 0}
     - target: {fileID: 1496581754107071710, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: floorObj
+      value: 
+      objectReference: {fileID: 7073079630801258459, guid: 5c68aa0b7729ca5478bc88f27f8e0c26, type: 3}
+    - target: {fileID: 1496581754107071710, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
+      propertyPath: skyboxMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 278ef6b657521d546bb1fa716db6db0a, type: 2}
+    - target: {fileID: 1496581754107071710, guid: b2302cd0082e42b4fb440d75ea2948f1, type: 3}
       propertyPath: roomsManager
       value: 
       objectReference: {fileID: 1017816717}

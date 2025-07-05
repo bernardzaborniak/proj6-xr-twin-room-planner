@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerControllerConfig config;
     [Tooltip("Do not set any values here before start")]
     [SerializeField] PlayerControllerRuntimeData runtimeData;
-    [SerializeField] Material mySkyboxMaterial;
+    [SerializeField] Material skyboxMat;
+    [SerializeField] GameObject floorObj;
+    GameObject floorInstance;
 
 
     //[Space]
@@ -107,6 +109,13 @@ public class PlayerController : MonoBehaviour
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
         Camera.main.backgroundColor = Color.black;
 
+        // remove floor if exists
+        if (floorInstance != null)
+        {
+            Destroy(floorInstance);
+            floorInstance = null;
+        }
+
         playerControllerStateMachine.SetState(playerControllerStateMachine.scanSelection);
     }
 
@@ -119,8 +128,14 @@ public class PlayerController : MonoBehaviour
         refs.roomManager.ShowRoomVariation(0);
 
         // set skybox
-        RenderSettings.skybox = mySkyboxMaterial;
+        RenderSettings.skybox = skyboxMat;
         Camera.main.clearFlags = CameraClearFlags.Skybox;
+
+        // place floor
+        floorInstance = Instantiate(floorObj);
+        floorInstance.name = "FloorForRoom";
+        floorInstance.transform.position = new Vector3(0, 0, 0);
+        floorInstance.transform.localScale = new Vector3(50, 1, 50);
 
         playerControllerStateMachine.SetState(playerControllerStateMachine.layoutSelectionAndMove);
     }
