@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Meta.XR.MRUtilityKit.SceneDecorator;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
@@ -20,9 +21,9 @@ public class SpawnObjectMenu : MonoBehaviour
     //bool isOpened = false;
     int currentItem = 0;
 
-    private void Start()
+    private void Awake()
     {
-        //spawnMenu.SetActive(false);
+        updateMenu(0);
     }
 
     void Update()

@@ -8,7 +8,7 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
     Plane currentInteractionPlane;
     Vector3 furnitureToRayOffset;
     Vector3 startMoveFurnitureRaycastPoint;
-    float heightOffset;
+    float heightOffset; 
 
     public override void OnStateEnter()
     {
@@ -60,7 +60,19 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
         {
             if (runtimeData.hoveredOverFurniture != null)
             {
+
+                GameObject obj = runtimeData.hoveredOverFurniture.gameObject;
+
+                ActionHistory.Instance.AddAction(new UserAction
+                {
+                    Obj = obj,
+                    Position = obj.transform.position,
+                    Rotation = obj.transform.rotation.eulerAngles
+                });
+
+                Debug.Log($"Added action to ActionHistory: {runtimeData.hoveredOverFurniture.gameObject.transform.position}, {runtimeData.hoveredOverFurniture.gameObject.transform.rotation.eulerAngles}");
                 EventLogger.Instance?.LogInteraction("Object moved.", EventLogger.actionTypes.ObjectMoved);
+
                 isInteractingWithObject = true;
                 currentInteractingObject = runtimeData.hoveredOverFurniture.gameObject;
                 heightOffset = 0;
@@ -68,7 +80,7 @@ public class LayoutSelectionAndMoveState : PlayerControllerInteractionState
                 float t = 0;
                 currentInteractionPlane.Raycast(ray, out t);
                 startMoveFurnitureRaycastPoint = (refs.rayOrigin.position + refs.rayOrigin.forward * t);
-                furnitureToRayOffset = currentInteractingObject.transform.position - startMoveFurnitureRaycastPoint;
+                furnitureToRayOffset = currentInteractingObject.transform.position - startMoveFurnitureRaycastPoint;  
             }
         }
 

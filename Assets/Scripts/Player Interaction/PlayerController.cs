@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerControllerConfig config;
     [Tooltip("Do not set any values here before start")]
     [SerializeField] PlayerControllerRuntimeData runtimeData;
+    [SerializeField] Material mySkyboxMaterial;
 
 
     //[Space]
@@ -101,6 +102,11 @@ public class PlayerController : MonoBehaviour
         ovrPassthroughLayer.enabled = true;
         refs.roomManager.ShowRoomScan();
 
+        // reset skybox for passthrough
+        RenderSettings.skybox = null;
+        Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        Camera.main.backgroundColor = Color.black;
+
         playerControllerStateMachine.SetState(playerControllerStateMachine.scanSelection);
     }
 
@@ -111,6 +117,10 @@ public class PlayerController : MonoBehaviour
         refs.roomManager.SaveRoomScanFromVisualization();
         ovrPassthroughLayer.enabled = false;
         refs.roomManager.ShowRoomVariation(0);
+
+        // set skybox
+        RenderSettings.skybox = mySkyboxMaterial;
+        Camera.main.clearFlags = CameraClearFlags.Skybox;
 
         playerControllerStateMachine.SetState(playerControllerStateMachine.layoutSelectionAndMove);
     }

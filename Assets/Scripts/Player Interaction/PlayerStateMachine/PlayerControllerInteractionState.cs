@@ -161,9 +161,6 @@ public abstract class PlayerControllerInteractionState
             {
                 runtimeData.selectedFurniture.OnDeselect();
             }
-
-            EventLogger.Instance?.LogInteraction("Object moved.", EventLogger.actionTypes.ObjectMoved);
-
             runtimeData.selectedFurniture = runtimeData.hoveredOverFurniture;
             //hoveredOverFurniture = null;
             runtimeData.selectedFurniture.OnSelect(refs.rayOrigin.forward);
