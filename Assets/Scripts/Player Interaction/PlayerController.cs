@@ -100,14 +100,11 @@ public class PlayerController : MonoBehaviour
     {
         currentMode = CurrentRoomMode.ScanMode;
 
+        // reset skybox and enable passsthough
         refs.roomManager.SaveRoomVariationFromVisualization(0);
+        RenderSettings.skybox = null;
         ovrPassthroughLayer.enabled = true;
         refs.roomManager.ShowRoomScan();
-
-        // reset skybox for passthrough
-        //RenderSettings.skybox = null;
-        //Camera.main.clearFlags = CameraClearFlags.SolidColor;
-        //Camera.main.backgroundColor = Color.black;
 
         // remove floor if exists
         if (floorInstance != null)
@@ -128,8 +125,8 @@ public class PlayerController : MonoBehaviour
         refs.roomManager.ShowRoomVariation(0);
 
         // set skybox
-        //RenderSettings.skybox = skyboxMat;
-        //Camera.main.clearFlags = CameraClearFlags.Skybox;
+        RenderSettings.skybox = skyboxMat;
+        Camera.main.clearFlags = CameraClearFlags.Skybox;
 
         // place floor
         floorInstance = Instantiate(floorObj);
