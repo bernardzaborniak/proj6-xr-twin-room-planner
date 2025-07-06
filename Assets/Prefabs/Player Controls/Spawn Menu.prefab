@@ -947,7 +947,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee2072b5689dae46b1c5b4c42706dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandAnchor: {fileID: 0}
   uiMask:
     serializedVersion: 2
     m_Bits: 32
@@ -1137,11 +1136,11 @@ MonoBehaviour:
   menuImage: {fileID: 2419128107472587503}
   count: {fileID: 1970982690222825026}
   furnitureList:
-  - fName: Couch 01
+  - fName: Couch
     label: 4
     boundsSizeAdjustment: {x: 1, y: 0.5, z: 0.7}
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
-  - fName: Desk 06
+  - fName: Desk
     label: 3
     boundsSizeAdjustment: {x: 0.5, y: 0.5, z: 0.5}
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
@@ -1151,6 +1150,18 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
   - fName: Bed
     label: 8
+    boundsSizeAdjustment: {x: 1, y: 0.5, z: 0.5}
+    image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
+  - fName: Lamp
+    label: 10
+    boundsSizeAdjustment: {x: 1, y: 0.5, z: 0.5}
+    image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
+  - fName: Plant
+    label: 11
+    boundsSizeAdjustment: {x: 1, y: 0.5, z: 0.5}
+    image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
+  - fName: Plant
+    label: 11
     boundsSizeAdjustment: {x: 1, y: 0.5, z: 0.5}
     image: {fileID: 21300000, guid: 17d565bb4a7744b41b7e4dc7e3a09e35, type: 3}
 --- !u!1 &7427252246846072438
