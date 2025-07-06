@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
 
         refs.roomManager.SaveRoomScanFromVisualization();
         ovrPassthroughLayer.enabled = false;
+        refs.roomManager.RevertRoomVariation(0);
         refs.roomManager.ShowRoomVariation(0);
 
         // set skybox
