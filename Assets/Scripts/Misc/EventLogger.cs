@@ -30,8 +30,8 @@ public class EventLogger : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        logFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DT4XR_Interaction_Logs"); //Windows
-        //logFolderPath = Path.Combine(Application.persistentDataPath, "DT4XR_Interaction_Logs");
+        // logFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DT4XR_Interaction_Logs"); //Windows
+        logFolderPath = Path.Combine(Application.persistentDataPath, "DT4XR_Interaction_Logs");
 
         if (!Directory.Exists(logFolderPath))
         {
