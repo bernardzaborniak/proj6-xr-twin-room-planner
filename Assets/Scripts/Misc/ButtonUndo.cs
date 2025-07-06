@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ButtonUndo : MonoBehaviour
 {
-    public Transform rightHandAnchor;
     public LayerMask uiMask;
 
     private UiCustomButton buttonHitByRay = null;

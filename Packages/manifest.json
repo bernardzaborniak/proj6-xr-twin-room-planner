@@ -3,6 +3,7 @@
     "com.meta.xr.mrutilitykit": "76.0.1",
     "com.meta.xr.sdk.all": "76.0.1",
     "com.meta.xr.sdk.core": "76.0.1",
+    "com.nobi.roundedcorners": "https://github.com/kirevdokimov/Unity-UI-Rounded-Corners.git",
     "com.unity.ai.navigation": "2.0.7",
     "com.unity.collab-proxy": "2.8.2",
     "com.unity.ide.rider": "3.0.36",
