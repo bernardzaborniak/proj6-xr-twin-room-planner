@@ -105,9 +105,9 @@ public class PlayerController : MonoBehaviour
         refs.roomManager.ShowRoomScan();
 
         // reset skybox for passthrough
-        RenderSettings.skybox = null;
-        Camera.main.clearFlags = CameraClearFlags.SolidColor;
-        Camera.main.backgroundColor = Color.black;
+        //RenderSettings.skybox = null;
+        //Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        //Camera.main.backgroundColor = Color.black;
 
         // remove floor if exists
         if (floorInstance != null)
@@ -128,8 +128,8 @@ public class PlayerController : MonoBehaviour
         refs.roomManager.ShowRoomVariation(0);
 
         // set skybox
-        RenderSettings.skybox = skyboxMat;
-        Camera.main.clearFlags = CameraClearFlags.Skybox;
+        //RenderSettings.skybox = skyboxMat;
+        //Camera.main.clearFlags = CameraClearFlags.Skybox;
 
         // place floor
         floorInstance = Instantiate(floorObj);
