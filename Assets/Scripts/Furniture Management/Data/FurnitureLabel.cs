@@ -18,5 +18,5 @@ public enum FurnitureLabel
     STORAGE,
     STORAGE2,
     STORAGE3,
-    TEST_SELFMADE
+    CHAIR
 }
