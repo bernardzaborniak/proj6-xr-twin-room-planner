@@ -79,7 +79,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5490303126448357809}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -171,7 +171,7 @@ MonoBehaviour:
   uiMenu: {fileID: 6420862822771126077}
   hoverMaterial: {fileID: 2100000, guid: 075c019337e69054fbb6b8f70a672611, type: 2}
   selectedMaterial: {fileID: 2100000, guid: d4005436a48f0bb48a43d299e2bc0e83, type: 2}
-  rendererToApplyOutlineTo: {fileID: 0}
+  rendererToApplyOutlineTo: {fileID: 1937268577476256462}
   scaleHelper: {fileID: 4386260947325157985}
 --- !u!65 &8771885151609156410
 BoxCollider:
@@ -285,6 +285,10 @@ PrefabInstance:
     - target: {fileID: 4808579583212854493, guid: 1f27a3d8be0ba5648a9c7a0ea5820ddb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572714749557565183, guid: 1f27a3d8be0ba5648a9c7a0ea5820ddb, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

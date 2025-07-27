@@ -98,7 +98,6 @@ public class ScanRegisterNewFurnitureState : PlayerControllerInteractionState
 
         // Do Rayast first
         Ray ray = new Ray(refs.rayOrigin.transform.position, refs.rayOrigin.transform.forward);
-        // RaycastHit hit;
 
         runtimeData.raycastEnd = refs.rayOrigin.position + refs.rayOrigin.forward * config.maxRaycastDistance;
         runtimeData.raycastWasSuccessfull = Physics.Raycast(ray, out runtimeData.raycastHitInfo, config.maxRaycastDistance, config.createNewBoundingBoxUniversalGround);

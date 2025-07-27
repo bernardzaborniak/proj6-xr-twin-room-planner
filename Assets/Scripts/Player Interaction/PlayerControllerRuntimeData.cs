@@ -23,17 +23,4 @@ public class PlayerControllerRuntimeData
 
     public UiCustomButton uiHitByRay;
     public BaseFurniture furnitureHitByRay;
-
-    /*
-    public bool furnitureHasHit;
-    public RaycastHit furnitureHit;
-    public Vector3 furnitureRayEnd;
-
-    public bool uiHasHit;
-    public RaycastHit uiHit;
-    public Vector3 uiRayEnd;
-    */
-
-    // Move furniture
-
 }

@@ -63,7 +63,7 @@ public abstract class BaseFurniture : MonoBehaviour
         {
             selectState = HoverSelectState.Hovered;
 
-            rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, hoverMaterial };
+            rendererToApplyOutlineTo.materials = new Material[2] { originalBeforeOutlineMaterial, hoverMaterial,  };
         }
     }
 

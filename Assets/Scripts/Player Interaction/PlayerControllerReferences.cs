@@ -23,5 +23,4 @@ public class PlayerControllerReferences
 
     [Header("Create new bounding Box")]
     public GameObject createNewBoundingBoxVisualizationPrefab;
-    //public GameObject scannedFurniturePrefab;
 }

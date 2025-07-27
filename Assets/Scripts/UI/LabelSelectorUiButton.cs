@@ -13,7 +13,6 @@ public class LabelSelectorUiButton : UiCustomButton
     FurnitureLabel label;
     LabelSelectorUi uiController;
 
-    //public Action OnClickCallback;
 
     public void SetUpButton(FurnitureLabel label, LabelSelectorUi uiController)
     {
@@ -26,7 +25,6 @@ public class LabelSelectorUiButton : UiCustomButton
     {
         base.OnClick();
         uiController.OnLabelSelected(label);
-        //OnClickCallback.Invoke();
     }
 
     public void SetSelected(bool isSelected)

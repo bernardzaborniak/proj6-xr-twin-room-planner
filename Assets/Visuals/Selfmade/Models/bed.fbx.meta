@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: c5c55235f7a8d6d48a238a7533c8f1fd
+guid: 12a4e7b37d91748439add3cdecc8637f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door
-    second: {fileID: 2100000, guid: 4cf310533a3b37546b7e70ec1b326089, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: DoorHandle
-    second: {fileID: 2100000, guid: 16f3da048373086479c0e855c44f8d36, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Storage
-    second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -103,7 +88,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

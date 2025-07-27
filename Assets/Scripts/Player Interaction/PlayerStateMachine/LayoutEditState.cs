@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class LayoutEditState : PlayerControllerInteractionState
 {
-    // TODO have a reference which furniture to delete
-
     LayoutModeFurniture selectedFurniture;
 
     public void SetCurrentFurniture(LayoutModeFurniture furniture)

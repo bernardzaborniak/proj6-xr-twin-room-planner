@@ -1,24 +1,19 @@
 using TMPro;
-//using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class LayoutModeFurniture : BaseFurniture
 {
     // used to isplay the furnitues, maybe also later have some collision etc to interact with furniture interactor to be able to be moved
-
-
     // for the visualization of furniture, only allow it to change position and rotation with ray interactor
 
 
-    //FurnitureData localDataCopy;
     GameObject visualizedFurniturePiece;
     LabelToModelConversionTable labelToMeshConversionTableRef;
 
 
     [SerializeField] Transform scaleHelper;
 
-    // todo add mvoeable readonly bool
     public bool Moveable { get; set; }
     /// <summary>
     /// We are using a custom direction decoupled from metas orientations //TODO
@@ -35,9 +30,6 @@ public class LayoutModeFurniture : BaseFurniture
         LocalDataCopy = data.DeepCopy();
         transform.localPosition = data.posInRoom;
         transform.localRotation = data.rotInRoom;
-
-        // adjust rotation to change showing direction mostly 90/180 or 270 degrees
-        //scaleHelper.Rotate(Vector3.up, data.rotationAdjuster);
 
         this.labelToMeshConversionTableRef = labelToMeshConversionTable;
 
@@ -98,7 +90,7 @@ public class LayoutModeFurniture : BaseFurniture
 
         GameObject instantiatedFurniture = Instantiate(furnitureToSpawn, scaleHelper);
 
-        rendererToApplyOutlineTo = instantiatedFurniture.GetComponent<MeshRenderer>();
+        //rendererToApplyOutlineTo = instantiatedFurniture.GetComponent<MeshRenderer>();
         originalBeforeOutlineMaterial = rendererToApplyOutlineTo.materials[0];
 
 

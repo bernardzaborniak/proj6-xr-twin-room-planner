@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: c2a8ae682a9cbf241893d636ac51ae05
+guid: 5647142cdb926374f8aa9b78334da20d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Holz_Tisch
-    second: {fileID: 2100000, guid: 4cf310533a3b37546b7e70ec1b326089, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: LegsPlastic
-    second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Mitte_plasitc
-    second: {fileID: 2100000, guid: dda056520eada2244bc3570514e7b277, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

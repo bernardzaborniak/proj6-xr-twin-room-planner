@@ -4,9 +4,7 @@ using UnityEngine;
 public class ScanCreateWallState : PlayerControllerInteractionState
 {
     GameObject previewWall;
-    //LineRenderer lineRenderer;
     List<Vector3> wallPoints = new List<Vector3>();
-    //bool building = false;
 
     Color lineRendererColorBefore;
 
@@ -16,10 +14,7 @@ public class ScanCreateWallState : PlayerControllerInteractionState
     {
         wallPoints.Clear();
         refs.lineRenderer.enabled = true;
-        //building = true;
 
-        //TODO enable required stuuff
-        // set up hand menu
         refs.scanAddObjectsMenu.gameObject.SetActive(true);
         refs.scanAddObjectsMenu.OnCancelClickedCallback += OnCancelAddBoxClicked;
 
@@ -107,8 +102,6 @@ public class ScanCreateWallState : PlayerControllerInteractionState
         {
             CreateWall(wallPoints[wallPoints.Count - 1], wallPoints[0]);
             GameObject.Destroy(previewWall);
-            //building = false;
-            //refs.lineRenderer.enabled = false;
 
             // automatically exit state on completion
             sm.SetState(sm.scanSelection);

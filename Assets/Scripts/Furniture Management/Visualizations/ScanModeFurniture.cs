@@ -5,16 +5,7 @@ public class ScanModeFurniture : BaseFurniture
 {
     // visualizes the bounds and tags, maybe also offer option to edit them?
 
-
-    // have a gizmo here showing forward, thats important for setting up the furniture properly later
-
-    //FurnitureData localDataCopy;
-    //[SerializeField] MeshFilter boundingBoxMeshFilter;
-    //[SerializeField] MeshRenderer boundingBoxMeshRenderer;
-    //[SerializeField] BoxCollider boxCollider;
-
     ScanModeFurnitureUiMenu scanUiMenu;
-
 
     public void VisualizeFromData(FurnitureData data)
     {
@@ -27,9 +18,6 @@ public class ScanModeFurniture : BaseFurniture
         newMesh.vertices = data.meshData.vertices;
         newMesh.triangles = data.meshData.triangles;
         newMesh.normals = data.meshData.normals;
-
-        //Vector2[] uv = new Vector2[8] {new Vector2(0,0), new Vector2(0,1), new Vector2(1,1), new Vector2(1,0), new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0) };
-        //newMesh.uv = uv;
 
         boundingBoxMeshFilter.sharedMesh = newMesh;
 
@@ -55,10 +43,9 @@ public class ScanModeFurniture : BaseFurniture
     }
 
 
+    // Draws the normals, as we had some issues with them
     void OnDrawGizmos()
     {
-        //MeshFilter meshFilter = GetComponent<MeshFilter>();
-        //if (meshFilter == null || meshFilter.sharedMesh == null) return;
 
         Mesh mesh = boundingBoxMeshFilter.sharedMesh;
         Vector3[] vertices = mesh.vertices;

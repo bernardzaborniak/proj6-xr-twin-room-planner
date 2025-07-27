@@ -18,7 +18,6 @@ public class SpawnObjectMenu : MonoBehaviour
     [SerializeField]
     private List<SpawnMenuFurnitureItem> furnitureList = new List<SpawnMenuFurnitureItem>();
 
-    //bool isOpened = false;
     int currentItem = 0;
 
     private void Awake()

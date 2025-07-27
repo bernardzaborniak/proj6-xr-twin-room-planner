@@ -16,14 +16,6 @@ public class PlayerController : MonoBehaviour
     GameObject floorInstance;
 
 
-    //[Space]
-    //[Header("Furniture Mode Controllers")]
-    //[SerializeField] FurnitureInteractionController layoutModeInteraction;
-    //[SerializeField] SpawnObjectMenu spawnObjectMenu;
-    //[SerializeField] FurnitureInteraction furnitureMoveInteraction;
-    //[Header("Scan Edit Mode Controllers")]
-    //[SerializeField] FurnitureInteractionController scanModeInteraction;
-
     [SerializeField]
     PlayerControllerInteractionStateMachine playerControllerStateMachine;
 
@@ -43,9 +35,6 @@ public class PlayerController : MonoBehaviour
         playerControllerStateMachine = new PlayerControllerInteractionStateMachine(refs,config,runtimeData);
 
         refs.roomManager = RoomsManager.Instance;
-
-        //roomsManager.ShowRoomScan();
-        //SwitchMode();
     }
 
     void Update()
@@ -59,16 +48,6 @@ public class PlayerController : MonoBehaviour
         {
             SwitchRoomMode();
         }
-
-        /* if (OVRInput.GetDown(OVRInput.Button.Two))
-         {
-             SwitchRoomMode();
-         }
-
-         if (OVRInput.GetDown(OVRInput.Button.One))
-         {
-             roomsManager.CaptureCurrentMetaRoom();
-         }*/
     }
 
 
